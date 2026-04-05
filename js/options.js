@@ -78,10 +78,13 @@
           else if (voiceName == "@supertonic") bgPageInvoke("manageSupertonicVoices").catch(console.error)
           else updateSettings({voiceName})
         });
-      $("#languages-edit-button")
-        .click(function() {
-          brapi.tabs.create({url: "languages.html"});
-        })
+      // lang picker open/close
+      $("#lang-picker-btn").click(function(e) {
+        e.stopPropagation()
+        $("#lang-picker-panel").toggle()
+      })
+      $("#lang-picker-panel").click(e => e.stopPropagation())
+      $(document).click(() => $("#lang-picker-panel").hide())
     })
 
   const voicesPopulatedObservable = rxjs.combineLatest([
@@ -97,6 +100,9 @@
     domReadyPromise
   ]).pipe(
       rxjs.tap(([voices, languages, acceptLangs, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken]) => {
+        const panelOpen = $("#lang-picker-panel").is(":visible")
+        buildLangPicker(voices, languages)
+        if (panelOpen) $("#lang-picker-panel").show()
         populateVoices(voices, {languages, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken}, acceptLangs)
         buildVoiceChips()
         applyVoiceFilter()
@@ -316,6 +322,46 @@
 
 
 
+
+  const langDisplayNames = (() => {
+    try { return new Intl.DisplayNames([navigator.language, 'en'], {type: 'language'}) }
+    catch(e) { return {of: c => c} }
+  })()
+
+  function buildLangPicker(allVoices, selectedLangsStr) {
+    const usableVoices = allVoices.filter(v => !isNativeVoice(v))
+    const voicesForLang = groupVoicesByLang(usableVoices)
+    const selectedLangs = selectedLangsStr ? selectedLangsStr.split(',').filter(Boolean) : []
+
+    const langs = Object.keys(voicesForLang)
+      .filter(c => c !== '<any>')
+      .map(code => ({code, name: langDisplayNames.of(code) || code}))
+      .sort((a, b) => a.name.localeCompare(b.name))
+
+    const $panel = $("#lang-picker-panel").empty()
+    langs.forEach(({code, name}) => {
+      const $label = $("<label>").addClass("lang-check-item")
+      $("<input>").attr("type", "checkbox").val(code).prop("checked", selectedLangs.includes(code))
+        .on("change", function() {
+          const checked = $("#lang-picker-panel input:checked").map((_, el) => el.value).get()
+          updateSettings({languages: checked.join(',')})
+          updateLangBtn(checked)
+        })
+        .appendTo($label)
+      $("<span>").text(name).appendTo($label)
+      $label.appendTo($panel)
+    })
+
+    updateLangBtn(selectedLangs)
+  }
+
+  function updateLangBtn(selected) {
+    let label
+    if (!selected.length) label = "All languages"
+    else if (selected.length <= 3) label = selected.map(c => langDisplayNames.of(c) || c).join(", ")
+    else label = selected.length + " languages"
+    $("#lang-picker-btn").text(label + " \u25be")
+  }
 
   function applyVoiceFilter() {
     const filter = $("#voice-filter").val().toLowerCase();

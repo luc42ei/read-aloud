@@ -249,6 +249,47 @@ input[type=checkbox] + label {
   margin-top: 1.5em;
 }
 
+.lang-picker {
+  position: relative;
+}
+.lang-picker-btn {
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+.lang-picker-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  min-width: 220px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .4rem .6rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,.15);
+}
+.dark-mode .lang-picker-panel {
+  background: #2e2e2e;
+  border-color: #555;
+}
+.lang-check-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .15rem 0;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: .9rem;
+  font-weight: normal;
+}
+.lang-check-item input {
+  cursor: pointer;
+}
+
 #voice-chips {
   display: flex;
   flex-wrap: wrap;

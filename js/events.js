@@ -125,6 +125,10 @@ brapi.commands.onCommand.addListener(function(command) {
     rewind()
       .catch(handleHeadlessError)
   }
+  else if (command == "rate-up" || command == "rate-down") {
+    adjustRate(command == "rate-up" ? 0.05 : -0.05)
+      .catch(handleHeadlessError)
+  }
 })
 
 
@@ -277,6 +281,14 @@ function seek(n) {
 }
 
 
+
+async function adjustRate(delta) {
+  const {voiceName} = await getSettings(["voiceName"])
+  const key = "rate" + (voiceName || "")
+  const {[key]: current} = await getSettings([key])
+  const rate = Math.round(((current || defaults.rate) + delta) * 1000) / 1000
+  await updateSettings({[key]: Math.min(10, Math.max(0.1, rate))})
+}
 
 function handleHeadlessError(err) {
   console.error(err)

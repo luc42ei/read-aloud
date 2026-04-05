@@ -98,6 +98,12 @@
     "rewind": {
       "suggested_key": {"default": "Alt+Comma"},
       "description": "Rewind"
+    },
+    "rate-up": {
+      "description": "Speed up (+0.05x)"
+    },
+    "rate-down": {
+      "description": "Slow down (-0.05x)"
     }
   }
 }

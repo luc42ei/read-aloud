@@ -60,10 +60,6 @@
   //hotkey
   domReadyPromise
     .then(() => {
-      $("#hotkeys-link").click(function() {
-        const el = document.getElementById("shortcuts-section")
-        if (el) { el.open = true; el.scrollIntoView({behavior: "smooth"}) }
-      });
     })
 
 

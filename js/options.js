@@ -333,7 +333,6 @@
   settingsChange$
     .subscribe(() => {
       showConfirmation()
-      bgPageInvoke("stop").catch(err => "OK")
     })
 
 

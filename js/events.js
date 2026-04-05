@@ -59,11 +59,16 @@ async function installContentScripts() {
 }
 
 function installContextMenus() {
-  if (brapi.contextMenus)
+  if (!brapi.contextMenus) return
   brapi.contextMenus.create({
     id: "read-selection",
     title: brapi.i18n.getMessage("context_read_selection"),
     contexts: ["selection"]
+  })
+  brapi.contextMenus.create({
+    id: "open-settings",
+    title: "Open settings",
+    contexts: ["action"]
   },
   function() {
     if (brapi.runtime.lastError) console.error(brapi.runtime.lastError)
@@ -87,6 +92,8 @@ brapi.contextMenus.onClicked.addListener(function(info, tab) {
         return playText(info.selectionText, {lang: lang})
       })
       .catch(handleHeadlessError)
+  if (info.menuItemId == "open-settings")
+    brapi.tabs.create({url: brapi.runtime.getURL("options.html")})
 })
 
 

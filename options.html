@@ -14,6 +14,7 @@
   <script src="js/messaging.js"></script>
   <script src="js/tts-engines.js"></script>
   <script src="js/options.js"></script>
+  <script src="js/custom-voices.js"></script>
 </head>
 <body>
   <div class="container-fluid">
@@ -48,6 +49,7 @@
         </button>
       </div>
       <div>
+        <div id="voice-chips"></div>
         <input id="voice-filter" type="text" class="form-control" placeholder="Filter voices…">
         <select id="voices" class="form-control">
         </select>
@@ -89,10 +91,12 @@
       </div>
 
       <div>
-        <label for="show-highlighting" data-i18n="options_show_highlighting"></label>
+        <span data-i18n="options_show_highlighting"></span>
       </div>
-      <div>
-        <input type="checkbox" id="show-highlighting">
+      <div class="btn-group btn-group-sm" id="show-highlighting">
+        <button type="button" class="btn btn-light" data-value="0" data-i18n="options_highlighting_off"></button>
+        <button type="button" class="btn btn-light" data-value="1" data-i18n="options_highlighting_popup"></button>
+        <button type="button" class="btn btn-light" data-value="2" data-i18n="options_highlighting_window"></button>
       </div>
 
       <div class="audio-playback-visible">
@@ -118,6 +122,88 @@
     <div class="form-group">
       <small id="status" style="color: red"></small>
     </div>
+
+    <details id="custom-voices-section">
+      <summary>Custom voices (API keys)</summary>
+
+      <details class="cv-provider">
+        <summary>Amazon Polly</summary>
+        <p class="cv-subtext">Enter AWS credentials to enable Amazon Polly voices</p>
+        <div class="cv-form">
+          <input type="text" class="form-control" id="aws-access-key-id" placeholder="Access key ID">
+          <input type="text" class="form-control" id="aws-secret-access-key" placeholder="Secret access key">
+          <button type="button" class="btn btn-sm" id="aws-save-button">Save</button>
+          <div class="spinner status progress" id="aws-progress"></div>
+          <div class="status cv-success" id="aws-success"></div>
+          <div class="status cv-error" id="aws-error"></div>
+        </div>
+      </details>
+
+      <details class="cv-provider">
+        <summary>Google Wavenet</summary>
+        <p class="cv-subtext">Enter GCP API key to enable Google Wavenet voices</p>
+        <div class="cv-form">
+          <input type="text" class="form-control" id="gcp-api-key" placeholder="API key">
+          <label class="cv-check"><input type="checkbox" id="gcp-enable-studio"> Include Google Studio voices (WARNING: 10x cost)</label>
+          <button type="button" class="btn btn-sm" id="gcp-save-button">Save</button>
+          <div class="spinner status progress" id="gcp-progress"></div>
+          <div class="status cv-success" id="gcp-success"></div>
+          <div class="status cv-error" id="gcp-error"></div>
+        </div>
+      </details>
+
+      <details class="cv-provider">
+        <summary>IBM Watson</summary>
+        <p class="cv-subtext">Enter IBM API key to enable IBM Watson voices</p>
+        <div class="cv-form">
+          <input type="text" class="form-control" id="ibm-api-key" placeholder="API key">
+          <input type="text" class="form-control" id="ibm-url" placeholder="URL">
+          <button type="button" class="btn btn-sm" id="ibm-save-button">Save</button>
+          <div class="spinner status progress" id="ibm-progress"></div>
+          <div class="status cv-success" id="ibm-success"></div>
+          <div class="status cv-error" id="ibm-error"></div>
+        </div>
+      </details>
+
+      <details class="cv-provider">
+        <summary>Microsoft Azure</summary>
+        <p class="cv-subtext">Enter Azure credentials to enable Microsoft Azure voices</p>
+        <div class="cv-form">
+          <input type="text" class="form-control" id="azure-region" placeholder="SPEECH_REGION">
+          <input type="text" class="form-control" id="azure-key" placeholder="SPEECH_KEY">
+          <button type="button" class="btn btn-sm" id="azure-save-button">Save</button>
+          <div class="spinner status progress" id="azure-progress"></div>
+          <div class="status cv-success" id="azure-success"></div>
+          <div class="status cv-error" id="azure-error"></div>
+        </div>
+      </details>
+
+      <details class="cv-provider">
+        <summary>OpenAI</summary>
+        <p class="cv-subtext">Use OpenAI or an OpenAI-compatible Speech endpoint</p>
+        <div class="openai">
+          <div class="view-new cv-form">
+            <button type="button" class="btn btn-sm btn-add">Add</button>
+          </div>
+          <div class="view-exist cv-form">
+            <div><span class="text-muted">API URL</span> <span class="endpoint-url"></span></div>
+            <div><span class="text-muted">API Key</span> <span class="api-key"></span></div>
+            <div><span class="text-muted">Voice List</span> <span class="voice-list"></span></div>
+            <button type="button" class="btn btn-sm btn-edit">Edit</button>
+            <button type="button" class="btn btn-sm btn-light btn-delete">Delete</button>
+          </div>
+          <div class="view-edit cv-form">
+            <label>API URL<input type="text" class="form-control txt-endpoint-url"></label>
+            <label>API Key (if required)<input type="password" class="form-control txt-api-key"></label>
+            <label>Voice List<textarea class="form-control txt-voice-list" rows="4"></textarea></label>
+            <div class="spinner status progress"></div>
+            <div class="status cv-error error"></div>
+            <button type="button" class="btn btn-sm btn-save">Save</button>
+            <button type="button" class="btn btn-sm btn-light btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </details>
+    </details>
   </div>
 </body>
 </html>

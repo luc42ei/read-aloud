@@ -75,8 +75,7 @@
       $("#voices")
         .change(function() {
           var voiceName = $(this).val();
-          if (voiceName == "@custom") brapi.tabs.create({url: "custom-voices.html"});
-          else if (voiceName == "@languages") brapi.tabs.create({url: "languages.html"});
+          if (voiceName == "@languages") brapi.tabs.create({url: "languages.html"});
           else if (voiceName == "@premium") brapi.tabs.create({url: "premium-voices.html"});
           else if (voiceName == "@piper") bgPageInvoke("managePiperVoices").catch(console.error)
           else if (voiceName == "@supertonic") bgPageInvoke("manageSupertonicVoices").catch(console.error)
@@ -96,6 +95,7 @@
   ]).pipe(
       rxjs.tap(([voices, languages, acceptLangs]) => {
         populateVoices(voices, {languages}, acceptLangs)
+        buildVoiceChips()
         applyVoiceFilter()
       }),
       rxjs.share()
@@ -196,16 +196,15 @@
   //showHighlighting
   domReadyPromise
     .then(() => {
-      $("#show-highlighting")
-        .change(function() {
-          updateSettings({showHighlighting: $(this).prop("checked") ? "1" : "0"})
-        })
+      $("#show-highlighting").on("click", "button", function() {
+        updateSettings({showHighlighting: $(this).data("value")})
+      })
     })
 
   rxjs.combineLatest([observeSetting("showHighlighting"), domReadyPromise])
     .subscribe(([showHighlighting]) => {
-      const val = showHighlighting != null ? showHighlighting : defaults.showHighlighting
-      $("#show-highlighting").prop("checked", String(val) !== "0")
+      const val = String(showHighlighting != null ? showHighlighting : defaults.showHighlighting)
+      $("#show-highlighting button").removeClass("active").filter(`[data-value="${val}"]`).addClass("active")
     })
 
 
@@ -326,6 +325,51 @@
     });
   }
 
+  function buildVoiceChips() {
+    const counts = {};
+    $("#voices option").each(function() {
+      const text = $(this).text().trim();
+      if (!text || text.startsWith("@") || text === "Auto select") return;
+      const words = text.split(" ");
+      for (let n = 1; n <= Math.min(words.length, 3); n++) {
+        const key = words.slice(0, n).join(" ");
+        counts[key] = (counts[key] || 0) + 1;
+      }
+    });
+    // Keep groups with ≥2 voices; skip sub-groups that are identical in size to their parent
+    const chips = Object.entries(counts)
+      .filter(([key, count]) => {
+        if (count < 2) return false;
+        const words = key.split(" ");
+        if (words.length > 1) {
+          const parent = words.slice(0, -1).join(" ");
+          if (counts[parent] === count) return false;
+        }
+        return true;
+      })
+      .map(([key]) => key)
+      .sort();
+
+    const $container = $("#voice-chips").empty();
+    chips.forEach(label => {
+      $("<button>")
+        .addClass("voice-chip")
+        .text(label)
+        .on("click", function() {
+          const current = $("#voice-filter").val();
+          if (current === label) {
+            $("#voice-filter").val("");
+          } else {
+            $("#voice-filter").val(label);
+          }
+          $(".voice-chip").removeClass("active");
+          if ($("#voice-filter").val() === label) $(this).addClass("active");
+          applyVoiceFilter();
+        })
+        .appendTo($container);
+    });
+  }
+
   function populateVoices(allVoices, settings, acceptLangs) {
     $("#voices").empty()
     $("<option>")
@@ -429,10 +473,6 @@
     $("<option>")
       .val("@languages")
       .text(brapi.i18n.getMessage("options_add_more_languages"))
-      .appendTo(additional)
-    $("<option>")
-      .val("@custom")
-      .text(brapi.i18n.getMessage("options_enable_custom_voices"))
       .appendTo(additional)
   }
 

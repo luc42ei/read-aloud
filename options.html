@@ -75,10 +75,16 @@
 
       <div class="pitch-visible">
         <span data-i18n="options_pitch_label"></span>
+        <button id="pitch-edit-button" type="button" class="btn btn-sm btn-light">
+          <i class="material-icons">mode_edit</i>
+        </button>
       </div>
       <div class="pitch-visible">
         <div id="pitch" class="slider" data-min="0" data-max="2" data-steps="40"></div>
         <span class="slider-value" id="pitch-value"></span>
+        <div id="pitch-input-div">
+          <input id="pitch-input" class="form-control" type="text" maxlength="5" />
+        </div>
       </div>
 
       <div>
@@ -93,9 +99,9 @@
         <span data-i18n="options_show_highlighting"></span>
       </div>
       <div class="btn-group btn-group-sm" id="show-highlighting">
-        <button type="button" class="btn btn-light" data-value="0" data-i18n="options_highlighting_off"></button>
         <button type="button" class="btn btn-light" data-value="1" data-i18n="options_highlighting_popup"></button>
         <button type="button" class="btn btn-light" data-value="2" data-i18n="options_highlighting_window"></button>
+        <button type="button" class="btn btn-light" data-value="0" data-i18n="options_highlighting_off"></button>
       </div>
 
       <div class="audio-playback-visible">

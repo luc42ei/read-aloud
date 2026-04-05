@@ -137,7 +137,7 @@
         })
       $("#rate-edit-button")
         .click(function() {
-          $("#rate, #rate-input-div").toggle();
+          $("#rate, #rate-value, #rate-input-div").toggle();
         });
       $("#rate-input")
         .change(function() {
@@ -173,16 +173,33 @@
   //pitch
   const pitchSliderPromise = domReadyPromise
     .then(() => {
-      return createSlider($("#pitch").get(0), {
+      const slider = createSlider($("#pitch").get(0), {
           format: v => v.toFixed(2),
           onChange(value) {
             updateSettings({pitch: value})
           }
         })
+      $("#pitch-edit-button")
+        .click(function() {
+          $("#pitch, #pitch-value, #pitch-input-div").toggle();
+        });
+      $("#pitch-input")
+        .change(function() {
+          var val = parseFloat($(this).val());
+          if (isNaN(val)) val = 1;
+          else if (val < 0) val = 0;
+          else if (val > 2) val = 2;
+          $(this).val(val);
+          updateSettings({pitch: val});
+        });
+      return slider
     })
 
   rxjs.combineLatest([observeSetting("pitch"), pitchSliderPromise])
-    .subscribe(([pitch, slider]) => slider.setValue(pitch || defaults.pitch))
+    .subscribe(([pitch, slider]) => {
+      slider.setValue(pitch || defaults.pitch)
+      $("#pitch-input").val(pitch || defaults.pitch)
+    })
 
 
 

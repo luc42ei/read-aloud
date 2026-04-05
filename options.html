@@ -48,6 +48,7 @@
         </button>
       </div>
       <div>
+        <input id="voice-filter" type="text" class="form-control" placeholder="Filter voices…">
         <select id="voices" class="form-control">
         </select>
         <small id="voice-info" class="form-text text-muted">
@@ -64,6 +65,7 @@
       </div>
       <div>
         <div id="rate" class="slider" data-min="-1" data-max="1" data-steps="40" data-pow="3"></div>
+        <span class="slider-value" id="rate-value"></span>
         <div id="rate-input-div">
           <input id="rate-input" class="form-control" type="text" maxlength="5" />
         </div>
@@ -75,6 +77,7 @@
       </div>
       <div class="pitch-visible">
         <div id="pitch" class="slider" data-min="0" data-max="2" data-steps="40"></div>
+        <span class="slider-value" id="pitch-value"></span>
       </div>
 
       <div>
@@ -82,16 +85,15 @@
       </div>
       <div>
         <div id="volume" class="slider" data-min="0.2" data-max="1" data-steps="40"></div>
+        <span class="slider-value" id="volume-value"></span>
       </div>
 
       <div>
-        <span data-i18n="options_show_highlighting"></span>
+        <label for="show-highlighting" data-i18n="options_show_highlighting"></label>
       </div>
-      <select id="show-highlighting" class="form-control">
-        <option value="0" data-i18n="options_highlighting_off"></option>
-        <option value="1" data-i18n="options_highlighting_popup"></option>
-        <option value="2" data-i18n="options_highlighting_window"></option>
-      </select>
+      <div>
+        <input type="checkbox" id="show-highlighting">
+      </div>
 
       <div class="audio-playback-visible">
         <span data-i18n="options_audio_playback"></span>

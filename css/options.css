@@ -249,6 +249,21 @@ input[type=checkbox] + label {
   margin-top: 1.5em;
 }
 
+#voice-filter {
+  margin-bottom: .4rem;
+}
+
+.slider-value {
+  font-size: .8rem;
+  color: #666;
+  margin-left: .25rem;
+  min-width: 3em;
+  display: inline-block;
+}
+.dark-mode .slider-value {
+  color: #aaa;
+}
+
 #rate-input-div {
   display: none;
 }

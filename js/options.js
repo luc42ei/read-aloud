@@ -61,7 +61,7 @@
   domReadyPromise
     .then(() => {
       $("#hotkeys-link").click(function() {
-        brapi.tabs.create({url: getHotkeySettingsUrl()});
+        window.location.href = getHotkeySettingsUrl();
       });
     })
 
@@ -70,6 +70,8 @@
   //voice
   domReadyPromise
     .then(() => {
+      $("#voice-filter").on("input", applyVoiceFilter);
+
       $("#voices")
         .change(function() {
           var voiceName = $(this).val();
@@ -92,7 +94,10 @@
     brapi.i18n.getAcceptLanguages().catch(err => {console.error(err); return []}),
     domReadyPromise
   ]).pipe(
-      rxjs.tap(([voices, languages, acceptLangs]) => populateVoices(voices, {languages}, acceptLangs)),
+      rxjs.tap(([voices, languages, acceptLangs]) => {
+        populateVoices(voices, {languages}, acceptLangs)
+        applyVoiceFilter()
+      }),
       rxjs.share()
     )
 
@@ -115,6 +120,7 @@
   const rateSliderPromise = domReadyPromise
     .then(() => {
       const slider = createSlider($("#rate").get(0), {
+          format: v => Math.pow($("#rate").data("pow"), v).toFixed(2) + "x",
           onChange(value) {
             const rate = Math.pow($("#rate").data("pow"), value)
             updateSetting("rate" + $("#voices").val(), Number(rate.toFixed(3)))
@@ -159,6 +165,7 @@
   const pitchSliderPromise = domReadyPromise
     .then(() => {
       return createSlider($("#pitch").get(0), {
+          format: v => v.toFixed(2),
           onChange(value) {
             updateSettings({pitch: value})
           }
@@ -174,6 +181,7 @@
   const volumeSliderPromise = domReadyPromise
     .then(() => {
       return createSlider($("#volume").get(0), {
+          format: v => Math.round(v * 100) + "%",
           onChange(value) {
             updateSettings({volume: value})
           }
@@ -190,12 +198,15 @@
     .then(() => {
       $("#show-highlighting")
         .change(function() {
-          updateSettings({showHighlighting: $(this).val()})
+          updateSettings({showHighlighting: $(this).prop("checked") ? "1" : "0"})
         })
     })
 
   rxjs.combineLatest([observeSetting("showHighlighting"), domReadyPromise])
-    .subscribe(([showHighlighting]) => $("#show-highlighting").val(showHighlighting || defaults.showHighlighting))
+    .subscribe(([showHighlighting]) => {
+      const val = showHighlighting != null ? showHighlighting : defaults.showHighlighting
+      $("#show-highlighting").prop("checked", String(val) !== "0")
+    })
 
 
 
@@ -303,6 +314,17 @@
 
 
 
+
+  function applyVoiceFilter() {
+    const filter = $("#voice-filter").val().toLowerCase();
+    $("#voices option").each(function() {
+      $(this).css("display", !filter || $(this).text().toLowerCase().includes(filter) ? "" : "none");
+    });
+    $("#voices optgroup").each(function() {
+      const hasVisible = $(this).find("option").filter((_, o) => $(o).css("display") !== "none").length > 0;
+      $(this).css("display", hasVisible ? "" : "none");
+    });
+  }
 
   function populateVoices(allVoices, settings, acceptLangs) {
     $("#voices").empty()
@@ -498,7 +520,7 @@
 
 
 
-  function createSlider(elem, {onChange, onSlideChange}) {
+  function createSlider(elem, {onChange, onSlideChange, format}) {
     var min = $(elem).data("min") || 0;
     var max = $(elem).data("max") || 1;
     var step = 1 / ($(elem).data("steps") || 20);
@@ -506,6 +528,7 @@
     var $bar = $("<div class='bar'>").appendTo(elem);
     var $track = $("<div class='track'>").appendTo(elem);
     var $knob = $("<div class='knob'>").appendTo($track);
+    var $valueEl = $(elem).next(".slider-value");
 
     $bg.click(function(e) {
       var pos = calcPosition(e);
@@ -538,6 +561,9 @@
       var percent = (100 * pos) + "%";
       $knob.css("left", percent);
       $bar.css("width", percent);
+      if ($valueEl.length && format) {
+        $valueEl.text(format(min + pos * (max - min)));
+      }
     }
     function calcPosition(e) {
       var rect = $track.get(0).getBoundingClientRect();

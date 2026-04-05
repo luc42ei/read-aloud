@@ -91,10 +91,16 @@
     voices$,
     observeSetting("languages"),
     brapi.i18n.getAcceptLanguages().catch(err => {console.error(err); return []}),
+    observeSetting("awsCreds"),
+    observeSetting("gcpCreds"),
+    observeSetting("ibmCreds"),
+    observeSetting("openaiCreds"),
+    observeSetting("azureCreds"),
+    observeSetting("authToken"),
     domReadyPromise
   ]).pipe(
-      rxjs.tap(([voices, languages, acceptLangs]) => {
-        populateVoices(voices, {languages}, acceptLangs)
+      rxjs.tap(([voices, languages, acceptLangs, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken]) => {
+        populateVoices(voices, {languages, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken}, acceptLangs)
         buildVoiceChips()
         applyVoiceFilter()
       }),
@@ -327,12 +333,14 @@
 
   function buildVoiceChips() {
     const counts = {};
-    $("#voices option").each(function() {
+    // Only consider online/API voices (skip offline and experimental optgroups)
+    $("#voices optgroup").not("[data-type='offline'],[data-type='experimental']").find("option").each(function() {
       const text = $(this).text().trim();
       if (!text || text.startsWith("@") || text === "Auto select") return;
       const words = text.split(" ");
       for (let n = 1; n <= Math.min(words.length, 3); n++) {
         const key = words.slice(0, n).join(" ");
+        if (/[(),;]/.test(key)) break; // stop at malformed prefix
         counts[key] = (counts[key] || 0) + 1;
       }
     });
@@ -371,6 +379,19 @@
   }
 
   function populateVoices(allVoices, settings, acceptLangs) {
+    const {awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken} = settings
+
+    // Filter out voices whose required credentials aren't configured
+    allVoices = allVoices.filter(function(voice) {
+      if (isPremiumVoice(voice)) return !!authToken
+      if (isAmazonPolly(voice)) return !!awsCreds
+      if (isGoogleWavenet(voice)) return !!gcpCreds
+      if (isIbmWatson(voice)) return !!ibmCreds
+      if (isOpenai(voice)) return !!openaiCreds
+      if (isAzure(voice)) return !!azureCreds
+      return true
+    })
+
     $("#voices").empty()
     $("<option>")
       .val("")
@@ -413,6 +434,7 @@
     //create the offline optgroup
     const offline = $("<optgroup>")
       .attr("label", brapi.i18n.getMessage("options_voicegroup_offline"))
+      .attr("data-type", "offline")
       .appendTo($("#voices"))
     for (const voice of groups.offline) {
       $("<option>")
@@ -425,6 +447,7 @@
     $("<optgroup>").appendTo("#voices")
     const experimental = $("<optgroup>")
       .attr("label", brapi.i18n.getMessage("options_voicegroup_experimental"))
+      .attr("data-type", "experimental")
       .appendTo("#voices")
     for (const voice of groups.experimental) {
       $("<option>")

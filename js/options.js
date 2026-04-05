@@ -374,51 +374,46 @@
     });
   }
 
-  function buildVoiceChips() {
-    const counts = {};
-    // Only consider online/API voices (skip offline and experimental optgroups)
-    $("#voices optgroup").not("[data-type='offline'],[data-type='experimental']").find("option").each(function() {
-      const text = $(this).text().trim();
-      if (!text || text.startsWith("@") || text === "Auto select") return;
-      const words = text.split(" ");
-      for (let n = 1; n <= Math.min(words.length, 3); n++) {
-        const key = words.slice(0, n).join(" ");
-        if (/[(),;]/.test(key)) break; // stop at malformed prefix
-        counts[key] = (counts[key] || 0) + 1;
+  function chipLabelFor(firstWord) {
+    const providers = ["Google", "Amazon", "IBM", "OpenAI", "Azure", "Microsoft", "ReadAloud", "Supertonic", "Piper", "RHVoice"]
+    for (const p of providers) {
+      if (firstWord.startsWith(p)) {
+        const rest = firstWord.slice(p.length).replace(/-/g, " ").trim()
+        return rest ? p + " " + rest : p
       }
-    });
-    // Keep groups with ≥2 voices; skip sub-groups that are identical in size to their parent
-    const chips = Object.entries(counts)
-      .filter(([key, count]) => {
-        if (count < 2) return false;
-        const words = key.split(" ");
-        if (words.length > 1) {
-          const parent = words.slice(0, -1).join(" ");
-          if (counts[parent] === count) return false;
-        }
-        return true;
-      })
-      .map(([key]) => key)
-      .sort();
+    }
+    return firstWord
+  }
 
-    const $container = $("#voice-chips").empty();
-    chips.forEach(label => {
-      $("<button>")
-        .addClass("voice-chip")
-        .text(label)
-        .on("click", function() {
-          const current = $("#voice-filter").val();
-          if (current === label) {
-            $("#voice-filter").val("");
-          } else {
-            $("#voice-filter").val(label);
-          }
-          $(".voice-chip").removeClass("active");
-          if ($("#voice-filter").val() === label) $(this).addClass("active");
-          applyVoiceFilter();
-        })
-        .appendTo($container);
-    });
+  function buildVoiceChips() {
+    const groups = {}
+    $("#voices optgroup").not("[data-type='offline'],[data-type='experimental']").find("option").each(function() {
+      const text = $(this).text().trim()
+      if (!text || text.startsWith("@") || text === "Auto select") return
+      const firstWord = text.split(" ")[0]
+      if (!groups[firstWord]) groups[firstWord] = {label: chipLabelFor(firstWord), count: 0}
+      groups[firstWord].count++
+    })
+
+    const currentFilter = $("#voice-filter").val()
+    const $container = $("#voice-chips").empty()
+    Object.entries(groups)
+      .filter(([, {count}]) => count >= 2)
+      .sort((a, b) => a[1].label.localeCompare(b[1].label))
+      .forEach(([filter, {label}]) => {
+        $("<button>")
+          .addClass("voice-chip")
+          .toggleClass("active", currentFilter === filter)
+          .text(label)
+          .on("click", function() {
+            const next = $("#voice-filter").val() === filter ? "" : filter
+            $("#voice-filter").val(next)
+            $(".voice-chip").removeClass("active")
+            if (next) $(this).addClass("active")
+            applyVoiceFilter()
+          })
+          .appendTo($container)
+      })
   }
 
   function populateVoices(allVoices, settings, acceptLangs) {

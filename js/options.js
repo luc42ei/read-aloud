@@ -61,7 +61,8 @@
   domReadyPromise
     .then(() => {
       $("#hotkeys-link").click(function() {
-        window.location.href = getHotkeySettingsUrl();
+        const el = document.getElementById("shortcuts-section")
+        if (el) { el.open = true; el.scrollIntoView({behavior: "smooth"}) }
       });
     })
 
@@ -381,8 +382,9 @@
   function populateVoices(allVoices, settings, acceptLangs) {
     const {awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken} = settings
 
-    // Filter out voices whose required credentials aren't configured
+    // Filter out voices that won't work
     allVoices = allVoices.filter(function(voice) {
+      if (isNativeVoice(voice)) return false          // browser built-in (espeak etc.) — poor quality
       if (isPremiumVoice(voice)) return !!authToken
       if (isAmazonPolly(voice)) return !!awsCreds
       if (isGoogleWavenet(voice)) return !!gcpCreds
@@ -431,72 +433,24 @@
       }))
     for (var name in groups) groups[name].sort(voiceSorter);
 
-    //create the offline optgroup
-    const offline = $("<optgroup>")
-      .attr("label", brapi.i18n.getMessage("options_voicegroup_offline"))
-      .attr("data-type", "offline")
-      .appendTo($("#voices"))
-    for (const voice of groups.offline) {
-      $("<option>")
-        .val(voice.voiceName)
-        .text(voice.voiceName)
-        .appendTo(offline)
+    function addGroup(label, type, voices, extra) {
+      if (!voices.length && !extra) return
+      const g = $("<optgroup>").attr("label", label)
+      if (type) g.attr("data-type", type)
+      voices.forEach(v => $("<option>").val(v.voiceName).text(v.voiceName).appendTo(g))
+      if (extra) extra(g)
+      g.appendTo($("#voices"))
     }
 
-    //create experimental group
-    $("<optgroup>").appendTo("#voices")
-    const experimental = $("<optgroup>")
-      .attr("label", brapi.i18n.getMessage("options_voicegroup_experimental"))
-      .attr("data-type", "experimental")
-      .appendTo("#voices")
-    for (const voice of groups.experimental) {
-      $("<option>")
-        .val(voice.voiceName)
-        .text(voice.voiceName)
-        .appendTo(experimental)
-    }
-    $("<option>")
-      .val("@piper")
-      .text(brapi.i18n.getMessage("options_enable_piper_voices"))
-      .appendTo(experimental)
-    $("<option>")
-      .val("@supertonic")
-      .text(brapi.i18n.getMessage("options_enable_supertonic_voices"))
-      .appendTo(experimental)
-
-    //create the standard optgroup
-    $("<optgroup>").appendTo($("#voices"))
-    var standard = $("<optgroup>")
-      .attr("label", brapi.i18n.getMessage("options_voicegroup_standard"))
-      .appendTo($("#voices"));
-    groups.standard.forEach(function(voice) {
-      $("<option>")
-        .val(voice.voiceName)
-        .text(voice.voiceName)
-        .appendTo(standard);
-    });
-
-    //create the premium optgroup
-    $("<optgroup>").appendTo($("#voices"));
-    var premium = $("<optgroup>")
-      .attr("label", brapi.i18n.getMessage("options_voicegroup_premium"))
-      .appendTo($("#voices"));
-    groups.premium.forEach(function(voice) {
-      $("<option>")
-        .val(voice.voiceName)
-        .text(voice.voiceName)
-        .appendTo(premium);
-    });
-
-    //create the additional optgroup
-    $("<optgroup>").appendTo($("#voices"));
-    var additional = $("<optgroup>")
-      .attr("label", brapi.i18n.getMessage("options_voicegroup_additional"))
-      .appendTo($("#voices"));
-    $("<option>")
-      .val("@languages")
-      .text(brapi.i18n.getMessage("options_add_more_languages"))
-      .appendTo(additional)
+    addGroup(brapi.i18n.getMessage("options_voicegroup_experimental"), "experimental", groups.experimental, g => {
+      $("<option>").val("@piper").text(brapi.i18n.getMessage("options_enable_piper_voices")).appendTo(g)
+      $("<option>").val("@supertonic").text(brapi.i18n.getMessage("options_enable_supertonic_voices")).appendTo(g)
+    })
+    addGroup(brapi.i18n.getMessage("options_voicegroup_standard"), null, groups.standard)
+    addGroup(brapi.i18n.getMessage("options_voicegroup_premium"), null, groups.premium)
+    addGroup(brapi.i18n.getMessage("options_voicegroup_additional"), null, [], g => {
+      $("<option>").val("@languages").text(brapi.i18n.getMessage("options_add_more_languages")).appendTo(g)
+    })
   }
 
   function voiceSorter(a, b) {

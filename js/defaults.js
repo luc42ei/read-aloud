@@ -109,7 +109,7 @@ const settingsChange$ = rxjs.fromEventPattern(
 
 function getSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.get(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.get(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
   });
 }
 
@@ -121,7 +121,7 @@ function updateSettings(items) {
 
 function clearSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.remove(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.remove(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
   });
 }
 

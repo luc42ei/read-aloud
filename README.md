@@ -10,7 +10,6 @@ See the original repo for general documentation, architecture, and API key setup
 
 ### Firefox compatibility
 - Background page uses `scripts` array instead of `service_worker` (MV3 Firefox requirement)
-- Separate Gecko extension ID so the fork can be loaded alongside the AMO-installed version
 
 ### Settings UI overhaul
 - **Voice filter chips** — clickable chips per provider/model family (Google Neural2, Google Chirp3-HD, etc.) instead of typing; one chip per family, not per language accent
@@ -59,6 +58,6 @@ To control which voice is picked for a language: star voices in your preferred o
 
 ## Loading in Firefox (development)
 
-1. Go to `about:debugging` → This Firefox → Load Temporary Add-on
-2. Select `manifest.json` from this repo
-3. The fork runs alongside the AMO version (different Gecko ID)
+1. Uninstall the AMO version if installed
+2. Go to `about:debugging` → This Firefox → Load Temporary Add-on
+3. Select `manifest.json` from this repo

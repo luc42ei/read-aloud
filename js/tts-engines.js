@@ -39,8 +39,6 @@ interface Options {
   }
   lang: string
   rate?: number
-  pitch?: number
-  volume?: number
 }
 
 interface Event {
@@ -65,8 +63,6 @@ function BrowserTtsEngine() {
       voiceName: options.voice.voiceId || options.voice.voiceName,
       lang: options.lang,
       rate: options.rate,
-      pitch: options.pitch,
-      volume: options.volume,
       requiredEventTypes: ["start", "end"],
       desiredEventTypes: ["start", "end", "error"],
       onEvent: onEvent
@@ -100,9 +96,7 @@ function WebSpeechEngine() {
     utter.text = text;
     utter.voice = options.voice;
     if (options.lang) utter.lang = options.lang;
-    if (options.pitch) utter.pitch = options.pitch;
     if (options.rate) utter.rate = options.rate;
-    if (options.volume) utter.volume = options.volume;
     utter.onstart = onEvent.bind(null, {type: 'start', charIndex: 0});
     utter.onend = onEvent.bind(null, {type: 'end', charIndex: text.length});
     utter.onerror = function(event) {
@@ -631,10 +625,10 @@ function GoogleWavenetTtsEngine() {
         updateSettings({wavenetVoices: list});
       })
   }
-  function getAudioUrl(text, {voice, pitch}) {
+  function getAudioUrl(text, {voice}) {
     assert(text && voice);
     return cache.fetchCached(
-      JSON.stringify([text, voice.voiceName, voice.lang, pitch]),
+      JSON.stringify([text, voice.voiceName, voice.lang]),
       () => {
         var matches = voice.voiceName.match(/^Google(\S+) .* \((\w+)\)$/);
         const voiceType = matches[1];
@@ -654,7 +648,6 @@ function GoogleWavenetTtsEngine() {
                 audioEncoding: "OGG_OPUS",
               }
             }
-            if (!voiceType.startsWith("Chirp")) postData.audioConfig.pitch = ((pitch || 1) -1) *20;
             if (settings.gcpCreds) return ajaxPost("https://" + endpoint + "/v1/text:synthesize?key=" + settings.gcpCreds.apiKey, postData, "json");
             if (!settings.gcpToken) throw new Error(JSON.stringify({code: "error_wavenet_auth_required"}));
             return ajaxPost("https://cxl-services.appspot.com/proxy?url=https://texttospeech.googleapis.com/v1beta1/text:synthesize&token=" + settings.gcpToken, postData, "json")
@@ -921,8 +914,6 @@ function PhoneTtsEngine() {
         options: {
           lang: options.lang,
           rate: options.rate,
-          pitch: options.pitch,
-          volume: options.volume
         }
       })
       .then(({speechId}) => {
@@ -1119,9 +1110,7 @@ function PiperTtsEngine() {
               return piper.sendRequest("speak", {
                 utterance,
                 voiceName: options.voice.voiceName,
-                pitch: options.pitch,
                 rate: options.rate,
-                volume: options.volume,
                 externalPlayback: options.rate && options.rate != 1,
               })
             case "pause":
@@ -1203,9 +1192,7 @@ function SupertonicTtsEngine() {
             return supertonic.sendRequest("speak", {
               utterance,
               voiceName: options.voice.voiceName,
-              pitch: options.pitch,
               rate: options.rate,
-              volume: options.volume,
               externalPlayback: options.rate && options.rate != 1,
             })
           case "pause":

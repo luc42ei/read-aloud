@@ -184,52 +184,7 @@
 
 
 
-  //pitch
-  const pitchSliderPromise = domReadyPromise
-    .then(() => {
-      const slider = createSlider($("#pitch").get(0), {
-          format: v => v.toFixed(2),
-          onChange(value) {
-            updateSettings({pitch: value})
-          }
-        })
-      $("#pitch-edit-button")
-        .click(function() {
-          $("#pitch, #pitch-value, #pitch-input-div").toggle();
-        });
-      $("#pitch-input")
-        .change(function() {
-          var val = parseFloat($(this).val());
-          if (isNaN(val)) val = 1;
-          else if (val < 0) val = 0;
-          else if (val > 2) val = 2;
-          $(this).val(val);
-          updateSettings({pitch: val});
-        });
-      return slider
-    })
 
-  rxjs.combineLatest([observeSetting("pitch"), pitchSliderPromise])
-    .subscribe(([pitch, slider]) => {
-      slider.setValue(pitch || defaults.pitch)
-      $("#pitch-input").val(pitch || defaults.pitch)
-    })
-
-
-
-  //volume
-  const volumeSliderPromise = domReadyPromise
-    .then(() => {
-      return createSlider($("#volume").get(0), {
-          format: v => Math.round(v * 100) + "%",
-          onChange(value) {
-            updateSettings({volume: value})
-          }
-        })
-    })
-
-  rxjs.combineLatest([observeSetting("volume"), volumeSliderPromise])
-    .subscribe(([volume, slider]) => slider.setValue(volume || defaults.volume))
 
 
 

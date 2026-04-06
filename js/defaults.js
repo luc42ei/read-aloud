@@ -34,8 +34,6 @@ var config = {
 
 var defaults = {
   rate: 1.0,
-  pitch: 1.0,
-  volume: 1.0,
   showHighlighting: 1,
   highlightFontSize: 3,
   highlightWindowSize: 2,
@@ -111,7 +109,7 @@ const settingsChange$ = rxjs.fromEventPattern(
 
 function getSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.get(names || ["voiceName", "rate", "pitch", "volume", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.get(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
   });
 }
 
@@ -123,7 +121,7 @@ function updateSettings(items) {
 
 function clearSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.remove(names || ["voiceName", "rate", "pitch", "volume", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.remove(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "preferredVoices", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
   });
 }
 
@@ -793,7 +791,7 @@ function playAudioHere(urlPromise, options, playbackState$) {
     rxjs.exhaustMap(url =>
       new rxjs.Observable(observer => {
         audio.defaultPlaybackRate = (options.rate || 1) * (options.rateAdjust || 1)
-        audio.volume = options.volume || 1
+        audio.volume = 1
         audio.oncanplay = () => observer.next()
         audio.onerror = () => observer.error(new Error(audio.error.message || audio.error.code))
         audio.src = url

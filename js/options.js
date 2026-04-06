@@ -137,6 +137,15 @@
     $("#voice-info").toggle(!!voiceName && isGoogleWavenet({voiceName}) && !gcpCreds)
   })
 
+  rxjs.combineLatest([
+    observeSetting("voiceName"),
+    observeSetting("lastAutoVoice"),
+    domReadyPromise
+  ]).subscribe(([voiceName, lastAutoVoice]) => {
+    const show = !voiceName && !!lastAutoVoice
+    $("#auto-voice-label").toggle(show).text(show ? "Auto: " + lastAutoVoice : "")
+  })
+
 
 
   //rate

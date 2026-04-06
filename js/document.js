@@ -322,6 +322,8 @@ function Doc(source, onEnd) {
     const voice = await getSpeechVoice(settings.voiceName, options.lang)
     if (!voice) throw new Error(JSON.stringify({code: "error_no_voice", lang: options.lang}));
     options.voice = voice;
+    options.rateSettingKey = "rate" + (settings.voiceName || "")
+    if (!settings.voiceName) await updateSettings({lastAutoVoice: voice.voiceName})
     return new Speech(texts, options);
   }
 

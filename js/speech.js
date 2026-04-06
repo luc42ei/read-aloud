@@ -4,7 +4,7 @@ function Speech(texts, options) {
   options.rate = (options.rate || 1) * rateMultiplier;
 
   // Live-update rate from storage so shortcut/settings changes apply mid-playback
-  const rateKey = "rate" + (options.voice ? options.voice.voiceName : "")
+  const rateKey = options.rateSettingKey || ("rate" + (options.voice ? options.voice.voiceName : ""))
   function onRateChange(changes) {
     if (rateKey in changes) {
       options.rate = (changes[rateKey].newValue || defaults.rate) * rateMultiplier

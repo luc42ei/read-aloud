@@ -1,133 +1,64 @@
+# Read Aloud — Personal Fork
 
-<div align="center">
-	<img src="img/icon.png" width="128" height="128">
-	<br>
-	<img src="docs/images/logo-text-trans.png" width="391" height="66">
-	<br>
-	A <b>Text to Speech Voice Reader</b> extension for your browser!
-</div>
+Fork of [ken107/read-aloud](https://github.com/ken107/read-aloud), optimized for Firefox with a focus on a cleaner settings UI and better voice management.
 
-<div align="center">
-	<a href="https://chromewebstore.google.com/detail/read-aloud-a-text-to-spee/hdhinadidafjejdhmfkjgnolgimiaplp">Chrome Web Store</a> | <a href="https://addons.mozilla.org/en-US/firefox/addon/read-aloud/">Firefox Addon</a> | <a href="https://blog.readaloud.app/">Blog</a> | <a href="https://readaloud.app/">Website</a> 
-</div>
+See the original repo for general documentation, architecture, and API key setup.
 
-<br>
+---
 
-<div align="center">
-    <br> github stats:
-    <img src="https://badgen.net/github/stars/ken107/read-aloud" >
-    <img src="https://badgen.net/github/open-issues/ken107/read-aloud" >
-    <img src="https://badgen.net/github/open-prs/ken107/read-aloud" >
-    <img src="https://badgen.net/github/tag/ken107/read-aloud" >
-    <img src="https://badgen.net/github/license/ken107/read-aloud/" >
-    <br> chrome web store stats:
-    <img src="https://badgen.net/chrome-web-store/users/hdhinadidafjejdhmfkjgnolgimiaplp" >
-    <img src="https://badgen.net/chrome-web-store/rating/hdhinadidafjejdhmfkjgnolgimiaplp" >
-    <img src="https://badgen.net/chrome-web-store/rating-count/hdhinadidafjejdhmfkjgnolgimiaplp" >
-    <img src="https://badgen.net/chrome-web-store/v/hdhinadidafjejdhmfkjgnolgimiaplp" >
-    <br> firefox addon stats:
-    <img src="https://badgen.net/amo/users/read-aloud" >
-    <img src="https://badgen.net/amo/rating/read-aloud" >
-    <img src="https://badgen.net/amo/reviews/read-aloud" >
-    <img src="https://badgen.net/amo/v/read-aloud" >
-</div>
+## Changes from upstream
 
-<br>
+### Firefox compatibility
+- Background page uses `scripts` array instead of `service_worker` (MV3 Firefox requirement)
+- Separate Gecko extension ID so the fork can be loaded alongside the AMO-installed version
 
-<div align="center">
-	<sub>A little browser extension built with ❤︎ by <a href="https://github.com/ken107">Hai Phan</a> and <a href="https://github.com/ken107/read-aloud/graphs/contributors">contributors</a> </sub>
-</div>
+### Settings UI overhaul
+- **Voice filter chips** — clickable chips per provider/model family (Google Neural2, Google Chirp3-HD, etc.) instead of typing; one chip per family, not per language accent
+- **Favorites** — star button next to the voice dropdown; starred voices appear in a gold "★ Favorites" chip that filters the dropdown to just your picks
+- **Language picker** (`Sprache`) — inline checkbox dropdown above the voice selector, no separate tab
+- **Highlighting** — three-button segmented control (Popup / Window / Off) instead of a dropdown
+- **Speed slider** shows live value while dragging; edit button switches to a manual number input
+- **Removed** pitch and volume controls (volume is set at OS level; pitch is rarely useful)
+- **Removed** native browser voices (espeak etc.) from the dropdown — poor quality
+- **Removed** empty optgroup separators from the voice dropdown
+- **Removed** static shortcut keys section (doesn't reflect user-customized shortcuts)
+- Custom voices (Amazon Polly, Google Wavenet, IBM Watson, Azure, OpenAI) embedded as collapsible sections inline — no separate tab
+- Voice dropdown only shows voices that will actually work (hides Amazon Polly without AWS keys, etc.)
+- Right-click extension icon → **Open settings** context menu
+- Increased row spacing in the settings grid
 
-<hr />
+### Playback behavior
+- Changing settings (rate, voice, etc.) no longer stops playback — the player re-reads settings per sentence, so changes take effect at the next sentence boundary
+- Rate change via keyboard shortcut applies mid-playback (was broken for auto-select due to key mismatch)
 
-## Reviews
->First impressions are super. Natural flowing voice and very helpful for multitasking and also giving my eyes a rest. 
+### Speed shortcuts
+Two new commands (assign keys in `about:addons → Manage Extension Shortcuts`):
+- **Speed up** (`rate-up`): +0.05×
+- **Slow down** (`rate-down`): −0.05×
 
-*Giuseppe*
+Rate changes apply at the next sentence boundary without interrupting playback.
 
-> Thank you so much for this extension. I absolutely swear by it whenever I need to read any large chunk of text. The combination of hearing it in a clear voice (...)  Its fantastic, thank you so much.
+### Auto-select voice
+When no specific voice is selected, the auto-select priority order is:
 
-*Abi*
+1. **Favorited voice matching the page language** — whichever matching favorite you starred first wins
+2. Piper (offline)
+3. Google Translate
+4. Other non-espeak voices
+5. Espeak (last resort)
 
-> LOVE this extension. I remember better when i hear a story vs reading
+The currently auto-selected voice is shown as `Auto: <voice name>` below the dropdown.
 
-*David*
+To control which voice is picked for a language: star voices in your preferred order. The first favorited voice that supports the page language is used. To change priority, unfavorite and re-favorite in the desired order.
 
-> This is a phenomenal extension. Better than anything else I tryed so far. Simple, easy, customizable (...) I would recommend this whole heartedly to anyone who has dyslexia like me, or any other reasons for not beeing able to read comfortably at all times.
+### Removed upstream features
+- `languages.html` per-language voice picker (replaced by the inline language filter + favorites)
+- `preferredVoices` storage key (superseded by `favoriteVoices`)
 
-*Merlin*
+---
 
+## Loading in Firefox (development)
 
-## Overview
-Read Aloud is a Chrome and Firefox extension that uses text-to-speech technology to convert webpage text to audio.&nbsp; It works on a variety of websites, including news sites, blogs, fan fiction, publications, textbooks, school and class websites, online universities and course materials.
-
-Read Aloud is aimed at users who prefer to listen to content instead of reading, people with dyslexia or other learning disabilities, children learning to read, or simply to provide users with alternative way to consume web content.
-
-Read Aloud allows you to select from a variety of text-to-speech voices, including those provided natively by the browser, as well as by text-to-speech cloud service providers such as Google Wavenet, Amazon Polly, IBM Watson, and Microsoft.&nbsp; Some of the cloud-based voices may require additional in-app purchase to enable.
-
-## Basic Usage
-
-### Extension Button
-<img src="docs/images/demo-extension-button.gif">
-
-### Right Click Menu
-<img src="docs/images/demo-right-click.gif">
-
-
-## Advanced Usage
-
-### Shortcuts
-
-```yaml
-ALT/Option + P           : Play/Pause
-ALT/Option + O           : Stop
-ALT/Option + Comma       : Rewind
-ALT/Option + Period      : Forward
-```
-
-### Customization
-
-You can change the voice, reading speed, pitch, or enable text highlighting:
-
-1. Click the Read Aloud icon on the [Extensions menu](https://i.imgur.com/KTqFZ3Q.png).
-2. Stop any text that may be playing.
-3. Click on the Gear icon in the Read Aloud context menu. (It may take a second or two for settings to appear)
-
-
-### Using Premium Voices
-[Using Premium Voices (Google Wavenet & Amazon Polly)](docs/usage/premium-voices.md)
-
-
-## Installation
-
-### Chrome and Chromium-based browsers
-You can get the latest available Read Aloud Extension version from the [Chrome Web Store](https://chromewebstore.google.com/detail/read-aloud-a-text-to-spee/hdhinadidafjejdhmfkjgnolgimiaplp).
-
-### Firefox
-You can get the latest version of Read Aloud Extension from the [Mozilla Add-ons website](https://addons.mozilla.org/en-US/firefox/addon/read-aloud/).
-
-#### Firefox install from source
-
-1. Create a build directory with `mkdir build`
-2. Run `npm run-script package`
-3. Extract the resulting zip file. You should see a `manifest.json` which will be used later.
-4. In Firefox, first make sure there isn't an existing read-aloud add-on already installed
-5. type `about:debugging` in the Address bar and enter.
-6. Click on "This Firefox" then click "Load Unpackaged Extension"
-7. Select the `manifest.json` file produced earlier.
-
-## Contribute
-
-- Star this GitHub repo :star:
-- Post about it on your social media (Twitter / Blogs / Facebook / Instagram etc).
-- Leave a positive review on the [Chrome Web Store](https://chromewebstore.google.com/detail/read-aloud-a-text-to-spee/hdhinadidafjejdhmfkjgnolgimiaplp) or [Firefox Addon](https://addons.mozilla.org/en-US/firefox/addon/read-aloud/) pages.
-- Create pull requests, submit bugs, suggest new features or documentation updates 🛠 
-	- To do so, go to [this page](https://github.com/ken107/read-aloud/issues) and click the *New issue* button.
-
-
-## Credits
-
-### Images
-
- - [Streamline Labs](https://lab.streamlineicons.com/)
- - [Freepik](https://www.freepik.com/free-vector/colorful-memphis-design-background-vector_3893585.htm)
+1. Go to `about:debugging` → This Firefox → Load Temporary Add-on
+2. Select `manifest.json` from this repo
+3. The fork runs alongside the AMO version (different Gecko ID)

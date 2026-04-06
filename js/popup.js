@@ -46,7 +46,7 @@ async function popout(tabId) {
     await createWindow({
       url,
       focused: true,
-      type: "popup",
+      type: "normal",
       width: Math.round(window.screen.availWidth / 3),
       height: Math.round(window.screen.availHeight * 3 / 4),
     })

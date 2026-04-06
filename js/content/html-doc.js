@@ -191,8 +191,13 @@ var readAloudDoc = new function() {
   }
 
   function getHeadingLevel(elem) {
-    var matches = elem && /^H(\d)$/i.exec(elem.tagName);
-    return matches ? Number(matches[1]) : 100;
+    if (!elem) return 100;
+    var matches = /^H(\d)$/i.exec(elem.tagName);
+    if (matches) return Number(matches[1]);
+    // Short <p> with no block children is likely a styled heading (e.g. Framer/Webflow sites)
+    // Use level 3 so it supersedes h4-h6 sub-headings found earlier in the backward walk
+    if (elem.tagName === 'P' && !$(elem).find('p, div').length && getInnerText(elem).length <= 60) return 3;
+    return 100;
   }
 
   function previousNode(node, skipChildren) {

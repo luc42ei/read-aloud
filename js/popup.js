@@ -47,8 +47,8 @@ async function popout(tabId) {
       url,
       focused: true,
       type: "popup",
-      width: 500,
-      height: 600,
+      width: Math.round(window.screen.availWidth / 3),
+      height: Math.round(window.screen.availHeight * 3 / 4),
     })
     window.close()
   }

@@ -166,6 +166,7 @@ class UnicodeProcessor {
     for (const [k, v] of Object.entries(replacements)) text = text.replaceAll(k, v)
     text = text.replace(/[♥☆♡©\\]/g, "")
     text = text.replaceAll("@", " at ").replaceAll("e.g.,", "for example, ").replaceAll("i.e.,", "that is, ")
+    text = text.replace(/ -+ /g, ", ")  // dash between phrases → comma, better duration prediction
     text = text.replace(/ ([,\.!\?;:])/g, "$1")
     while (text.includes('""')) text = text.replace('""', '"')
     while (text.includes("''")) text = text.replace("''", "'")

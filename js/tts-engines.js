@@ -1178,82 +1178,81 @@ function PiperTtsEngine() {
 
 
 function SupertonicTtsEngine() {
-  let control = null
-  let isSpeaking = false
-  this.speak = function(utterance, options, onEvent) {
-    const supertonicPromise = rxjs.firstValueFrom(supertonic$)
-    control = new rxjs.Subject()
-    control.pipe(
-      rxjs.startWith("speak"),
-      rxjs.concatMap(async cmd => {
-        const supertonic = await supertonicPromise
-        switch (typeof cmd == "string" ? cmd : cmd.type) {
-          case "speak":
-            return supertonic.sendRequest("speak", {
-              utterance,
-              voiceName: options.voice.voiceName,
-              rate: options.rate,
-              externalPlayback: options.rate && options.rate != 1,
-            })
-          case "pause":
-            return supertonic.sendRequest("pause")
-          case "resume":
-            return supertonic.sendRequest("resume")
-          case "stop":
-            return supertonic.sendRequest("stop")
-              .then(() => Promise.reject({name: "interrupted", message: "Playback interrupted"}))
-          case "forward":
-            return supertonic.sendRequest("forward")
-          case "rewind":
-            return supertonic.sendRequest("rewind")
-          case "seek":
-            return supertonic.sendRequest("seek", {index: cmd.index})
+  let worker = null
+  let nextId = 0
+  let modelsLoaded = false
+  const prefetchCache = new Map()
+
+  function getWorker() {
+    if (!worker) {
+      worker = new Worker(brapi.runtime.getURL("js/supertonic-worker.js"))
+    }
+    return worker
+  }
+
+  function postWorker(method, data) {
+    return new Promise((resolve, reject) => {
+      const id = nextId++
+      const w = getWorker()
+      function handler(e) {
+        if (e.data.id === id) {
+          w.removeEventListener("message", handler)
+          if (e.data.error) reject(new Error(e.data.error))
+          else resolve(e.data.result)
         }
-      }),
-      rxjs.ignoreElements(),
-      rxjs.mergeWith(supertonicCallbacks),
-      rxjs.map(event => {
-        if (event.type == "error") throw event.error
-        return event
-      }),
-      rxjs.takeWhile(event => event.type != "end")
-    )
-    .subscribe({
-      next(event) {
-        if (event.type == "start") isSpeaking = true
-        onEvent(event)
-      },
-      complete() {
-        onEvent({type: "end"})
-      },
-      error(err) {
-        if (err.name != "interrupted") onEvent({type: "error", error: err})
       }
-    })
-    .add(() => {
-      isSpeaking = false
-      control = null
+      w.addEventListener("message", handler)
+      w.postMessage({id, method, ...data})
     })
   }
-  this.isSpeaking = function(callback) {
-    callback(isSpeaking)
+
+  async function ensureModels() {
+    if (modelsLoaded) return
+    await postWorker("loadModels", {})
+    modelsLoaded = true
   }
-  this.pause = function() {
-    control?.next("pause")
+
+  function synthesize(utterance, options) {
+    const lang = parseLang(options.lang || "en").lang
+    const voiceName = (options.voice.voiceName || "").replace("Supertonic ", "")
+    return ensureModels()
+      .then(() => postWorker("speak", {text: utterance, lang, voiceName, speed: options.rate || 1}))
+      .then(wavBuf => URL.createObjectURL(new Blob([wavBuf], {type: "audio/wav"})))
   }
-  this.resume = function() {
-    control?.next("resume")
+
+  function cacheKey(utterance, options) {
+    return utterance + "\x00" + options.voice.voiceName + "\x00" + (options.rate || 1)
   }
-  this.stop = function() {
-    control?.next("stop")
+
+  this.speak = function(utterance, options, playbackState$) {
+    const key = cacheKey(utterance, options)
+    const urlPromise = prefetchCache.get(key) || synthesize(utterance, options)
+    prefetchCache.delete(key)
+    return playAudio(urlPromise, options, playbackState$)
   }
-  this.forward = function() {
-    control?.next("forward")
+
+  this.prefetch = function(utterance, options) {
+    const key = cacheKey(utterance, options)
+    if (!prefetchCache.has(key)) {
+      prefetchCache.set(key, synthesize(utterance, options).catch(err => {
+        prefetchCache.delete(key)
+        throw err
+      }))
+    }
   }
-  this.rewind = function() {
-    control?.next("rewind")
-  }
-  this.seek = function(index) {
-    control?.next({type: "seek", index})
+
+  this.getVoices = function() {
+    return [
+      {voiceName: "Supertonic F1", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic F2", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic F3", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic F4", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic F5", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic M1", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic M2", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic M3", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic M4", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+      {voiceName: "Supertonic M5", lang: "en", langs: ["en", "ko", "es", "pt", "fr"]},
+    ]
   }
 }

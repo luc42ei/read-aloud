@@ -32,29 +32,6 @@ const piperDispatcher = makeDispatcher("piper-host", {
 })
 
 
-const supertonicSubject = new rxjs.Subject()
-const supertonic$ = rxjs.defer(() => {
-  createSupertonicFrame()
-  return supertonicSubject
-}).pipe(
-  rxjs.shareReplay({bufferSize: 1, refCount: false}),
-  rxjs.tap(raiseSupertonicFrame)
-)
-const supertonicCallbacks = new rxjs.Subject()
-const supertonicDispatcher = makeDispatcher("supertonic-host", {
-  advertiseVoices({voices}, sender) {
-    updateSettings({supertonicVoices: voices})
-    supertonicSubject.next(sender)
-  },
-  onStart: args => supertonicCallbacks.next({type: "start", ...args}),
-  onSentence: args => supertonicCallbacks.next({type: "sentence", ...args}),
-  onParagraph: args => supertonicCallbacks.next({type: "paragraph", ...args}),
-  onEnd: args => supertonicCallbacks.next({type: "end", ...args}),
-  onError: args => supertonicCallbacks.next({type: "error", ...args}),
-  audioPlay: args => audioPlayer.play(args.src, args.rate, args.volume),
-  audioPause: () => audioPlayer.pause(),
-  audioResume: () => audioPlayer.resume(),
-})
 
 
 const audioPlayer = immediate(() => {
@@ -113,14 +90,6 @@ window.addEventListener("message", event => {
     }
   }, send)
 
-  supertonicDispatcher.dispatch(event.data, {
-    sendRequest(method, args) {
-      const id = String(Math.random())
-      send({from: "supertonic-host", to: "supertonic-service", type: "request", id, method, args})
-      return supertonicDispatcher.waitForResponse(id)
-    }
-  }, send)
-
   fasttextDispatcher.dispatch(event.data, {
     sendRequest(method, args) {
       const id = String(Math.random())
@@ -136,13 +105,12 @@ const idleSubject = new rxjs.BehaviorSubject(true)
 if (queryString.has("autoclose")) {
   rxjs.combineLatest(
     idleSubject,
-    piperSubject.pipe(rxjs.startWith(null)),
-    supertonicSubject.pipe(rxjs.startWith(null))
+    piperSubject.pipe(rxjs.startWith(null))
   ).pipe(
-    rxjs.switchMap(([isIdle, piper, supertonic]) =>
+    rxjs.switchMap(([isIdle, piper]) =>
       rxjs.iif(
         () => isIdle,
-        rxjs.timer(queryString.get("autoclose") == "long" || piper || supertonic ? 15*60*1000 : 5*60*1000),
+        rxjs.timer(queryString.get("autoclose") == "long" || piper ? 15*60*1000 : 5*60*1000),
         rxjs.EMPTY
       )
     )
@@ -165,7 +133,6 @@ var messageHandlers = {
   startPairing: () => phoneTtsEngine.startPairing(),
   isPaired: () => phoneTtsEngine.isPaired(),
   managePiperVoices,
-  manageSupertonicVoices,
   getLastUrl: () => lastUrlPromise,
 }
 
@@ -487,40 +454,6 @@ function raisePiperFrame() {
   $('#piper-frame').css('z-index', maxZ + 1)
 }
 
-function manageSupertonicVoices() {
-  if (isEmbedded) {
-    return "POPOUT"
-  } else {
-    rxjs.firstValueFrom(supertonic$)
-      .catch(console.error)
-    brapi.tabs.getCurrent()
-      .then(tab => Promise.all([
-        brapi.windows.update(tab.windowId, {focused: true}),
-        brapi.tabs.update(tab.id, {active: true})
-      ]))
-      .catch(console.error)
-    return "OK"
-  }
-}
-
-function createSupertonicFrame() {
-  const f = document.createElement("iframe")
-  f.id = "supertonic-frame"
-  f.src = "https://supertonic.ttstool.com/"
-  f.allow = "cross-origin-isolated"
-  f.style.position = "absolute"
-  f.style.left =
-  f.style.top = "0"
-  f.style.width =
-  f.style.height = "100%"
-  f.style.borderWidth = "0"
-  document.body.appendChild(f)
-}
-
-function raiseSupertonicFrame() {
-  const maxZ = $('iframe').get().reduce((max, f) => Math.max(max, Number(f.style.zIndex) || 0), 0)
-  $('#supertonic-frame').css('z-index', maxZ + 1)
-}
 
 function createFasttextFrame() {
   const f = document.createElement("iframe")

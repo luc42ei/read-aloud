@@ -288,6 +288,8 @@ function isNativeVoice(voice) {
     || isIbmWatson(voice)
     || isOpenai(voice)
     || isAzure(voice)
+    || isPiperVoice(voice)
+    || isSupertonicVoice(voice)
   )
 }
 

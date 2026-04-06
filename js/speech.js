@@ -63,7 +63,7 @@ function Speech(texts, options) {
     }
     else {
       if (isGoogleTranslate(options.voice)) return new CharBreaker(200, punctuator).breakText(text);
-      else if (isPiperVoice(options.voice) || isSupertonicVoice(options.voice)) return [text];
+      else if (isPiperVoice(options.voice)) return [text];
       else return new CharBreaker(200, punctuator).breakText(text);
     }
   }

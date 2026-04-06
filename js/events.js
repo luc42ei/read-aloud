@@ -4,6 +4,8 @@ brapi.runtime.onInstalled.addListener(function() {
   installContextMenus()
 })
 
+manageSupertonicVoices()
+
 
 /**
  * IPC handlers
@@ -24,6 +26,8 @@ var handlers = {
   managePiperVoices,
   manageSupertonicVoices,
 }
+
+
 
 registerMessageListener("serviceWorker", handlers)
 
@@ -390,12 +394,12 @@ async function managePiperVoices() {
 }
 
 async function manageSupertonicVoices() {
-  const result = await sendToPlayer({method: "manageSupertonicVoices"}).catch(err => false)
-  if (result != "OK") {
-    if (result == "POPOUT") await sendToPlayer({method: "close"})
-    await injectPlayer()
-    await sendToPlayer({method: "manageSupertonicVoices"})
-  }
+  const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
+    voiceName: "Supertonic " + id,
+    lang: "en",
+    langs: ["en", "ko", "es", "pt", "fr"]
+  }))
+  await updateSettings({supertonicVoices: voices})
 }
 
 
@@ -439,12 +443,11 @@ async function injectContentScript(tab, frameId, extraScripts) {
 }
 
 async function injectPlayer(tab) {
-  const settings = await getSettings(["useEmbeddedPlayer", "piperVoices", "supertonicVoices"])
+  const settings = await getSettings(["useEmbeddedPlayer", "piperVoices"])
   const promise = new Promise(f => handlers.playerCheckIn = f)
   if (tab && settings.useEmbeddedPlayer
-    //don't use embedded player if there are Piper or Supertonic voices installed
+    //don't use embedded player if there are Piper voices installed
     && (settings.piperVoices || []).length == 0
-    && (settings.supertonicVoices || []).length == 0
   ) {
     try {
       if (tab.incognito) {

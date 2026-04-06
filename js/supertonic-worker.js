@@ -73,7 +73,7 @@ async function speak({text, lang, voiceName, speed}) {
   speed = speed || 1.05
 
   const style = await getVoiceStyle(voiceName)
-  const {wav} = await tts.call(text, lang, style, 4, speed)
+  const {wav} = await tts.call(text, lang, style, 6, speed)
   return writeWavFile(wav, tts.sampleRate)
 }
 
@@ -267,7 +267,10 @@ class TextToSpeech {
 
     const finalTensor = new ort.Tensor("float32", new Float32Array(xt.flat(2)), [bsz, xt[0].length, xt[0][0].length])
     const vocOut = await this.vocoderOrt.run({latent: finalTensor})
-    return {wav: Array.from(vocOut.wav_tts.data), duration}
+    const wavFull = Array.from(vocOut.wav_tts.data)
+    // trim to predicted duration — vocoder output is padded beyond actual speech
+    const wavLen = Math.floor(Math.max(...duration) * this.sampleRate)
+    return {wav: wavFull.slice(0, wavLen), duration}
   }
 
   sampleNoisyLatent(duration, sampleRate, baseChunkSize, chunkCompress, latentDim) {

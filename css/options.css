@@ -344,6 +344,16 @@ input[type=checkbox] + label {
   margin-bottom: .4rem;
 }
 
+.auto-select-info {
+  display: block;
+  color: #999;
+  font-size: .75rem;
+  margin-top: .25rem;
+}
+.dark-mode .auto-select-info {
+  color: #666;
+}
+
 .voice-select-row {
   display: flex;
   gap: .4rem;

@@ -300,13 +300,15 @@ async function getSpeechVoice(voiceName, lang) {
   var voice;
   //if a specific voice is indicated
   if (voiceName) voice = findVoiceByName(voices, voiceName);
-  //if no specific voice, prefer a favorited voice that matches the language
+  //if no specific voice, prefer a favorited voice that matches the language (array order = priority)
   if (!voice && lang) {
     const favoriteVoices = (await getSetting("favoriteVoices")) || []
-    if (favoriteVoices.length) {
-      const favVoices = favoriteVoices.map(n => findVoiceByName(voices, n)).filter(Boolean)
-      voice = findVoiceByLang(favVoices, lang)
-    }
+    const speechLang = parseLang(lang).lang
+    voice = favoriteVoices
+      .map(n => findVoiceByName(voices, n))
+      .filter(Boolean)
+      .find(v => (getVoiceLanguages(v) || []).some(l => parseLang(l).lang === speechLang))
+      || null
   }
   //otherwise, auto-select in order: offline, free, premium, any (skip native/espeak until last resort)
   if (!voice && lang) {

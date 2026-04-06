@@ -1,6 +1,16 @@
 
 function Speech(texts, options) {
-  options.rate = (options.rate || 1) * (isGoogleNative(options.voice) ? 0.9 : 1);
+  const rateMultiplier = isGoogleNative(options.voice) ? 0.9 : 1
+  options.rate = (options.rate || 1) * rateMultiplier;
+
+  // Live-update rate from storage so shortcut/settings changes apply mid-playback
+  const rateKey = "rate" + (options.voice ? options.voice.voiceName : "")
+  function onRateChange(changes) {
+    if (rateKey in changes) {
+      options.rate = (changes[rateKey].newValue || defaults.rate) * rateMultiplier
+    }
+  }
+  brapi.storage.local.onChanged.addListener(onRateChange)
 
   for (var i=0; i<texts.length; i++) if (/[\w)]$/.test(texts[i])) texts[i] += '.';
   if (texts.length) texts = getChunks(texts.join("\n\n"));
@@ -185,9 +195,11 @@ function Speech(texts, options) {
       }
     },
     complete: () => {
+      brapi.storage.local.onChanged.removeListener(onRateChange)
       if (this.onEnd) this.onEnd()
     },
     error: err => {
+      brapi.storage.local.onChanged.removeListener(onRateChange)
       if (err.name != "CancellationException") {
         if (this.onEnd) this.onEnd(err)
       }

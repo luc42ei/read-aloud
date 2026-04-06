@@ -77,7 +77,19 @@
           else if (voiceName == "@piper") bgPageInvoke("managePiperVoices").catch(console.error)
           else if (voiceName == "@supertonic") bgPageInvoke("manageSupertonicVoices").catch(console.error)
           else updateSettings({voiceName})
+          updateFavStar()
         });
+      $("#fav-toggle").click(async function() {
+        const voiceName = $("#voices").val()
+        if (!voiceName || voiceName.startsWith("@")) return
+        const {favoriteVoices} = await brapi.storage.local.get(["favoriteVoices"])
+        const favs = favoriteVoices || []
+        const idx = favs.indexOf(voiceName)
+        if (idx >= 0) favs.splice(idx, 1)
+        else favs.push(voiceName)
+        await updateSettings({favoriteVoices: favs})
+        updateFavStar()
+      });
       // lang picker open/close
       $("#lang-picker-btn").click(function(e) {
         e.stopPropagation()
@@ -97,14 +109,15 @@
     observeSetting("openaiCreds"),
     observeSetting("azureCreds"),
     observeSetting("authToken"),
+    observeSetting("favoriteVoices"),
     domReadyPromise
   ]).pipe(
-      rxjs.tap(([voices, languages, acceptLangs, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken]) => {
+      rxjs.tap(([voices, languages, acceptLangs, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken, favoriteVoices]) => {
         const panelOpen = $("#lang-picker-panel").is(":visible")
         buildLangPicker(voices, languages)
         if (panelOpen) $("#lang-picker-panel").show()
         populateVoices(voices, {languages, awsCreds, gcpCreds, ibmCreds, openaiCreds, azureCreds, authToken}, acceptLangs)
-        buildVoiceChips()
+        buildVoiceChips(favoriteVoices || [])
         applyVoiceFilter()
       }),
       rxjs.share()
@@ -113,6 +126,7 @@
   rxjs.combineLatest([observeSetting("voiceName"), voicesPopulatedObservable])
     .subscribe(([voiceName]) => {
       $("#voices").val(voiceName || "")
+      updateFavStar()
     })
 
   rxjs.combineLatest(
@@ -379,10 +393,28 @@
     $("#lang-picker-btn").text(label + " \u25be")
   }
 
+  var currentFavorites = []
+
+  async function updateFavStar() {
+    const voiceName = $("#voices").val()
+    const {favoriteVoices} = await brapi.storage.local.get(["favoriteVoices"])
+    const isFav = voiceName && (favoriteVoices || []).includes(voiceName)
+    $("#fav-toggle")
+      .toggleClass("active", !!isFav)
+      .find(".material-icons").text(isFav ? "star" : "star_border")
+  }
+
   function applyVoiceFilter() {
-    const filter = $("#voice-filter").val().toLowerCase();
+    const raw = $("#voice-filter").val()
+    const isFavFilter = raw === "@fav"
+    const filter = isFavFilter ? "" : raw.toLowerCase()
     $("#voices option").each(function() {
-      $(this).css("display", !filter || $(this).text().toLowerCase().includes(filter) ? "" : "none");
+      const name = $(this).val()
+      const text = $(this).text().toLowerCase()
+      let show = true
+      if (isFavFilter) show = !name || currentFavorites.includes(name)
+      else if (filter) show = text.includes(filter)
+      $(this).css("display", show ? "" : "none");
     });
     $("#voices optgroup").each(function() {
       const hasVisible = $(this).find("option").filter((_, o) => $(o).css("display") !== "none").length > 0;
@@ -401,7 +433,8 @@
     return firstWord
   }
 
-  function buildVoiceChips() {
+  function buildVoiceChips(favorites) {
+    currentFavorites = favorites
     const groups = {}
     $("#voices optgroup").not("[data-type='offline'],[data-type='experimental']").find("option").each(function() {
       const text = $(this).text().trim()
@@ -413,6 +446,22 @@
 
     const currentFilter = $("#voice-filter").val()
     const $container = $("#voice-chips").empty()
+
+    if (favorites.length) {
+      $("<button>")
+        .addClass("voice-chip voice-chip-fav")
+        .toggleClass("active", currentFilter === "@fav")
+        .text("\u2605 Favorites")
+        .on("click", function() {
+          const next = $("#voice-filter").val() === "@fav" ? "" : "@fav"
+          $("#voice-filter").val(next)
+          $(".voice-chip").removeClass("active")
+          if (next) $(this).addClass("active")
+          applyVoiceFilter()
+        })
+        .appendTo($container)
+    }
+
     Object.entries(groups)
       .filter(([, {count}]) => count >= 2)
       .sort((a, b) => a[1].label.localeCompare(b[1].label))

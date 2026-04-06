@@ -323,9 +323,54 @@ input[type=checkbox] + label {
   border-color: #17a2b8;
   color: white;
 }
+.voice-chip-fav {
+  border-color: #f5a623;
+}
+.voice-chip-fav.active {
+  background: #f5a623;
+  border-color: #f5a623;
+  color: #333;
+}
+.dark-mode .voice-chip-fav {
+  border-color: #f5a623;
+}
+.dark-mode .voice-chip-fav.active {
+  background: #f5a623;
+  border-color: #f5a623;
+  color: #333;
+}
 
 #voice-filter {
   margin-bottom: .4rem;
+}
+
+.voice-select-row {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+}
+.voice-select-row select {
+  flex: 1;
+}
+.fav-btn {
+  padding: .2rem .3rem;
+  line-height: 1;
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+}
+.fav-btn .material-icons {
+  font-size: 1.3rem;
+  color: #999;
+}
+.fav-btn.active .material-icons {
+  color: #f5a623;
+}
+.dark-mode .fav-btn .material-icons {
+  color: #666;
+}
+.dark-mode .fav-btn.active .material-icons {
+  color: #f5a623;
 }
 
 

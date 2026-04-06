@@ -50,8 +50,13 @@
       <div>
         <div id="voice-chips"></div>
         <input id="voice-filter" type="text" class="form-control" placeholder="Filter voices…">
-        <select id="voices" class="form-control">
-        </select>
+        <div class="voice-select-row">
+          <select id="voices" class="form-control">
+          </select>
+          <button type="button" id="fav-toggle" class="btn btn-sm btn-light fav-btn" title="Add to favorites">
+            <i class="material-icons">star_border</i>
+          </button>
+        </div>
         <small id="voice-info" class="form-text text-muted">
           Note: This voice may become unavailable at any time.
           <a href='http://blog.readaloud.app/2018/10/the-state-of-text-to-speech-technology.html' target='_blank'>Read more</a> about it on our blog.

@@ -4,9 +4,6 @@ brapi.runtime.onInstalled.addListener(function() {
   installContextMenus()
 })
 
-manageSupertonicVoices()
-
-
 /**
  * IPC handlers
  */
@@ -393,13 +390,35 @@ async function managePiperVoices() {
   }
 }
 
+let supertonicInstallPromise = null
+
 async function manageSupertonicVoices() {
-  const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
-    voiceName: "Supertonic " + id,
-    lang: "en",
-    langs: ["en", "ko", "es", "pt", "fr"]
-  }))
-  await updateSettings({supertonicVoices: voices})
+  if (supertonicInstallPromise) return supertonicInstallPromise
+  supertonicInstallPromise = (async () => {
+    const workerUrl = brapi.runtime.getURL("js/supertonic-worker.js")
+    const worker = new Worker(workerUrl)
+    try {
+      await new Promise((resolve, reject) => {
+        worker.onmessage = e => {
+          if (e.data.type === "progress") return
+          if (e.data.error) reject(new Error(e.data.error))
+          else resolve()
+        }
+        worker.onerror = e => reject(new Error(e.message))
+        worker.postMessage({method: "loadModels", id: 0})
+      })
+    } finally {
+      worker.terminate()
+      supertonicInstallPromise = null
+    }
+    const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
+      voiceName: "Supertonic " + id,
+      lang: "en",
+      langs: ["en", "ko", "es", "pt", "fr"]
+    }))
+    await updateSettings({supertonicVoices: voices})
+  })()
+  return supertonicInstallPromise
 }
 
 

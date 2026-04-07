@@ -74,7 +74,13 @@
           var voiceName = $(this).val();
           if (voiceName == "@premium") brapi.tabs.create({url: "premium-voices.html"});
           else if (voiceName == "@piper") bgPageInvoke("managePiperVoices").catch(console.error)
-          else if (voiceName == "@supertonic") bgPageInvoke("manageSupertonicVoices").catch(console.error)
+          else if (voiceName == "@supertonic") {
+            const $sel = $(this)
+            $sel.prop("disabled", true)
+            bgPageInvoke("manageSupertonicVoices")
+              .then(() => location.reload())
+              .catch(err => { $sel.prop("disabled", false); console.error(err) })
+          }
           else updateSettings({voiceName})
           updateFavStar()
         });
@@ -509,7 +515,8 @@
 
     addGroup(brapi.i18n.getMessage("options_voicegroup_experimental"), "experimental", groups.experimental, g => {
       $("<option>").val("@piper").text(brapi.i18n.getMessage("options_enable_piper_voices")).appendTo(g)
-      $("<option>").val("@supertonic").text(brapi.i18n.getMessage("options_enable_supertonic_voices")).appendTo(g)
+      if (!groups.experimental.some(isSupertonicVoice))
+        $("<option>").val("@supertonic").text(brapi.i18n.getMessage("options_enable_supertonic_voices")).appendTo(g)
     })
     addGroup(brapi.i18n.getMessage("options_voicegroup_standard"), null, groups.standard)
     addGroup(brapi.i18n.getMessage("options_voicegroup_premium"), null, groups.premium)

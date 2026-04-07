@@ -17,6 +17,13 @@ function Speech(texts, options) {
   var modifiedLengths = texts.map(t => t.length);
   if (texts.length) texts = getChunks(texts.join("\n\n"));
   var chunkToOrigText = buildChunkMapping(modifiedLengths, texts);
+  var origTextToFirstChunk = [];
+  if (chunkToOrigText) {
+    for (var i = 0; i < texts.length; i++) {
+      var oi = chunkToOrigText[i];
+      if (origTextToFirstChunk[oi] === undefined) origTextToFirstChunk[oi] = i;
+    }
+  }
 
   const engine = pickEngine()
   let enginePlaybackState
@@ -36,6 +43,13 @@ function Speech(texts, options) {
     playbackState$.next("resumed")
   }
   this.gotoEnd = () => cmd$.next({name: "gotoEnd"})
+  this.seekToOrigText = function(origTextIndex) {
+    var chunkIndex = origTextToFirstChunk[origTextIndex];
+    if (chunkIndex != null) {
+      cmd$.next({name: "seek", index: chunkIndex})
+      playbackState$.next("resumed")
+    }
+  }
 
   function pickEngine() {
     if (isPiperVoice(options.voice)) return piperTtsEngine;

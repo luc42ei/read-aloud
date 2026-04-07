@@ -134,6 +134,11 @@ var messageHandlers = {
   isPaired: () => phoneTtsEngine.isPaired(),
   managePiperVoices,
   getLastUrl: () => lastUrlPromise,
+  seekToOrigText: async function(origTextIndex) {
+    if (!activeDoc) return;
+    var speech = await activeDoc.getActiveSpeech();
+    if (speech && speech.seekToOrigText) speech.seekToOrigText(origTextIndex);
+  },
 }
 
 registerMessageListener("player", messageHandlers)

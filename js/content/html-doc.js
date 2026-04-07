@@ -267,13 +267,45 @@ var readAloudDoc = new function() {
     if (sameElem.length > 1) {
       // Use range-based highlighting: find text within element
       var mark = highlightTextInElement(entry.elem, entry.text);
-      if (mark) {
-        mark.scrollIntoView({behavior: "smooth", block: "center"});
-        return;
-      }
+      if (mark) { scrollToQuarter(mark); return; }
     }
     $(entry.elem).addClass("read-aloud-highlight");
-    entry.elem.scrollIntoView({behavior: "smooth", block: "center"});
+    scrollToQuarter(entry.elem);
+  }
+
+  this.attachInPageHandlers = function(seekCallback) {
+    if (self._inPageHandlersAttached || !self._highlightEntries) return;
+    self._inPageHandlersAttached = true;
+
+    // Group entries by element
+    var elemGroups = new Map();
+    for (var i = 0; i < self._highlightEntries.length; i++) {
+      var elem = self._highlightEntries[i].elem;
+      if (!elemGroups.has(elem)) elemGroups.set(elem, []);
+      elemGroups.get(elem).push({origIdx: i, text: self._highlightEntries[i].text});
+    }
+
+    elemGroups.forEach(function(entries, elem) {
+      $(elem).css("cursor", "pointer").on("click.readaloud", function(e) {
+        e.preventDefault();
+        var origIdx = entries.length === 1
+          ? entries[0].origIdx
+          : findClickedEntry(elem, entries, e.clientX, e.clientY);
+        seekCallback(origIdx);
+      });
+    });
+  }
+
+  this.detachInPageHandlers = function() {
+    if (!self._inPageHandlersAttached || !self._highlightEntries) return;
+    self._inPageHandlersAttached = false;
+    var seenElems = new Set();
+    for (var i = 0; i < self._highlightEntries.length; i++) {
+      var elem = self._highlightEntries[i].elem;
+      if (seenElems.has(elem)) continue;
+      seenElems.add(elem);
+      $(elem).css("cursor", "").off("click.readaloud");
+    }
   }
 
   this.clearHighlight = function() {
@@ -286,33 +318,69 @@ var readAloudDoc = new function() {
     });
   }
 
-  function highlightTextInElement(container, searchText) {
-    // Collect text nodes
+  function scrollToQuarter(elem) {
+    var rect = elem.getBoundingClientRect();
+    window.scrollTo({top: window.scrollY + rect.top - window.innerHeight * 0.25, behavior: "smooth"});
+  }
+
+  function buildTextNodeBuffer(container) {
     var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
     var textNodes = [];
     while (walker.nextNode()) textNodes.push(walker.currentNode);
-    if (!textNodes.length) return null;
-
-    // Build whitespace-normalized buffer with position map back to text nodes
-    // This handles <br> elements (which produce separate text nodes) and
-    // addMissingPunctuation differences by collapsing all whitespace
-    var needle = searchText.replace(/\s+/g, " ").trim();
-    var buf = "";
-    var map = [];
+    var buf = "", map = [];
     for (var n = 0; n < textNodes.length; n++) {
       var text = textNodes[n].nodeValue;
       for (var c = 0; c < text.length; c++) {
         if (/\s/.test(text[c])) {
-          if (buf.length > 0 && buf[buf.length - 1] !== " ") {
-            buf += " ";
-            map.push({ni: n, off: c});
-          }
-        } else {
-          buf += text[c];
-          map.push({ni: n, off: c});
-        }
+          if (buf.length > 0 && buf[buf.length - 1] !== " ") { buf += " "; map.push({ni: n, off: c}); }
+        } else { buf += text[c]; map.push({ni: n, off: c}); }
       }
     }
+    return {textNodes: textNodes, buf: buf, map: map};
+  }
+
+  function findClickedEntry(container, entries, clientX, clientY) {
+    // Get caret position at click point (cross-browser)
+    var clickedNode, clickedOffset;
+    if (document.caretPositionFromPoint) {
+      var pos = document.caretPositionFromPoint(clientX, clientY);
+      if (pos) { clickedNode = pos.offsetNode; clickedOffset = pos.offset; }
+    } else if (document.caretRangeFromPoint) {
+      var r = document.caretRangeFromPoint(clientX, clientY);
+      if (r) { clickedNode = r.startContainer; clickedOffset = r.startOffset; }
+    }
+    if (!clickedNode) return entries[0].origIdx;
+
+    var tb = buildTextNodeBuffer(container);
+    var textNodes = tb.textNodes, buf = tb.buf, map = tb.map;
+
+    // Find click position in normalized buffer
+    var clickNodeIdx = textNodes.indexOf(clickedNode);
+    if (clickNodeIdx === -1) return entries[0].origIdx;
+    var clickBufPos = 0;
+    for (var i = 0; i < map.length; i++) {
+      if (map[i].ni === clickNodeIdx && map[i].off >= clickedOffset) { clickBufPos = i; break; }
+    }
+
+    // Find which entry's text starts at or before the click position
+    var best = entries[0];
+    var searchFrom = 0;
+    for (var e = 0; e < entries.length; e++) {
+      var needle = entries[e].text.replace(/\s+/g, " ").trim();
+      var idx = buf.indexOf(needle, searchFrom);
+      if (idx === -1) continue;
+      if (idx <= clickBufPos) best = entries[e];
+      else break;
+      searchFrom = idx + needle.length;
+    }
+    return best.origIdx;
+  }
+
+  function highlightTextInElement(container, searchText) {
+    var tb = buildTextNodeBuffer(container);
+    var textNodes = tb.textNodes, buf = tb.buf, map = tb.map;
+    if (!textNodes.length) return null;
+    var needle = searchText.replace(/\s+/g, " ").trim();
 
     var idx = buf.indexOf(needle);
     if (idx === -1) {

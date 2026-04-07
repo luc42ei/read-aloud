@@ -10,6 +10,7 @@
     },
     clearHighlight: function() {
       if (readAloudDoc.clearHighlight) readAloudDoc.clearHighlight();
+      if (readAloudDoc.detachInPageHandlers) readAloudDoc.detachInPageHandlers();
     }
   })
 
@@ -74,6 +75,14 @@
         .then(function(texts) {
           if (texts && Array.isArray(texts)) {
             if (!quietly) console.log(texts.join("\n\n"));
+            // Attach in-page click handlers if mode is active
+            brapi.storage.local.get("showHighlighting").then(function(s) {
+              if (Number(s.showHighlighting) === 3 && readAloudDoc.attachInPageHandlers) {
+                readAloudDoc.attachInPageHandlers(function(origTextIndex) {
+                  sendToPlayer({method: "seekToOrigText", args: [origTextIndex]}).catch(function(){});
+                });
+              }
+            });
           }
           return texts;
         })

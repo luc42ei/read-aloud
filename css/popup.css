@@ -129,6 +129,12 @@ body:not(.is-popup) #highlight {
 body:not(.is-popup) #toolbar .btn-group.window-size {
   display: none;
 }
+.speed-display {
+  cursor: default;
+  min-width: 3.2em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
 
 
 #footer {

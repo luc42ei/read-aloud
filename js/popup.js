@@ -67,6 +67,8 @@ async function init() {
   $("#increase-font-size").click(changeFontSize.bind(null, +1));
   $("#decrease-window-size").click(changeWindowSize.bind(null, -1));
   $("#increase-window-size").click(changeWindowSize.bind(null, +1));
+  $("#decrease-speed").click(changeSpeed.bind(null, -0.05));
+  $("#increase-speed").click(changeSpeed.bind(null, +0.05));
   $("#toggle-dark-mode").click(toggleDarkMode);
 
   refreshSize();
@@ -176,6 +178,13 @@ async function updateButtons() {
   else {
     $("#highlight, #toolbar").hide()
   }
+
+  // Update speed display
+  const rateKey = "rate" + (settings.voiceName || "")
+  brapi.storage.local.get(rateKey).then(function(s) {
+    const rate = s[rateKey] || defaults.rate
+    $("#speed-display").text(rate.toFixed(2).replace(/\.?0+$/, "") + "×")
+  })
 }
 
 function updateHighlighting(speech) {
@@ -307,6 +316,19 @@ function onRewind() {
 
 function onSeek(n) {
   bgPageInvoke("seek", [n])
+    .catch(handleError)
+}
+
+function changeSpeed(delta) {
+  getSettings(["voiceName"])
+    .then(function(settings) {
+      const key = "rate" + (settings.voiceName || "")
+      return brapi.storage.local.get(key).then(function(s) {
+        const current = s[key] || defaults.rate
+        const next = Math.round((current + delta) * 1000) / 1000
+        return updateSettings({[key]: Math.min(10, Math.max(0.1, next))})
+      })
+    })
     .catch(handleError)
 }
 

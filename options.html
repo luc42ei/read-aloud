@@ -21,6 +21,9 @@
     <button type="button" class="close" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
+    <button type="button" id="toggle-dark-mode-options" class="btn btn-sm btn-light options-dark-btn" title="Toggle dark mode">
+      <i class="material-icons">dark_mode</i>
+    </button>
     <h2>
       <span data-i18n="options_heading"></span>
       <a href="advanced-options.html" id="expand-button" class="material-icons">open_in_new</a>
@@ -197,6 +200,80 @@
           </div>
         </div>
       </details>
+    </details>
+
+    <details id="voice-info-section">
+      <summary>About voice providers</summary>
+      <table class="provider-table">
+        <thead>
+          <tr><th>Provider</th><th>Type</th><th>Languages</th><th>Notes</th><th>Links</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Supertonic</td>
+            <td><span class="badge badge-offline">Offline</span></td>
+            <td>EN, KO, ES, PT, FR</td>
+            <td>Install once (~250 MB); runs fully in-browser via ONNX. Natural-sounding, 5 female + 5 male voices.</td>
+            <td><a href="https://github.com/supertone-inc/supertonic" target="_blank">GitHub</a> · <a href="https://huggingface.co/spaces/Supertone/supertonic-2" target="_blank">Demo &amp; Samples</a></td>
+          </tr>
+          <tr>
+            <td>Piper</td>
+            <td><span class="badge badge-offline">Offline</span></td>
+            <td>Many</td>
+            <td>Per-voice download (~50–200 MB). Install from "Custom voices" in upstream or via Piper settings.</td>
+            <td><a href="https://github.com/OHF-Voice/piper1-gpl" target="_blank">GitHub</a> · <a href="https://rhasspy.github.io/piper-samples" target="_blank">Voice Samples</a></td>
+          </tr>
+          <tr>
+            <td>Google Translate</td>
+            <td><span class="badge badge-free">Free · Online</span></td>
+            <td>Many</td>
+            <td>No API key required. Sends text to Google servers.</td>
+            <td><a href="https://translate.google.com/" target="_blank">translate.google.com</a></td>
+          </tr>
+          <tr>
+            <td>Google Wavenet / Neural2 / Chirp3-HD</td>
+            <td><span class="badge badge-api">API key · Paid</span></td>
+            <td>Many</td>
+            <td>High quality. Enter GCP API key under Custom Voices. Studio voices cost 10× more.</td>
+            <td><a href="https://cloud.google.com/text-to-speech" target="_blank">Service</a> · <a href="https://cloud.google.com/text-to-speech/docs/voices" target="_blank">Voices</a> · <a href="https://cloud.google.com/text-to-speech/docs/chirp3-hd" target="_blank">Chirp-HD Docs</a></td>
+          </tr>
+          <tr>
+            <td>Amazon Polly</td>
+            <td><span class="badge badge-api">API key · Paid</span></td>
+            <td>Many</td>
+            <td>Enter AWS Access Key ID + Secret under Custom Voices.</td>
+            <td><a href="https://aws.amazon.com/polly/" target="_blank">Service</a> · <a href="https://docs.aws.amazon.com/polly/latest/dg/available-voices.html" target="_blank">Voices &amp; Samples</a></td>
+          </tr>
+          <tr>
+            <td>IBM Watson</td>
+            <td><span class="badge badge-api">API key · Paid</span></td>
+            <td>Several</td>
+            <td>Enter IBM API key + endpoint URL under Custom Voices.</td>
+            <td><a href="https://www.ibm.com/products/text-to-speech" target="_blank">Service</a> · <a href="https://www.ibm.com/demos/live/tts-demo/self-service/home" target="_blank">Demo &amp; Samples</a></td>
+          </tr>
+          <tr>
+            <td>Microsoft Azure</td>
+            <td><span class="badge badge-api">API key · Paid</span></td>
+            <td>Many</td>
+            <td>Enter Azure region + speech key under Custom Voices.</td>
+            <td><a href="https://azure.microsoft.com/en-us/products/ai-services/ai-speech/" target="_blank">Service</a> · <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech" target="_blank">Docs &amp; Samples</a></td>
+          </tr>
+          <tr>
+            <td>OpenAI / compatible</td>
+            <td><span class="badge badge-api">API key · Paid</span></td>
+            <td>EN + more</td>
+            <td>Works with OpenAI or any OpenAI-compatible TTS endpoint (e.g. self-hosted).</td>
+            <td><a href="https://platform.openai.com/docs/guides/text-to-speech" target="_blank">API Docs &amp; Samples</a></td>
+          </tr>
+          <tr>
+            <td>Browser voices</td>
+            <td><span class="badge badge-offline">Offline</span></td>
+            <td>Varies</td>
+            <td>Built-in OS/browser voices. Quality varies; espeak variants are low quality.</td>
+            <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice" target="_blank">MDN Web Speech API</a></td>
+          </tr>
+        </tbody>
+      </table>
     </details>
   </div>
 </body>

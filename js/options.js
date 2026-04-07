@@ -242,6 +242,20 @@
 
 
 
+  //darkMode
+  domReadyPromise.then(() => {
+    $("#toggle-dark-mode-options").click(function() {
+      const darkMode = document.body.classList.toggle("dark-mode")
+      updateSettings({darkMode})
+    })
+  })
+  rxjs.combineLatest([observeSetting("darkMode"), domReadyPromise])
+    .subscribe(([darkMode]) => {
+      document.body.classList.toggle("dark-mode", !!darkMode)
+    })
+
+
+
   //voiceTest
   const demoSpeech = {
     get(lang) {

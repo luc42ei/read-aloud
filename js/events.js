@@ -390,44 +390,13 @@ async function managePiperVoices() {
   }
 }
 
-const SUPERTONIC_HF_BASE = "https://huggingface.co/Supertone/supertonic-2/resolve/main"
-const SUPERTONIC_CACHE = "supertonic-models-v1"
-const SUPERTONIC_ONNX_FILES = [
-  "onnx/duration_predictor.onnx",
-  "onnx/text_encoder.onnx",
-  "onnx/vector_estimator.onnx",
-  "onnx/vocoder.onnx"
-]
-
-let supertonicInstallPromise = null
-
 async function manageSupertonicVoices() {
-  if (supertonicInstallPromise) return supertonicInstallPromise
-  supertonicInstallPromise = (async () => {
-    try {
-      const cache = await caches.open(SUPERTONIC_CACHE)
-      for (let i = 0; i < SUPERTONIC_ONNX_FILES.length; i++) {
-        const name = SUPERTONIC_ONNX_FILES[i]
-        const url = `${SUPERTONIC_HF_BASE}/${name}`
-        await updateSettings({supertonicDownloadProgress: {step: i + 1, total: SUPERTONIC_ONNX_FILES.length}})
-        if (!await cache.match(url)) {
-          const resp = await fetch(url)
-          if (!resp.ok) throw new Error(`Failed to fetch ${name}: ${resp.status}`)
-          await cache.put(url, resp)
-        }
-      }
-    } finally {
-      supertonicInstallPromise = null
-      updateSettings({supertonicDownloadProgress: null}).catch(() => {})
-    }
-    const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
-      voiceName: "Supertonic " + id,
-      lang: "en",
-      langs: ["en", "ko", "es", "pt", "fr"]
-    }))
-    await updateSettings({supertonicVoices: voices})
-  })()
-  return supertonicInstallPromise
+  const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
+    voiceName: "Supertonic " + id,
+    lang: "en",
+    langs: ["en", "ko", "es", "pt", "fr"]
+  }))
+  await updateSettings({supertonicVoices: voices})
 }
 
 

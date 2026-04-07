@@ -72,8 +72,7 @@
       $("#voices")
         .change(function() {
           var voiceName = $(this).val();
-          if (voiceName == "@languages") brapi.tabs.create({url: "languages.html"});
-          else if (voiceName == "@premium") brapi.tabs.create({url: "premium-voices.html"});
+          if (voiceName == "@premium") brapi.tabs.create({url: "premium-voices.html"});
           else if (voiceName == "@piper") bgPageInvoke("managePiperVoices").catch(console.error)
           else if (voiceName == "@supertonic") bgPageInvoke("manageSupertonicVoices").catch(console.error)
           else updateSettings({voiceName})
@@ -514,9 +513,6 @@
     })
     addGroup(brapi.i18n.getMessage("options_voicegroup_standard"), null, groups.standard)
     addGroup(brapi.i18n.getMessage("options_voicegroup_premium"), null, groups.premium)
-    addGroup(brapi.i18n.getMessage("options_voicegroup_additional"), null, [], g => {
-      $("<option>").val("@languages").text(brapi.i18n.getMessage("options_add_more_languages")).appendTo(g)
-    })
   }
 
   function voiceSorter(a, b) {

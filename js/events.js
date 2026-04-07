@@ -390,28 +390,33 @@ async function managePiperVoices() {
   }
 }
 
+const SUPERTONIC_HF_BASE = "https://huggingface.co/Supertone/supertonic-2/resolve/main"
+const SUPERTONIC_CACHE = "supertonic-models-v1"
+const SUPERTONIC_ONNX_FILES = [
+  "onnx/duration_predictor.onnx",
+  "onnx/text_encoder.onnx",
+  "onnx/vector_estimator.onnx",
+  "onnx/vocoder.onnx"
+]
+
 let supertonicInstallPromise = null
 
 async function manageSupertonicVoices() {
   if (supertonicInstallPromise) return supertonicInstallPromise
   supertonicInstallPromise = (async () => {
-    const workerUrl = brapi.runtime.getURL("js/supertonic-worker.js")
-    const worker = new Worker(workerUrl)
     try {
-      await new Promise((resolve, reject) => {
-        worker.onmessage = e => {
-          if (e.data.type === "progress") {
-            updateSettings({supertonicDownloadProgress: {step: e.data.step, total: e.data.total}}).catch(() => {})
-            return
-          }
-          if (e.data.error) reject(new Error(e.data.error))
-          else resolve()
+      const cache = await caches.open(SUPERTONIC_CACHE)
+      for (let i = 0; i < SUPERTONIC_ONNX_FILES.length; i++) {
+        const name = SUPERTONIC_ONNX_FILES[i]
+        const url = `${SUPERTONIC_HF_BASE}/${name}`
+        await updateSettings({supertonicDownloadProgress: {step: i + 1, total: SUPERTONIC_ONNX_FILES.length}})
+        if (!await cache.match(url)) {
+          const resp = await fetch(url)
+          if (!resp.ok) throw new Error(`Failed to fetch ${name}: ${resp.status}`)
+          await cache.put(url, resp)
         }
-        worker.onerror = e => reject(new Error(e.message))
-        worker.postMessage({method: "cacheModels", id: 0})
-      })
+      }
     } finally {
-      worker.terminate()
       supertonicInstallPromise = null
       updateSettings({supertonicDownloadProgress: null}).catch(() => {})
     }

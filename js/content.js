@@ -4,7 +4,13 @@
     getRequireJs: getRequireJs,
     getDocumentInfo: getInfo,
     getCurrentIndex: getCurrentIndex,
-    getTexts: getTexts
+    getTexts: getTexts,
+    highlightBlock: function(origTextIndex) {
+      if (readAloudDoc.highlightBlock) readAloudDoc.highlightBlock(origTextIndex);
+    },
+    clearHighlight: function() {
+      if (readAloudDoc.clearHighlight) readAloudDoc.clearHighlight();
+    }
   })
 
   function getInfo() {

@@ -262,7 +262,36 @@ function closeDoc() {
     activeDoc.close();
     activeDoc = null;
     idleSubject.next(true)
+    sendHighlightToContent("clearHighlight", [])
+    lastHighlightedIndex = null
   }
+}
+
+var lastHighlightedIndex = null;
+
+setInterval(async function() {
+  try {
+    if (!activeDoc) return;
+    var settings = await brapi.storage.local.get("showHighlighting");
+    if (Number(settings.showHighlighting) != 3) return;
+    var speech = await activeDoc.getActiveSpeech();
+    if (!speech) return;
+    var info = speech.getInfo();
+    var origIdx = info.position.originalTextIndex;
+    if (origIdx != null && origIdx !== lastHighlightedIndex) {
+      lastHighlightedIndex = origIdx;
+      sendHighlightToContent("highlightBlock", [origIdx]);
+    }
+  } catch(e) {}
+}, 500);
+
+async function sendHighlightToContent(method, args) {
+  try {
+    var data = await brapi.storage.local.get("sourceUri");
+    if (!data.sourceUri || !data.sourceUri.startsWith("contentscript:")) return;
+    var tabId = Number(data.sourceUri.substr(14));
+    await brapi.tabs.sendMessage(tabId, {dest: "contentScript", method: method, args: args});
+  } catch(e) {}
 }
 
 function forward() {

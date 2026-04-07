@@ -12,8 +12,11 @@ function Speech(texts, options) {
   }
   brapi.storage.local.onChanged.addListener(onRateChange)
 
+  var originalTextCount = texts.length;
   for (var i=0; i<texts.length; i++) if (/[\w)]$/.test(texts[i])) texts[i] += '.';
+  var modifiedLengths = texts.map(t => t.length);
   if (texts.length) texts = getChunks(texts.join("\n\n"));
+  var chunkToOrigText = buildChunkMapping(modifiedLengths, texts);
 
   const engine = pickEngine()
   let enginePlaybackState
@@ -68,6 +71,29 @@ function Speech(texts, options) {
     }
   }
 
+  function buildChunkMapping(originalLengths, chunks) {
+    var offsets = [];
+    var pos = 0;
+    for (var i = 0; i < originalLengths.length; i++) {
+      offsets.push(pos);
+      pos += originalLengths[i];
+      if (i < originalLengths.length - 1) pos += 2;
+    }
+    offsets.push(pos);
+    var result = [];
+    var charPos = 0;
+    for (var i = 0; i < chunks.length; i++) {
+      var origIdx = 0;
+      for (var j = 1; j < offsets.length; j++) {
+        if (charPos >= offsets[j]) origIdx = j;
+        else break;
+      }
+      result.push(origIdx);
+      charPos += chunks[i].length;
+    }
+    return result;
+  }
+
   async function getState() {
     if (playbackState$.value == "resumed") {
       return await rxjs.firstValueFrom(isLoading$) ? "LOADING" : "PLAYING"
@@ -77,10 +103,12 @@ function Speech(texts, options) {
   }
 
   function getInfo() {
+    var currentIndex = enginePlaybackState ? enginePlaybackState.index : playlist.getIndex();
     return {
       texts: enginePlaybackState ? enginePlaybackState.texts : texts,
       position: {
-        index: enginePlaybackState ? enginePlaybackState.index : playlist.getIndex()
+        index: currentIndex,
+        originalTextIndex: chunkToOrigText ? chunkToOrigText[currentIndex] : currentIndex
       },
       isRTL: /^(ar|az|dv|he|iw|ku|fa|ur)\b/.test(options.lang),
       engine: immediate(() => {

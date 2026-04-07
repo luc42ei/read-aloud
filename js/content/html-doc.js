@@ -71,8 +71,23 @@ var readAloudDoc = new function() {
     }
     $(toRead).addClass("read-aloud");   //for debugging only
 
-    //extract texts
-    return toRead.flatMap(getTexts).filter(isNotEmpty);
+    //extract texts and build element mapping for in-page highlighting
+    var finalTexts = [];
+    self._highlightEntries = [];
+    for (var i = 0; i < toRead.length; i++) {
+      var elem = toRead[i];
+      var isMulti = $(elem).data("read-aloud-multi-block");
+      var children = isMulti ? $(elem).children(":visible").get() : null;
+      var elemTexts = getTexts(elem).filter(isNotEmpty);
+      for (var j = 0; j < elemTexts.length; j++) {
+        self._highlightEntries.push({
+          elem: isMulti && children[j] ? children[j] : elem,
+          text: elemTexts[j]
+        });
+      }
+      finalTexts.push.apply(finalTexts, elemTexts);
+    }
+    return finalTexts;
   }
 
   function findTextBlocks(threshold) {
@@ -233,5 +248,107 @@ var readAloudDoc = new function() {
       child = child.nextSibling;
     }
     return false;
+  }
+
+  this.highlightBlock = function(origTextIndex) {
+    if (!self._highlightEntries) return;
+    var entry = self._highlightEntries[origTextIndex];
+    if (!entry) return;
+    if (!document.getElementById("read-aloud-highlight-style")) {
+      var style = document.createElement("style");
+      style.id = "read-aloud-highlight-style";
+      style.textContent = ".read-aloud-highlight { background-color: rgba(66,133,244,0.15) !important; outline: 2px solid rgba(66,133,244,0.5) !important; border-radius: 3px; } read-aloud-hl { background-color: rgba(66,133,244,0.15); outline: 2px solid rgba(66,133,244,0.5); border-radius: 3px; display: inline; }";
+      document.head.appendChild(style);
+    }
+    self.clearHighlight();
+
+    // Check if multiple texts share this element
+    var sameElem = self._highlightEntries.filter(function(e) { return e.elem === entry.elem; });
+    if (sameElem.length > 1) {
+      // Use range-based highlighting: find text within element
+      var mark = highlightTextInElement(entry.elem, entry.text);
+      if (mark) {
+        mark.scrollIntoView({behavior: "smooth", block: "center"});
+        return;
+      }
+    }
+    $(entry.elem).addClass("read-aloud-highlight");
+    entry.elem.scrollIntoView({behavior: "smooth", block: "center"});
+  }
+
+  this.clearHighlight = function() {
+    $(".read-aloud-highlight").removeClass("read-aloud-highlight");
+    $("read-aloud-hl").each(function() {
+      var parent = this.parentNode;
+      while (this.firstChild) parent.insertBefore(this.firstChild, this);
+      parent.removeChild(this);
+      parent.normalize();
+    });
+  }
+
+  function highlightTextInElement(container, searchText) {
+    // Collect text nodes
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    if (!textNodes.length) return null;
+
+    // Build whitespace-normalized buffer with position map back to text nodes
+    // This handles <br> elements (which produce separate text nodes) and
+    // addMissingPunctuation differences by collapsing all whitespace
+    var needle = searchText.replace(/\s+/g, " ").trim();
+    var buf = "";
+    var map = [];
+    for (var n = 0; n < textNodes.length; n++) {
+      var text = textNodes[n].nodeValue;
+      for (var c = 0; c < text.length; c++) {
+        if (/\s/.test(text[c])) {
+          if (buf.length > 0 && buf[buf.length - 1] !== " ") {
+            buf += " ";
+            map.push({ni: n, off: c});
+          }
+        } else {
+          buf += text[c];
+          map.push({ni: n, off: c});
+        }
+      }
+    }
+
+    var idx = buf.indexOf(needle);
+    if (idx === -1) {
+      // Try shorter prefix
+      needle = needle.substring(0, 60);
+      idx = buf.indexOf(needle);
+      if (idx === -1) return null;
+    }
+    var endIdx = idx + needle.length - 1;
+    if (endIdx >= map.length) endIdx = map.length - 1;
+
+    var s = map[idx];
+    var e = map[endIdx];
+    var range = document.createRange();
+    range.setStart(textNodes[s.ni], s.off);
+    range.setEnd(textNodes[e.ni], e.off + 1);
+
+    try {
+      var mark = document.createElement("read-aloud-hl");
+      range.surroundContents(mark);
+      return mark;
+    } catch(err) {
+      // surroundContents fails if range crosses element boundaries (e.g. footnotes)
+      // Wrap each text node in the range individually
+      var firstMark = null;
+      for (var i = s.ni; i <= e.ni; i++) {
+        var node = textNodes[i];
+        if (!node.nodeValue.trim()) continue;
+        var r = document.createRange();
+        r.setStart(node, i === s.ni ? s.off : 0);
+        r.setEnd(node, i === e.ni ? e.off + 1 : node.nodeValue.length);
+        var m = document.createElement("read-aloud-hl");
+        r.surroundContents(m);
+        if (!firstMark) firstMark = m;
+      }
+      return firstMark;
+    }
   }
 }

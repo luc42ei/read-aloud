@@ -70,7 +70,6 @@ async function init() {
   $("#toggle-dark-mode").click(toggleDarkMode);
 
   refreshSize();
-  checkAnnouncements();
 
   const {state} = await bgPageInvoke("getPlaybackState")
   if (state == "PAUSED" || state == "STOPPED") onPlay()
@@ -170,7 +169,7 @@ async function updateButtons() {
   $("#btnStop").toggle(state == "PAUSED" || state == "PLAYING" || state == "LOADING");
   $("#btnForward, #btnRewind").toggle(state == "PLAYING" || state == "PAUSED");
 
-  if (showHighlighting && (state == "LOADING" || state == "PAUSED" || state == "PLAYING") && speech) {
+  if (showHighlighting && showHighlighting != 3 && (state == "LOADING" || state == "PAUSED" || state == "PLAYING") && speech) {
     $("#highlight, #toolbar").show()
     updateHighlighting(speech)
   }

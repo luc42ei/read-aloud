@@ -89,6 +89,19 @@ var readAloudDoc = new function() {
     var hasParagraphs = function(elem) {
       return someChildNodes(elem, isParagraph);
     };
+    // Catch span-only paragraphs (Draft.js, rich text editors) where text is split across
+    // sibling <span> runs — each span alone may be below the threshold but together they form
+    // a paragraph. Only applies when there are no block-level children.
+    var blockTags = "div,section,article,main,header,footer,p,ul,ol,dl,table,blockquote,figure,aside,form";
+    var hasInlineText = function(elem) {
+      if (getInnerText(elem).length < threshold) return false;
+      var blockChildren = $(elem).children(blockTags).get();
+      if (blockChildren.length === 0) return true;
+      // Also match if all block children are link-only wrappers (e.g. Draft.js inline link divs)
+      return blockChildren.every(function(child) {
+        return $(child).find("a[href]").length > 0 && $(child).children(":not(a[href])").length === 0;
+      });
+    };
     var containsTextBlocks = function(elem) {
       var childElems = $(elem).children(":not(" + skipTags + ")").get();
       return childElems.some(hasTextNodes) || childElems.some(hasParagraphs) || childElems.some(containsTextBlocks);
@@ -116,6 +129,7 @@ var readAloudDoc = new function() {
       else {
         if (hasTextNodes(this)) addBlock(this);
         else if (hasParagraphs(this)) addBlock(this, true);
+        else if (hasInlineText(this)) addBlock(this);
         else $(this).add(this.shadowRoot).children(":not(" + skipTags + ")").each(walk);
       }
     };
@@ -194,9 +208,13 @@ var readAloudDoc = new function() {
     if (!elem) return 100;
     var matches = /^H(\d)$/i.exec(elem.tagName);
     if (matches) return Number(matches[1]);
-    // Short <p> with no block children is likely a styled heading (e.g. Framer/Webflow sites)
-    // Use level 3 so it supersedes h4-h6 sub-headings found earlier in the backward walk
-    if (elem.tagName === 'P' && !$(elem).find('p, div').length && getInnerText(elem).length <= 60) return 3;
+    var innerText = getInnerText(elem);
+    if (innerText.length <= 60 && !$(elem).find('p, div').length) {
+      // Short <p> → pseudo-h3 (e.g. Framer/Webflow styled headings)
+      if (elem.tagName === 'P') return 3;
+      // Short element with bold inline style → pseudo-h4 (e.g. Draft.js bold headings)
+      if (/bold|[6-9]\d\d/.test(elem.style.fontWeight)) return 4;
+    }
     return 100;
   }
 

@@ -400,16 +400,20 @@ async function manageSupertonicVoices() {
     try {
       await new Promise((resolve, reject) => {
         worker.onmessage = e => {
-          if (e.data.type === "progress") return
+          if (e.data.type === "progress") {
+            updateSettings({supertonicDownloadProgress: {step: e.data.step, total: e.data.total}}).catch(() => {})
+            return
+          }
           if (e.data.error) reject(new Error(e.data.error))
           else resolve()
         }
         worker.onerror = e => reject(new Error(e.message))
-        worker.postMessage({method: "loadModels", id: 0})
+        worker.postMessage({method: "cacheModels", id: 0})
       })
     } finally {
       worker.terminate()
       supertonicInstallPromise = null
+      updateSettings({supertonicDownloadProgress: null}).catch(() => {})
     }
     const voices = ["F1","F2","F3","F4","F5","M1","M2","M3","M4","M5"].map(id => ({
       voiceName: "Supertonic " + id,

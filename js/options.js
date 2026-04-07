@@ -77,9 +77,10 @@
           else if (voiceName == "@supertonic") {
             const $sel = $(this)
             $sel.prop("disabled", true)
+            showSupertonicProgress()
             bgPageInvoke("manageSupertonicVoices")
               .then(() => location.reload())
-              .catch(err => { $sel.prop("disabled", false); console.error(err) })
+              .catch(err => { hideSupertonicProgress(); $sel.prop("disabled", false); console.error(err) })
           }
           else updateSettings({voiceName})
           updateFavStar()
@@ -686,4 +687,26 @@
       return false;
     }
   }
+
+  function showSupertonicProgress(prog) {
+    const text = prog ? `(${prog.step}/${prog.total})` : ""
+    $("#supertonic-progress-text").text(text)
+    $("#supertonic-progress").show()
+  }
+
+  function hideSupertonicProgress() {
+    $("#supertonic-progress").hide()
+  }
+
+  // Show progress if a download was already running when this page loaded
+  getSettings(["supertonicDownloadProgress"]).then(s => {
+    if (s.supertonicDownloadProgress) showSupertonicProgress(s.supertonicDownloadProgress)
+  })
+
+  brapi.storage.onChanged.addListener(changes => {
+    if (!("supertonicDownloadProgress" in changes)) return
+    const prog = changes.supertonicDownloadProgress.newValue
+    if (prog) showSupertonicProgress(prog)
+    else hideSupertonicProgress()
+  })
 })();

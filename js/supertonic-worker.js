@@ -21,6 +21,10 @@ onmessage = async function(e) {
         await loadModels(e.data)
         postMessage({id: e.data.id, result: "ok"})
         break
+      case "cacheModels":
+        await cacheModels(e.data)
+        postMessage({id: e.data.id, result: "ok"})
+        break
       case "speak":
         const wav = await speak(e.data)
         postMessage({id: e.data.id, result: wav}, [wav])
@@ -31,6 +35,22 @@ onmessage = async function(e) {
     }
   } catch (err) {
     postMessage({id: e.data.id, error: err.message || String(err)})
+  }
+}
+
+async function cacheModels() {
+  const allFiles = [
+    "onnx/tts.json",
+    "onnx/unicode_indexer.json",
+    "onnx/duration_predictor.onnx",
+    "onnx/text_encoder.onnx",
+    "onnx/vector_estimator.onnx",
+    "onnx/vocoder.onnx"
+  ]
+  for (let i = 0; i < allFiles.length; i++) {
+    postMessage({type: "progress", step: i + 1, total: allFiles.length, name: allFiles[i]})
+    if (allFiles[i].endsWith(".json")) await fetchJson(allFiles[i])
+    else await fetchBinary(allFiles[i])
   }
 }
 

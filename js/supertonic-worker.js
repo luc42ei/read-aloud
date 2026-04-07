@@ -38,6 +38,8 @@ onmessage = async function(e) {
   }
 }
 
+const MODEL_CACHE = "supertonic-models-v1"
+
 async function cacheModels() {
   const allFiles = [
     "onnx/tts.json",
@@ -47,10 +49,20 @@ async function cacheModels() {
     "onnx/vector_estimator.onnx",
     "onnx/vocoder.onnx"
   ]
+  const cache = await caches.open(MODEL_CACHE)
   for (let i = 0; i < allFiles.length; i++) {
-    postMessage({type: "progress", step: i + 1, total: allFiles.length, name: allFiles[i]})
-    if (allFiles[i].endsWith(".json")) await fetchJson(allFiles[i])
-    else await fetchBinary(allFiles[i])
+    const name = allFiles[i]
+    postMessage({type: "progress", step: i + 1, total: allFiles.length, name})
+    if (name.endsWith(".json")) {
+      await fetchJson(name)
+    } else {
+      const url = `${HF_BASE}/${name}`
+      if (!await cache.match(url)) {
+        const resp = await fetch(url)
+        if (!resp.ok) throw new Error(`Failed to fetch ${name}: ${resp.status}`)
+        await cache.put(url, resp)  // streams to disk — no memory buffering
+      }
+    }
   }
 }
 
@@ -108,13 +120,14 @@ async function fetchJson(name) {
 }
 
 async function fetchBinary(name) {
-  let data = await supertonicIdb.getCachedModel(name)
-  if (data) return data
-  const resp = await fetch(`${HF_BASE}/${name}`)
+  const url = `${HF_BASE}/${name}`
+  const cache = await caches.open(MODEL_CACHE)
+  const cached = await cache.match(url)
+  if (cached) return cached.arrayBuffer()
+  const resp = await fetch(url)
   if (!resp.ok) throw new Error(`Failed to fetch ${name}: ${resp.status}`)
-  data = await resp.arrayBuffer()
-  await supertonicIdb.putCachedModel(name, data)
-  return data
+  await cache.put(url, resp.clone())
+  return resp.arrayBuffer()
 }
 
 async function getVoiceStyle(voiceName) {

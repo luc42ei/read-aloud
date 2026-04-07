@@ -80,7 +80,12 @@
             showSupertonicProgress()
             bgPageInvoke("manageSupertonicVoices")
               .then(() => location.reload())
-              .catch(err => { hideSupertonicProgress(); $sel.prop("disabled", false); console.error(err) })
+              .catch(err => {
+                hideSupertonicProgress()
+                $sel.prop("disabled", false)
+                $("#supertonic-progress").text("Download failed: " + (err.message || err)).show()
+                console.error(err)
+              })
           }
           else updateSettings({voiceName})
           updateFavStar()

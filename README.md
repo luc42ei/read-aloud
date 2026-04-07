@@ -50,9 +50,31 @@ The currently auto-selected voice is shown as `Auto: <voice name>` below the dro
 
 To control which voice is picked for a language: star voices in your preferred order. The first favorited voice that supports the page language is used. To change priority, unfavorite and re-favorite in the desired order.
 
+### Text extraction improvements
+- Better block detection for rich-text editors (Draft.js, X/Twitter): span-only paragraphs without block-level children are now recognized as text blocks
+- Short `<p>` and bold-styled elements treated as pseudo-headings for correct reading order
+
+### Supertonic TTS (offline, on-device)
+- Bundled Supertonic TTS engine running entirely in-browser via ONNX Runtime Web (WASM backend) in a Web Worker — no external service
+- Models (~250 MB) downloaded on demand from HuggingFace and cached in the browser Cache API (persistent, not subject to cache eviction)
+- **Install:** select "Supertonic Stimmen installieren…" in the voice dropdown; progress is shown inline; the 10 voices (F1–F5, M1–M5) appear only after download completes
+- Models are loaded from cache into the Worker on first use per session; subsequent sentences in the same session are instant
+- Supports en / ko / es / pt / fr
+- Dash-between-phrases is normalized to a comma before inference for more natural pausing
+
+### In-page highlighting
+New **In Page** option in the highlighting control (alongside Popup / Window / Off):
+- Highlights the currently-read block directly on the webpage with a semi-transparent blue outline
+- Uses element-level highlighting for pages with `<p>` tags; falls back to precise range-based highlighting for flat HTML (e.g. `<br><br>`-separated text)
+- Handles inline elements (footnotes, links, bold) within a highlighted range without wrapping the whole page
+- Highlighted block scrolls to 25% from the top of the viewport
+- **Click any block to seek** — while "In Page" mode is active, all readable blocks are clickable; clicking seeks TTS to that block (including click-position detection within single-container pages)
+- Highlighting is driven by the player (persists after popup is closed)
+
 ### Removed upstream features
 - `languages.html` per-language voice picker (replaced by the inline language filter + favorites)
 - `preferredVoices` storage key (superseded by `favoriteVoices`)
+- Remote announcements banner in popup
 
 ---
 

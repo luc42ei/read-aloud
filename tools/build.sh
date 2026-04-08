@@ -12,6 +12,7 @@ zip -r "$OUT" . \
   --exclude "package-lock.json" \
   --exclude "introduction.md" \
   --exclude "README.md" \
+  --exclude "updates.json" \
   -q
 
 echo "Built: $OUT ($(du -sh "$OUT" | cut -f1))"

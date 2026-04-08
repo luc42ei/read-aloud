@@ -9,6 +9,7 @@
   "minimum_chrome_version": "99",
   "browser_specific_settings": {
     "gecko": {
+      "id": "read-aloud-fork@lucaseichhorn",
       "strict_min_version": "121.0"
     }
   },

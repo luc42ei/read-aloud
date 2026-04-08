@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+OUT="../read-aloud-fork.zip"
+rm -f "$OUT"
+
+zip -r "$OUT" . \
+  --exclude "*.git*" \
+  --exclude "docs/*" \
+  --exclude "tools/*" \
+  --exclude "package.json" \
+  --exclude "package-lock.json" \
+  --exclude "introduction.md" \
+  --exclude "README.md" \
+  -q
+
+echo "Built: $OUT ($(du -sh "$OUT" | cut -f1))"

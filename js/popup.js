@@ -67,8 +67,8 @@ async function init() {
   $("#increase-font-size").click(changeFontSize.bind(null, +1));
   $("#decrease-window-size").click(changeWindowSize.bind(null, -1));
   $("#increase-window-size").click(changeWindowSize.bind(null, +1));
-  $("#decrease-speed").click(changeSpeed.bind(null, -0.05));
-  $("#increase-speed").click(changeSpeed.bind(null, +0.05));
+  $("#decrease-speed").click(changeSpeed.bind(null, -0.1));
+  $("#increase-speed").click(changeSpeed.bind(null, +0.1));
   $("#toggle-dark-mode").click(toggleDarkMode);
 
   refreshSize();

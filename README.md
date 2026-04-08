@@ -35,8 +35,8 @@ See the original repo for general documentation, architecture, and API key setup
 
 ### Speed shortcuts
 Two new commands (assign keys in `about:addons → Manage Extension Shortcuts`):
-- **Speed up** (`rate-up`): +0.05×
-- **Slow down** (`rate-down`): −0.05×
+- **Speed up** (`rate-up`): +0.1×
+- **Slow down** (`rate-down`): −0.1×
 
 Rate changes apply at the next sentence boundary without interrupting playback.
 

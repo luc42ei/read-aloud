@@ -127,7 +127,7 @@ brapi.commands.onCommand.addListener(function(command) {
       .catch(handleHeadlessError)
   }
   else if (command == "rate-up" || command == "rate-down") {
-    adjustRate(command == "rate-up" ? 0.05 : -0.05)
+    adjustRate(command == "rate-up" ? 0.1 : -0.1)
       .catch(handleHeadlessError)
   }
 })

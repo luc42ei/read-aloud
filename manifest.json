@@ -107,10 +107,10 @@
       "description": "Rewind"
     },
     "rate-up": {
-      "description": "Speed up (+0.05x)"
+      "description": "Speed up (+0.1x)"
     },
     "rate-down": {
-      "description": "Slow down (-0.05x)"
+      "description": "Slow down (-0.1x)"
     }
   }
 }

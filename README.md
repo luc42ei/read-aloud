@@ -25,6 +25,9 @@ See the original repo for general documentation, architecture, and API key setup
 - Voice dropdown only shows voices that will actually work (hides Amazon Polly without AWS keys, etc.)
 - Right-click extension icon → **Open settings** context menu
 - Increased row spacing in the settings grid
+- **Dark mode toggle** button in the options page header
+- **"About voice providers"** collapsible table — all providers with type (offline/free/paid), supported languages, notes, and links to docs and voice samples
+- **Auto-select hint** below the voice dropdown explains language-matching behavior and favorites priority
 
 ### Playback behavior
 - Changing settings (rate, voice, etc.) no longer stops playback — the player re-reads settings per sentence, so changes take effect at the next sentence boundary
@@ -37,14 +40,16 @@ Two new commands (assign keys in `about:addons → Manage Extension Shortcuts`):
 
 Rate changes apply at the next sentence boundary without interrupting playback.
 
+### Popup improvements
+- **Speed buttons** — `−` / `+` buttons in the popup for quick speed adjustment without opening settings
+
 ### Auto-select voice
-When no specific voice is selected, the auto-select priority order is:
+When no specific voice is selected, a voice matching the **page language** is picked automatically. Priority order:
 
 1. **Favorited voice matching the page language** — whichever matching favorite you starred first wins
-2. Piper (offline)
+2. Piper
 3. Google Translate
-4. Other non-espeak voices
-5. Espeak (last resort)
+4. Other voices
 
 The currently auto-selected voice is shown as `Auto: <voice name>` below the dropdown.
 
@@ -78,8 +83,31 @@ New **In Page** option in the highlighting control (alongside Popup / Window / O
 
 ---
 
-## Loading in Firefox (development)
+## Installing
 
-1. Uninstall the AMO version if installed
+### Firefox (recommended)
+
+This addon is distributed as an unlisted extension via Mozilla AMO — it's signed by Mozilla but not publicly listed in the addon directory.
+
+1. Download the latest `.xpi` file from the [Releases](../../releases) page
+2. In Firefox, go to `about:addons`
+3. Click the gear icon → **Install Add-on From File…**
+4. Select the downloaded `.xpi`
+
+The addon will be installed and signed — no developer mode required.
+
+### Firefox (development / from source)
+
+1. Clone this repo
 2. Go to `about:debugging` → This Firefox → Load Temporary Add-on
-3. Select `manifest.json` from this repo
+3. Select `manifest.json` from the repo root
+
+Note: temporary addons are removed on Firefox restart.
+
+---
+
+## Support
+
+If you find this useful, consider buying me a coffee:
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/lucaseichhorn)

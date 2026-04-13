@@ -12,11 +12,23 @@ function Speech(texts, options) {
   }
   brapi.storage.local.onChanged.addListener(onRateChange)
 
-  var originalTextCount = texts.length;
   for (var i=0; i<texts.length; i++) if (/[\w)]$/.test(texts[i])) texts[i] += '.';
-  var modifiedLengths = texts.map(t => t.length);
-  if (texts.length) texts = getChunks(texts.join("\n\n"));
-  var chunkToOrigText = buildChunkMapping(modifiedLengths, texts);
+  // Chunk each text separately so chunk boundaries align with original text boundaries.
+  // Joining all texts first (texts.join("\n\n")) caused short texts to merge into a single
+  // chunk, making origTextToFirstChunk undefined for embedded texts and breaking seek/highlight.
+  var chunkToOrigText = null;
+  if (texts.length) {
+    var allChunks = [];
+    chunkToOrigText = [];
+    for (var i = 0; i < texts.length; i++) {
+      var textChunks = getChunks(texts[i]);
+      for (var j = 0; j < textChunks.length; j++) {
+        allChunks.push(textChunks[j]);
+        chunkToOrigText.push(i);
+      }
+    }
+    texts = allChunks;
+  }
   var origTextToFirstChunk = [];
   if (chunkToOrigText) {
     for (var i = 0; i < texts.length; i++) {
@@ -85,28 +97,6 @@ function Speech(texts, options) {
     }
   }
 
-  function buildChunkMapping(originalLengths, chunks) {
-    var offsets = [];
-    var pos = 0;
-    for (var i = 0; i < originalLengths.length; i++) {
-      offsets.push(pos);
-      pos += originalLengths[i];
-      if (i < originalLengths.length - 1) pos += 2;
-    }
-    offsets.push(pos);
-    var result = [];
-    var charPos = 0;
-    for (var i = 0; i < chunks.length; i++) {
-      var origIdx = 0;
-      for (var j = 1; j < offsets.length; j++) {
-        if (charPos >= offsets[j]) origIdx = j;
-        else break;
-      }
-      result.push(origIdx);
-      charPos += chunks[i].length;
-    }
-    return result;
-  }
 
   async function getState() {
     if (playbackState$.value == "resumed") {

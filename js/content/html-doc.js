@@ -76,16 +76,12 @@ var readAloudDoc = new function() {
     self._highlightEntries = [];
     for (var i = 0; i < toRead.length; i++) {
       var elem = toRead[i];
-      var isMulti = $(elem).data("read-aloud-multi-block");
-      var children = isMulti ? $(elem).children(":visible").get() : null;
-      var elemTexts = getTexts(elem).filter(isNotEmpty);
-      for (var j = 0; j < elemTexts.length; j++) {
-        self._highlightEntries.push({
-          elem: isMulti && children[j] ? children[j] : elem,
-          text: elemTexts[j]
-        });
+      var pairs = getTextsWithElems(elem);
+      for (var j = 0; j < pairs.length; j++) {
+        if (!isNotEmpty(pairs[j].text)) continue;
+        self._highlightEntries.push(pairs[j]);
+        finalTexts.push(pairs[j].text);
       }
-      finalTexts.push.apply(finalTexts, elemTexts);
     }
     return finalTexts;
   }
@@ -167,14 +163,31 @@ var readAloudDoc = new function() {
   }
 
   function getTexts(elem) {
+    return getTextsWithElems(elem).map(function(p) { return p.text });
+  }
+
+  function getTextsWithElems(elem) {
     var toHide = $(elem).find(":visible").filter(dontRead).hide();
     $(elem).find("ol, ul").addBack("ol, ul").each(addNumbering);
-    var texts = $(elem).data("read-aloud-multi-block")
-      ? $(elem).children(":visible").get().map(getText)
-      : getText(elem).split(paragraphSplitter);
+    var blockChildren = $(elem).data("read-aloud-multi-block")
+      ? $(elem).children(":visible").get()
+      : $(elem).children("p, blockquote, li, h1, h2, h3, h4, h5, h6").filter(":visible").get();
+    var pairs;
+    if (blockChildren.length) {
+      pairs = [];
+      blockChildren.forEach(function(child) {
+        getText(child).split(paragraphSplitter).forEach(function(text) {
+          pairs.push({elem: child, text: text});
+        });
+      });
+    } else {
+      pairs = getText(elem).split(paragraphSplitter).map(function(text) {
+        return {elem: elem, text: text};
+      });
+    }
     $(elem).find(".read-aloud-numbering").remove();
     toHide.show();
-    return texts;
+    return pairs;
   }
 
   function addNumbering() {
@@ -288,9 +301,13 @@ var readAloudDoc = new function() {
     elemGroups.forEach(function(entries, elem) {
       $(elem).css("cursor", "pointer").on("click.readaloud", function(e) {
         e.preventDefault();
-        var origIdx = entries.length === 1
-          ? entries[0].origIdx
-          : findClickedEntry(elem, entries, e.clientX, e.clientY);
+        var origIdx;
+        if (entries.length === 1) {
+          origIdx = entries[0].origIdx;
+        } else {
+          origIdx = findClickedEntryByTarget(e.target, entries);
+          if (origIdx == null) origIdx = findClickedEntry(elem, entries, e.clientX, e.clientY);
+        }
         seekCallback(origIdx);
       });
     });
@@ -337,6 +354,28 @@ var readAloudDoc = new function() {
       }
     }
     return {textNodes: textNodes, buf: buf, map: map};
+  }
+
+  function findClickedEntryByTarget(target, entries) {
+    var node = target;
+    while (node && node.nodeType !== 1) node = node.parentNode;
+    while (node) {
+      var norm = (node.innerText || "").replace(/\s+/g, " ").trim();
+      if (norm.length >= 3) {
+        for (var e = 0; e < entries.length; e++) {
+          var needle = entries[e].text.replace(/\s+/g, " ").trim();
+          if (!needle) continue;
+          // Only accept if ancestor text is roughly this entry (not a giant container).
+          if (norm.length / needle.length > 1.3) continue;
+          if (norm === needle || norm.indexOf(needle) === 0 || needle.indexOf(norm) === 0) {
+            return entries[e].origIdx;
+          }
+        }
+      }
+      node = node.parentNode;
+      if (!node || node.nodeType !== 1) break;
+    }
+    return null;
   }
 
   function findClickedEntry(container, entries, clientX, clientY) {

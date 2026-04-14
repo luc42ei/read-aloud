@@ -4,6 +4,8 @@ brapi.runtime.onInstalled.addListener(function() {
   installContextMenus()
 })
 
+installContextMenus()
+
 /**
  * IPC handlers
  */
@@ -65,16 +67,12 @@ function installContextMenus() {
     id: "read-selection",
     title: brapi.i18n.getMessage("context_read_selection"),
     contexts: ["selection"]
-  })
+  }, () => { brapi.runtime.lastError })
   brapi.contextMenus.create({
     id: "open-settings",
     title: "Open settings",
     contexts: ["action"]
-  },
-  function() {
-    if (brapi.runtime.lastError) console.error(brapi.runtime.lastError)
-    else console.info("Installed context menus")
-  })
+  }, () => { brapi.runtime.lastError })
 }
 
 

@@ -167,7 +167,12 @@ var readAloudDoc = new function() {
   }
 
   function getTextsWithElems(elem) {
-    var toHide = $(elem).find(":visible").filter(dontRead).hide();
+    // Guard: don't hide wrappers that contain the majority of the block's text
+    // (e.g. newsletter layouts with float:right main-content columns).
+    var beforeLen = (elem.innerText||"").trim().length;
+    var toHide = $(elem).find(":visible").filter(dontRead).filter(function() {
+      return (this.innerText||"").trim().length < beforeLen * 0.5;
+    }).hide();
     $(elem).find("ol, ul").addBack("ol, ul").each(addNumbering);
     var blockChildren = $(elem).data("read-aloud-multi-block")
       ? $(elem).children(":visible").get()
@@ -343,7 +348,14 @@ var readAloudDoc = new function() {
   function buildTextNodeBuffer(container) {
     var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
     var textNodes = [];
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    var skipSel = "sup, " + self.ignoreTags;
+    while (walker.nextNode()) {
+      var n = walker.currentNode;
+      // Skip text inside sup/ignored ancestors — those are excluded from pair texts
+      // (hidden during extraction), so including them here would break indexOf().
+      if ($(n.parentNode).closest(skipSel).length) continue;
+      textNodes.push(n);
+    }
     var buf = "", map = [];
     for (var n = 0; n < textNodes.length; n++) {
       var text = textNodes[n].nodeValue;

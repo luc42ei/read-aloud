@@ -189,7 +189,7 @@
 
   // ── BLOCK FROM CURSOR POINT ────────────────────────────────────────────────
 
-  function blockFromPoint(x, y) {
+  function blockFromPoint(x, y, strict) {
     try {
       // caretRangeFromPoint is WebKit/Chrome; Firefox exposes caretPositionFromPoint.
       // Without the Firefox branch this always fell through to the weak nearest-Y
@@ -212,6 +212,10 @@
         }
       }
     } catch (_) { /* cross-origin frame, ShadowRoot, or detached node */ }
+    // Click-to-seek passes strict: a click without a real text caret (scrollbar
+    // gutter, empty margin) must NOT resolve to the nearest block by Y, or it
+    // seeks to whatever happens to be closest.
+    if (strict) return -1;
     let best = -1, bestD = Infinity;
     blocks.forEach((el, i) => {
       try {
@@ -642,17 +646,11 @@
       if (window.getSelection().toString().length > 0) return;
       if (e.target.closest && e.target.closest(INTERACTIVE)) return;
 
-      // Ignore clicks on the scrollbar gutter — they sit beyond the content box
-      // and would otherwise fall through blockFromPoint's nearest-Y fallback and
-      // seek to whatever block happens to be closest.
-      const de = document.documentElement;
-      if (e.clientX > de.clientWidth || e.clientY > de.clientHeight) return;
-
       // Only seek when TTS is already active — don't trigger playback from a cold stop
       const state = await safeSend({ dest: 'serviceWorker', method: 'getPlaybackState' });
       if (!state || (state.state !== 'PLAYING' && state.state !== 'PAUSED')) return;
 
-      const idx = blockFromPoint(e.clientX, e.clientY);
+      const idx = blockFromPoint(e.clientX, e.clientY, true);
       if (idx < 0) return;
       const el = blocks[idx];
       if (!el) return;

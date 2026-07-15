@@ -534,8 +534,13 @@
     // Each step only runs when the previous one missed, so anchoring can't
     // regress pages where the anchor is stale or mismatched.
     let found = anchor ? findTextInScope(needle, anchor) : null;
-    if (!found) found = findTextInBlocks(needle, fromBlockEl, fromChar);
-    if (!found && fromBlockEl) found = findTextInBlocks(needle, null, 0);
+    let via = found ? 'anchored' : '';
+    if (!found) { found = findTextInBlocks(needle, fromBlockEl, fromChar); if (found) via = 'cursor'; }
+    if (!found && fromBlockEl) { found = findTextInBlocks(needle, null, 0); if (found) via = 'top'; }
+    console.log('[RA-DBG] hl', via || 'MISS',
+      '| needle=', JSON.stringify(needle.slice(0, 60)),
+      '| blocks=', blocks.length,
+      '| anchor=', anchor ? (anchor.elem.tagName + (anchor.elem.id ? '#' + anchor.elem.id : '') + ' chunkStart=' + anchor.chunkStart + ' prior=' + anchor.priorTexts.length) : 'none');
     if (!found) return null;   // keep previous rects — text may be mid-transition
 
     actRange = found.range;
@@ -636,6 +641,12 @@
       if (e.button !== 0) return;
       if (window.getSelection().toString().length > 0) return;
       if (e.target.closest && e.target.closest(INTERACTIVE)) return;
+
+      // Ignore clicks on the scrollbar gutter — they sit beyond the content box
+      // and would otherwise fall through blockFromPoint's nearest-Y fallback and
+      // seek to whatever block happens to be closest.
+      const de = document.documentElement;
+      if (e.clientX > de.clientWidth || e.clientY > de.clientHeight) return;
 
       // Only seek when TTS is already active — don't trigger playback from a cold stop
       const state = await safeSend({ dest: 'serviceWorker', method: 'getPlaybackState' });

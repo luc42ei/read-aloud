@@ -410,6 +410,13 @@
       for (let i = 0; i < upto && i < all.length; i++) {
         if (all[i].elem === entry.elem && all[i].text) priorTexts.push(all[i].text);
       }
+      // Click-to-seek may have cut a sentence-level prefix off this element's
+      // entry text (html-doc.js parse()) to seek mid-paragraph. That prefix is
+      // still in the DOM but no longer in any entry's .text, so occurrence
+      // counting would miss it — add it back once, regardless of whether the
+      // current entry IS the sliced one or a later entry of the same element.
+      if (readAloudDoc._seekSlicePrefix && readAloudDoc._seekSliceElem === entry.elem)
+        priorTexts.push(readAloudDoc._seekSlicePrefix);
       return {
         elem: entry.elem,
         priorTexts: priorTexts,

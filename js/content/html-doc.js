@@ -87,6 +87,8 @@ var readAloudDoc = new function() {
     //extract texts and build element mapping for in-page highlighting
     var finalTexts = [];
     self._highlightEntries = [];
+    self._seekSlicePrefix = null;
+    self._seekSliceElem = null;
     for (var i = 0; i < toRead.length; i++) {
       var elem = toRead[i];
       var pairs = getTextsWithElems(elem);
@@ -138,11 +140,35 @@ var readAloudDoc = new function() {
         }
         if (ti < 0) ti = first;
       }
+      // Sentence-level slice WITHIN the matched entry: find the sentence the
+      // click landed on (same splitter the TTS chunker uses, so boundaries
+      // agree) and cut everything before it. entry.text is mutated in place
+      // so chunkStart (speech.js) stays aligned with the sliced text; the cut
+      // prefix is remembered so the overlay's occurrence counting (which reads
+      // it back from the still-unmodified DOM) doesn't miscount matches that
+      // fall inside it.
+      if (ti >= 0 && typeof raSentenceSplitter !== 'undefined') {
+        var sentSplit = raSentenceSplitter.splitWithOffsets(finalTexts[ti]);
+        var sentStart = -1;
+        for (var sp = 0; sp < probes.length && sentStart < 0; sp++) {
+          for (var si2 = 0; si2 < sentSplit.length; si2++) {
+            var sHay = normalizeHaystack(sentSplit[si2].text);
+            if (probes[sp].ci) sHay = sHay.toLowerCase();
+            if (sHay.indexOf(probes[sp].s) >= 0) { sentStart = sentSplit[si2].start; break; }
+          }
+        }
+        if (sentStart > 0) {
+          var prefix = finalTexts[ti].slice(0, sentStart);
+          finalTexts[ti] = finalTexts[ti].slice(sentStart);
+          self._highlightEntries[ti].text = finalTexts[ti];
+          self._seekSlicePrefix = prefix;
+          self._seekSliceElem = self._highlightEntries[ti].elem;
+        }
+      }
       if (ti > 0) {
         self._highlightEntriesOffset = ti;
         self._highlightEntries = self._highlightEntries.slice(ti);
         finalTexts = finalTexts.slice(ti);
-        // Don't slice mid-paragraph — offsets in normalized space are unreliable
       }
     }
 

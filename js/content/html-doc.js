@@ -262,7 +262,7 @@ var readAloudDoc = new function() {
     var toHide = $(elem).find(":visible").filter(dontRead).filter(function() {
       return (this.innerText||"").trim().length < beforeLen * 0.5;
     }).hide();
-    $(elem).find("ol, ul").addBack("ol, ul").each(addNumbering);
+    $(elem).find("ol").addBack("ol").each(addNumbering);
     var blockChildren = $(elem).data("read-aloud-multi-block")
       ? $(elem).children(":visible").get()
       : $(elem).children("p, blockquote, li, h1, h2, h3, h4, h5, h6").filter(":visible").get();

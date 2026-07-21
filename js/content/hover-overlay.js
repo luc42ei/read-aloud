@@ -545,13 +545,8 @@
     // Each step only runs when the previous one missed, so anchoring can't
     // regress pages where the anchor is stale or mismatched.
     let found = anchor ? findTextInScope(needle, anchor) : null;
-    let via = found ? 'anchored' : '';
-    if (!found) { found = findTextInBlocks(needle, fromBlockEl, fromChar); if (found) via = 'cursor'; }
-    if (!found && fromBlockEl) { found = findTextInBlocks(needle, null, 0); if (found) via = 'top'; }
-    console.log('[RA-DBG] hl', via || 'MISS',
-      '| needle=', JSON.stringify(needle.slice(0, 60)),
-      '| blocks=', blocks.length,
-      '| anchor=', anchor ? (anchor.elem.tagName + (anchor.elem.id ? '#' + anchor.elem.id : '') + ' chunkStart=' + anchor.chunkStart + ' prior=' + anchor.priorTexts.length) : 'none');
+    if (!found) found = findTextInBlocks(needle, fromBlockEl, fromChar);
+    if (!found && fromBlockEl) found = findTextInBlocks(needle, null, 0);
     if (!found) return null;   // keep previous rects — text may be mid-transition
 
     actRange = found.range;
@@ -609,6 +604,16 @@
 
       const key = idx + ':' + text;
       if (key === lastPlayKey) return;
+
+      // A chunk that is only a list marker (e.g. "2.", "(a)" from addNumbering)
+      // has no meaningful location — its bare digits would indexOf-match a
+      // random decimal elsewhere and yank the highlight there. Keep the current
+      // highlight put and just advance the play key so we don't re-poll it.
+      if (/^\s*\(?\d{1,3}[).]\s*$/.test(text) || /^\s*\(?[a-zA-Z][).]\s*$/.test(text)) {
+        lastTextIdx = idx;
+        lastPlayKey = key;
+        return;
+      }
 
       // Resume the search at the cursor while playback advances; a non-increasing
       // idx means a seek-back or restart, so search the document from the top.

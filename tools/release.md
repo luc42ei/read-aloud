@@ -40,8 +40,9 @@ Fix in-page highlighting on legacy pages; faster Supertonic startup.
 
 ## Pitfalls
 
-- **Icons must be square.** AMO rejects non-square icons. Every declared icon
-  (`img/icon.png` and `img/icon_spot.png`) must be N×N. Quick check:
+- **Icons must be square** (only relevant if you changed an icon). AMO rejects
+  non-square icons — every declared icon (`img/icon.png`, `img/icon_spot.png`)
+  must be N×N. Check only after touching them:
   ```bash
   python3 -c "from PIL import Image; [print(f, Image.open(f).size) for f in ['img/icon.png','img/icon_spot.png']]"
   ```

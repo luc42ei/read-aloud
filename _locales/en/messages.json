@@ -170,6 +170,18 @@
   "error_chatgpt": {
     "message": "Click the speaker icon next to each answer to read it aloud"
   },
+  "error_network_unreachable": {
+    "message": "Could not reach {host}. If you're on a corporate network, a proxy or TLS-inspection appliance may be blocking this request."
+  },
+  "error_unauthorized": {
+    "message": "{host} rejected the request, please check your API key/credentials"
+  },
+  "error_rate_limited": {
+    "message": "{host} rate limit reached, please try again later"
+  },
+  "error_service_error": {
+    "message": "{host} returned a server error ({status})"
+  },
   "languages_heading": {
     "message": "Language Options"
   },

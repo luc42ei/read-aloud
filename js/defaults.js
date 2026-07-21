@@ -491,11 +491,36 @@ function urlEncode(oData) {
   return parts.join("&");
 }
 
+//classify network/TLS failures (eg. corporate proxy, MITM inspection) and HTTP status codes
+//into distinct error codes, so the UI can show a specific message instead of a generic one
+function classifyFetchError(err, host) {
+  if (err instanceof TypeError) return new Error(JSON.stringify({code: "error_network_unreachable", host}))
+  return err
+}
+
+function throwHttpError(res, host) {
+  if (res.status == 401 || res.status == 403) throw new Error(JSON.stringify({code: "error_unauthorized", host}))
+  if (res.status == 429) throw new Error(JSON.stringify({code: "error_rate_limited", host}))
+  if (res.status >= 500) throw new Error(JSON.stringify({code: "error_service_error", host, status: res.status}))
+  throw new Error("Server returns " + res.status)
+}
+
+//same classification as classifyFetchError/throwHttpError, but for aws-sdk errors (used by Amazon Polly)
+function classifyAwsError(err, host) {
+  if (err.code == "NetworkingError" || err.code == "TimeoutError") return new Error(JSON.stringify({code: "error_network_unreachable", host}))
+  if (err.statusCode == 401 || err.statusCode == 403) return new Error(JSON.stringify({code: "error_unauthorized", host}))
+  if (err.code == "ThrottlingException" || err.statusCode == 429) return new Error(JSON.stringify({code: "error_rate_limited", host}))
+  if (err.statusCode >= 500) return new Error(JSON.stringify({code: "error_service_error", host, status: err.statusCode}))
+  return err
+}
+
 function ajaxGet(sUrl) {
   var opts = typeof sUrl == "string" ? {url: sUrl} : sUrl;
+  var host = new URL(opts.url).host;
   return fetch(opts.url, {headers: opts.headers})
+    .catch(err => { throw classifyFetchError(err, host) })
     .then(res => {
-      if (!res.ok) throw new Error("Server returns " + res.status)
+      if (!res.ok) return throwHttpError(res, host)
       switch (opts.responseType) {
         case "json": return res.json()
         case "blob": return res.blob()
@@ -505,6 +530,7 @@ function ajaxGet(sUrl) {
 }
 
 function ajaxPost(sUrl, oData, sType) {
+  var host = new URL(sUrl).host;
   return fetch(sUrl, {
       method: "POST",
       headers: {
@@ -512,8 +538,9 @@ function ajaxPost(sUrl, oData, sType) {
       },
       body: sType == "json" ? JSON.stringify(oData) : urlEncode(oData)
     })
+    .catch(err => { throw classifyFetchError(err, host) })
     .then(res => {
-      if (!res.ok) throw new Error("Server returns " + res.status)
+      if (!res.ok) return throwHttpError(res, host)
       return res.text()
     })
 }

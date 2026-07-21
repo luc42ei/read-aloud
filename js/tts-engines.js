@@ -152,13 +152,15 @@ function PremiumTtsEngine(serviceUrl) {
   async function getAudioUrl(utterance, {lang, voice}) {
     const {authToken, clientId, manifest} = await readyPromise
     const url = serviceUrl + "/read-aloud/speak/" + lang + "/" + encodeURIComponent(voice.voiceName) + "?c=" + encodeURIComponent(clientId) + "&t=" + encodeURIComponent(authToken) + (voice.autoSelect ? '&a=1' : '') + "&v=" + manifest.version + "&q=" + encodeURIComponent(utterance)
+    const host = new URL(url).host
     return cache.fetchCached(
       url,
       async () => {
-        const res = await fetch(url)
+        const res = await fetch(url).catch(err => { throw classifyFetchError(err, host) })
         if (!res.ok) {
           const msg = await res.text().catch(err => "")
-          throw new Error(msg || (res.status + " " + res.statusText))
+          if (msg) throw new Error(msg)
+          return throwHttpError(res, host)
         }
         const blob = await res.blob()
         return URL.createObjectURL(blob)
@@ -448,6 +450,7 @@ function AmazonPollyTtsEngine() {
       async () => {
         const polly = await getPolly()
         const blob = await polly.synthesizeSpeech(getOpts(text, voiceId, style)).promise()
+          .catch(err => { throw classifyAwsError(err, "polly.us-east-1.amazonaws.com") })
         return URL.createObjectURL(blob);
       },
       blobUrl => URL.revokeObjectURL(blobUrl)
@@ -878,12 +881,14 @@ function OpenaiTtsEngine() {
     {voice: "shimmer", langs: ["en-US", "zh-CN"], model: "tts-1"},
   ]
   this.test = async function({apiKey, url, voiceList}) {
+    const host = new URL(url).host
     const res = await fetch(url + "/models", {
       headers: {"Authorization": "Bearer " + apiKey}
-    })
+    }).catch(err => { throw classifyFetchError(err, host) })
     if (!res.ok) {
-      const {error} = await res.json()
-      throw error
+      const error = await res.json().then(x => x.error).catch(() => null)
+      if (error) throw error
+      throwHttpError(res, host)
     }
   }
   this.speak = function(utterance, options, playbackState$) {
@@ -912,6 +917,7 @@ function OpenaiTtsEngine() {
         const {openaiCreds} = await getSettings(["openaiCreds"])
         const voiceInfo = openaiCreds.voiceList.find(x => x.voice == voiceId)
         assert(voiceInfo, "Voice not found " + voiceId)
+        const host = new URL(openaiCreds.url).host
         const res = await fetch(openaiCreds.url + "/audio/speech", {
           method: "POST",
           headers: {
@@ -929,8 +935,12 @@ function OpenaiTtsEngine() {
             instructions: voiceInfo.instructions,
             response_format: "mp3",
           })
-        })
-        if (!res.ok) throw await res.json().then(x => x.error)
+        }).catch(err => { throw classifyFetchError(err, host) })
+        if (!res.ok) {
+          const error = await res.json().then(x => x.error).catch(() => null)
+          if (error) throw error
+          throwHttpError(res, host)
+        }
         return URL.createObjectURL(await res.blob())
       },
       blobUrl => URL.revokeObjectURL(blobUrl)
@@ -963,13 +973,14 @@ function AzureTtsEngine() {
     }
   }
   this.fetchVoices = async function(region, key) {
-    const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/voices/list`, {
+    const host = `${region}.tts.speech.microsoft.com`
+    const res = await fetch(`https://${host}/cognitiveservices/voices/list`, {
       method: "GET",
       headers: {
         "Ocp-Apim-Subscription-Key": key,
       }
-    })
-    if (!res.ok) throw new Error("Server return " + res.status)
+    }).catch(err => { throw classifyFetchError(err, host) })
+    if (!res.ok) throwHttpError(res, host)
     const voices = await res.json()
     return voices.map(item => {
       const name = item.ShortName.split("-")[2]
@@ -988,7 +999,8 @@ function AzureTtsEngine() {
       async () => {
         const {azureCreds} = await getSettings(["azureCreds"])
         const {region, key} = azureCreds
-        const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+        const host = `${region}.tts.speech.microsoft.com`
+        const res = await fetch(`https://${host}/cognitiveservices/v1`, {
           method: "POST",
           headers: {
             "Ocp-Apim-Subscription-Key": key,
@@ -996,8 +1008,8 @@ function AzureTtsEngine() {
             "X-Microsoft-OutputFormat": "ogg-48khz-16bit-mono-opus",
           },
           body: `<speak version='1.0' xml:lang='${lang}'><voice name='${voiceName}'>${escapeXml(text)}</voice></speak>`
-        })
-        if (!res.ok) throw new Error("Server return " + res.status)
+        }).catch(err => { throw classifyFetchError(err, host) })
+        if (!res.ok) throwHttpError(res, host)
         const blob = await res.blob()
         return URL.createObjectURL(blob)
       },

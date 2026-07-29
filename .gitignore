@@ -40,3 +40,7 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Python bytecode
+__pycache__/
+*.pyc

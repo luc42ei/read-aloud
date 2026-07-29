@@ -116,7 +116,8 @@ def main():
     ap.add_argument("--max", type=int, default=0, help="stop after N chunks")
     ap.add_argument("--json", default="")
     ap.add_argument("--headed", action="store_true")
-    ap.add_argument("--browser", default="chromium", choices=["chromium", "firefox"])
+    ap.add_argument("--browser", default="firefox", choices=["firefox", "chromium"],
+                    help="Gecko is the shipping target, so it is the default")
     ap.add_argument("--htmldoc", default="", help="alternative html-doc.js (e.g. baseline from git)")
     ap.add_argument("--wait", type=int, default=800, help="ms to wait per chunk for the overlay poll")
     args = ap.parse_args()

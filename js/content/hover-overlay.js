@@ -494,13 +494,18 @@
           pos = tc.indexOf(probe.s, pos + 1);
         }
       }
-      if (matches.length) {
-        const m = matches[Math.min(occurrence, matches.length - 1)];
+      // Keep only matches that actually render: pages carry invisible copies of
+      // their text (collapsed embeds, email/preview duplicates, zero-size nodes).
+      // Highlighting one of those paints nothing and scrolls the reader off to it.
+      const visible = [];
+      for (const m of matches) {
         const tc = m.block.textContent;
         const end = Math.min(tc.length, m.pos + needle.length);
         const range = createRangeForChars(m.block, m.pos, end);
-        if (range) return { range: range, block: m.block, endChar: end };
+        if (range && getLineRects(range).length)
+          visible.push({ range: range, block: m.block, endChar: end });
       }
+      if (visible.length) return visible[Math.min(occurrence, visible.length - 1)];
     }
     return null;
   }
@@ -529,7 +534,9 @@
       if (pos < 0) continue;
       const end   = Math.min(tc.length, pos + needle.length);
       const range = createRangeForChars(block, pos, end);
-      if (range) return { range, block, endChar: end };
+      // Skip matches that render nothing (invisible duplicate copies of the text)
+      // and keep looking in later blocks for the one the reader can see.
+      if (range && getLineRects(range).length) return { range, block, endChar: end };
     }
     return null;
   }
@@ -545,17 +552,31 @@
     // Each step only runs when the previous one missed, so anchoring can't
     // regress pages where the anchor is stale or mismatched.
     let found = anchor ? findTextInScope(needle, anchor) : null;
+    const anchored = !!found;
     if (!found) found = findTextInBlocks(needle, fromBlockEl, fromChar);
     if (!found && fromBlockEl) found = findTextInBlocks(needle, null, 0);
     if (!found) return null;   // keep previous rects — text may be mid-transition
 
+    const rects = getLineRects(found.range);
+    if (!rects.length) return null;   // nothing to paint — keep the previous highlight
     actRange = found.range;
-    const rects = getLineRects(actRange);
     ensureActSvg();
     fillSvg(actSvg, rects, PLAY_COLOR, PLAY_ALPHA);
 
-    if (rects.length > 0 && isRectNearEdgeOrOffscreen(rects[0])) {
-      found.block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Only follow the highlight when we trust the location: an anchored match, or
+    // an unanchored page-wide one. A page-wide match found DESPITE having an anchor
+    // is a guess — short chunks like a heading also occur mid-sentence elsewhere
+    // ("…of the incident.") — so paint it but never yank the view across the page.
+    const trusted = anchored || !anchor
+      || anchor.elem.contains(found.block) || found.block.contains(anchor.elem);
+    if (trusted && isRectNearEdgeOrOffscreen(rects[0])) {
+      // Scroll to the sentence, not to its block: a block can be a synthetic run
+      // spanning most of the page (wrappers with display:contents collapse into
+      // one), and its top is then nowhere near the sentence being read.
+      window.scrollTo({
+        top: window.scrollY + rects[0].top - window.innerHeight * 0.3,
+        behavior: 'smooth',
+      });
     }
     return found;
   }
@@ -620,7 +641,11 @@
       const goneBackward = idx <= lastTextIdx;
       const fromEl   = goneBackward ? null : cursorBlock;
       const fromChar = goneBackward ? 0    : cursorChar;
-      const found = applyPlaybackHighlight(text, fromEl, fromChar, getPlaybackAnchor(info.position));
+      // speech.js appends a "." to any text ending in a word character, which the
+      // DOM does not have — a short chunk (a heading) then misses every match tier
+      // in its own anchor scope and the page-wide fallback lands somewhere random.
+      const needle = text.replace(/\.\s*$/, '') || text;
+      const found = applyPlaybackHighlight(needle, fromEl, fromChar, getPlaybackAnchor(info.position));
       if (found) {
         cursorBlock = found.block;
         cursorChar  = found.endChar;

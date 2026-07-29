@@ -87,6 +87,7 @@ var readAloudDoc = new function() {
     //extract texts and build element mapping for in-page highlighting
     var finalTexts = [];
     self._highlightEntries = [];
+    searchCursor = {elem: null, pos: 0, idx: -1};
     self._seekSlicePrefix = null;
     self._seekSliceElem = null;
     for (var i = 0; i < toRead.length; i++) {
@@ -454,12 +455,33 @@ var readAloudDoc = new function() {
       return;
     }
 
-    // Non-semantic shared container → scope to this entry's text.
-    var mark = highlightTextInElement(entry.elem, entry.text);
-    if (mark) { scrollToQuarter(mark); return; }
+    // Non-semantic shared container → scope to this entry's text. Search from the
+    // last match onwards (same idea as the overlay's forward cursor): text that
+    // repeats earlier on the page — a table of contents holds a copy of every
+    // heading — would otherwise match that earlier copy and drag the view up.
+    var forward = (searchCursor.elem === entry.elem && origTextIndex >= searchCursor.idx)
+      ? searchCursor.pos : 0;
+    var found = highlightTextInElement(entry.elem, entry.text, forward);
+    if (found) {
+      searchCursor = {elem: entry.elem, pos: found.pos, idx: origTextIndex};
+      scrollToQuarter(found.el);
+      return;
+    }
+    // Nothing at or after the reading position. Try the whole container, but paint
+    // without scrolling: a match before the cursor is more likely a duplicate
+    // (heading in a table of contents) than the passage being read.
+    found = forward ? highlightTextInElement(entry.elem, entry.text, 0) : null;
+    if (found) return;
     // Couldn't scope safely (range crosses element boundaries) → skip the box rather
     // than fragment it; the SVG playback overlay carries the highlight.
   }
+
+  // Reading position of the fallback text search: {elem, pos, idx} — pos is the
+  // last match's start offset in the container's normalized search buffer, idx the
+  // entry it came from, so a backwards seek resets the search to the top. Keeping
+  // the start (not the end) makes re-highlighting the same entry — one entry spans
+  // several spoken chunks — land on the same spot every time.
+  var searchCursor = {elem: null, pos: 0, idx: -1};
 
   this.attachInPageHandlers = function(seekCallback) {
     if (self._inPageHandlersAttached || !self._highlightEntries) return;
@@ -630,7 +652,9 @@ var readAloudDoc = new function() {
     return best.origIdx;
   }
 
-  function highlightTextInElement(container, searchText) {
+  // Returns {el, pos} — the outlined element and the match's start offset in the
+  // normalized search buffer (the caller's forward cursor), or null.
+  function highlightTextInElement(container, searchText, fromPos) {
     var tb = buildTextNodeBuffer(container);
     var textNodes = tb.textNodes, buf = tb.buf, map = tb.map;
     if (!textNodes.length) return null;
@@ -646,12 +670,13 @@ var readAloudDoc = new function() {
     var numMatch = nText.match(/^\d+[.)]?\s+/);
     if (numMatch) nText = nText.substring(numMatch[0].length);
 
-    var nIdx = bufView.text.indexOf(nText);
+    var from = fromPos || 0;
+    var nIdx = bufView.text.indexOf(nText, from);
     if (nIdx === -1) {
       // Sibling-text-node boundary spaces can cause end-of-string drift
       // (e.g. "etc." vs "etc ."), so try a short prefix.
       nText = nText.substring(0, 60);
-      nIdx = bufView.text.indexOf(nText);
+      nIdx = bufView.text.indexOf(nText, from);
       if (nIdx === -1) return null;
     }
 
@@ -676,7 +701,7 @@ var readAloudDoc = new function() {
     if (block && block !== document.body && block !== document.documentElement &&
         (block.innerText || "").length <= searchText.length * 3) {
       $(block).addClass("read-aloud-highlight");
-      return block;
+      return {el: block, pos: nIdx};
     }
     // No bounding block — bare text directly under a huge container, e.g. legacy HTML
     // where a paragraph sits between <p> separators with no wrapper of its own. Wrap the
@@ -689,7 +714,7 @@ var readAloudDoc = new function() {
     try {
       var mark = document.createElement("read-aloud-hl");
       r.surroundContents(mark);
-      return mark;
+      return {el: mark, pos: nIdx};
     } catch(_) { return null; }
   }
 

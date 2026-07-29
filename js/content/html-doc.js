@@ -279,9 +279,61 @@ var readAloudDoc = new function() {
         return {elem: elem, text: text};
       });
     }
+    refineEntryElems(elem, pairs);
     $(elem).find(".read-aloud-numbering").remove();
     toHide.show();
     return pairs;
+  }
+
+  var PARA_SELECTOR = "p, li, blockquote, h1, h2, h3, h4, h5, h6, dd, dt, figcaption, pre, td";
+
+  // Modern pages nest the article in wrapper <div>s, so getText() runs on one big
+  // container and every extracted paragraph maps to that same element. The blue box
+  // then has to locate the paragraph by searching the whole article's text, which
+  // picks the FIRST occurrence — and a table of contents repeats every heading, so
+  // the box lands at the top of the page and drags the view with it. Resolve each
+  // entry to the leaf block that actually holds its text instead, walking forward
+  // through the document so repeated text resolves to the passage being read.
+  // Texts themselves are untouched — only entry.elem gets sharper.
+  function refineEntryElems(container, pairs) {
+    if (!pairs.length) return;
+    // Leaf = a paragraph-ish element with no paragraph-ish descendant (so a
+    // <blockquote> wrapping <p>s yields the <p>s). Derived by marking ancestors
+    // instead of a nested find() per candidate, which keeps this one pass.
+    var cand = $(container).find(PARA_SELECTOR).filter(":visible").get();
+    var candSet = new Set(cand), inner = new Set();
+    for (var k = 0; k < cand.length; k++) {
+      for (var p = cand[k].parentElement; p && p !== container; p = p.parentElement) {
+        if (candSet.has(p)) { inner.add(p); break }
+      }
+    }
+    var leaves = cand.filter(function(el) { return !inner.has(el) });
+    if (!leaves.length) return;
+    var norm = function(s) { return (s || "").replace(/\s+/g, " ").replace(/\.(\s|$)/g, "$1").trim() };
+    var leafTexts = leaves.map(function(el) { return norm(el.innerText) });
+    var cursor = 0;
+    for (var i = 0; i < pairs.length; i++) {
+      var needle = norm(pairs[i].text);
+      // Too short to identify a block (list markers like "2.", "(a)") — a bare digit
+      // would match anywhere. Leave those on the original element.
+      if (needle.length < 4) continue;
+      var probe = needle.slice(0, 40);
+      for (var j = cursor; j < leaves.length; j++) {
+        // An entry can also span several leaves (a heading glued to the following
+        // list marker by innerText), so a leaf that starts the entry counts too.
+        if (leafTexts[j].indexOf(probe) < 0
+            && !(leafTexts[j].length >= 4 && needle.indexOf(leafTexts[j]) === 0)) continue;
+        // Legacy pages put a whole essay into one <p> (paulgraham.com). Outlining
+        // that leaf would paint a page-tall box, so leave those entries on the
+        // original element — highlightTextInElement's range fallback handles them.
+        if (leafTexts[j].length > needle.length * 4 + 200) break;
+        pairs[i].elem = leaves[j];
+        // One leaf can hold several entries (a <p> whose <br><br> split it into
+        // paragraphs), so only advance past it once its text is used up.
+        cursor = leafTexts[j].length > needle.length + 5 ? j : j + 1;
+        break;
+      }
+    }
   }
 
   function addNumbering() {
@@ -361,6 +413,10 @@ var readAloudDoc = new function() {
     if (!self._highlightEntries) return;
     var entry = self._highlightEntries[origTextIndex];
     if (!entry) return;
+    // A pure list marker ("2.", "(a)" — inserted by addNumbering) has no location of
+    // its own: searching for it lands on a random digit somewhere in the container and
+    // drags the view there. Keep the previous box (same guard as the amber overlay).
+    if (/^\s*\(?\d{1,3}[).]?\s*$/.test(entry.text) || /^\s*\(?[a-zA-Z][).]\s*$/.test(entry.text)) return;
     if (!document.getElementById("read-aloud-highlight-style")) {
       var style = document.createElement("style");
       style.id = "read-aloud-highlight-style";
@@ -459,6 +515,12 @@ var readAloudDoc = new function() {
     // SVG playback overlay does its own scrollIntoView on the actual sentence.
     if (elem === document.body || elem === document.documentElement) return;
     var rect = elem.getBoundingClientRect();
+    // Already in a comfortable reading position → leave the view alone. Several
+    // chunks and several entries can map to one block (a <p> split at <br><br>, a
+    // blockquote read paragraph by paragraph, a block taller than the viewport);
+    // re-scrolling it to the same offset would yank the view back up while the
+    // reader has moved on. The amber sentence overlay does the fine scrolling.
+    if (rect.bottom > window.innerHeight * 0.25 && rect.top < window.innerHeight * 0.6) return;
     window.scrollTo({top: window.scrollY + rect.top - window.innerHeight * 0.25, behavior: "smooth"});
   }
 

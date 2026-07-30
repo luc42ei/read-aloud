@@ -542,8 +542,9 @@ var readAloudDoc = new function() {
     // blockquote read paragraph by paragraph, a block taller than the viewport);
     // re-scrolling it to the same offset would yank the view back up while the
     // reader has moved on. The amber sentence overlay does the fine scrolling.
-    if (rect.bottom > window.innerHeight * 0.25 && rect.top < window.innerHeight * 0.6) return;
-    window.scrollTo({top: window.scrollY + rect.top - window.innerHeight * 0.25, behavior: "smooth"});
+    var targetTop = window.innerHeight * 0.15;
+    if (rect.bottom > targetTop && rect.top < window.innerHeight * 0.6) return;
+    window.scrollTo({top: window.scrollY + rect.top - targetTop, behavior: "smooth"});
   }
 
   function buildTextNodeBuffer(container) {

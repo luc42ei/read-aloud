@@ -28,13 +28,14 @@ var contentHandlers = [
     match: function(url) {
       return /^file:/.test(url);
     },
-    validate: function() {
-      return new Promise(function(fulfill) {
+    //Firefox before 153 always reports false here, yet grants file access via the host permission
+    //anyway, so only trust the check where it is meaningful (Chrome, and Firefox 153+)
+    validate: async function() {
+      if (config.browserId == "firefox" && (await getFirefoxMajorVersion()) < 153) return;
+      var allowed = await new Promise(function(fulfill) {
         brapi.extension.isAllowedFileSchemeAccess(fulfill);
       })
-      .then(function(allowed) {
-        if (!allowed) throw new Error(JSON.stringify({code: "error_file_access"}));
-      })
+      if (!allowed) throw new Error(JSON.stringify({code: "error_file_access"}));
     }
   },
 

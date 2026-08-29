@@ -624,6 +624,13 @@ function getBrowser() {
   return 'chrome';
 }
 
+//0 on non-Firefox (getBrowserInfo is Firefox-only)
+async function getFirefoxMajorVersion() {
+  if (!brapi.runtime.getBrowserInfo) return 0;
+  var info = await brapi.runtime.getBrowserInfo();
+  return parseInt(info.version) || 0;
+}
+
 function getHotkeySettingsUrl() {
   switch (config.browserId) {
     case 'opera': return 'opera://settings/configureCommands';

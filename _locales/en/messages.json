@@ -144,7 +144,7 @@
     "message": "Cannot read aloud this website"
   },
   "error_file_access": {
-    "message": "You need to grant Spotlight Reader access to file URLs: right-click the toolbar icon, choose \"Manage Extension\", then on the \"Details\" tab enable \"Allow access to file URLs\" (not on the \"Permissions\" tab)"
+    "message": "You need to grant Spotlight Reader access to local files: open about:addons, select Spotlight Reader, go to the \"Permissions and data\" tab, then enable \"Access local files on your computer\""
   },
   "error_add_permissions": {
     "message": "You need to grant Spotlight Reader additional [permissions](request-permissions) for this website"

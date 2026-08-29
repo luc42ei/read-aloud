@@ -4,7 +4,7 @@
   "name": "__MSG_extension_name__",
   "short_name": "__MSG_extension_short_name__",
   "description": "__MSG_extension_description__",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "default_locale": "en",
   "browser_specific_settings": {
     "gecko": {
@@ -40,12 +40,12 @@
     "webNavigation"
   ],
   "host_permissions": [
-    "https://translate.google.com/"
+    "https://translate.google.com/",
+    "file://*/*"
   ],
   "optional_host_permissions": [
     "http://*/",
-    "https://*/",
-    "file://*/*"
+    "https://*/"
   ],
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'"

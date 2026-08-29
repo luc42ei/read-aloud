@@ -90,7 +90,7 @@ function handleError(err) {
     $("#status a").click(function() {
       switch ($(this).attr("href")) {
         case "#open-extension-settings":
-          brapi.tabs.create({url: "chrome://extensions/?id=" + brapi.runtime.id});
+          brapi.tabs.create({url: config.browserId == "firefox" ? "about:addons" : "chrome://extensions/?id=" + brapi.runtime.id}).catch(function() {});
           break;
         case "#request-permissions":
           brapi.permissions.request(errInfo.perms)

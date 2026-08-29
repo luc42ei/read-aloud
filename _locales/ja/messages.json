@@ -141,7 +141,7 @@
     "message": "このウェブサイトを読み上げることはできません"
   },
   "error_file_access": {
-    "message": "拡張子[設定](open-extension-settings)のファイルURLへの読み上げアクセスを許可する必要があります "
+    "message": "Spotlight Reader にローカルファイルへのアクセスを許可する必要があります: about:addons を開き、Spotlight Reader を選択して「許可設定とデータ」タブに移動し、「コンピューター上のローカルファイルへのアクセス」を有効にしてください"
   },
   "error_add_permissions": {
     "message": "このウェブサイトにReadAloudの追加の[権限](request-permissions)を付与する必要があります"

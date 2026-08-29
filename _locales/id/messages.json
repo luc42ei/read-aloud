@@ -141,7 +141,7 @@
     "message": "Tidak dapat membaca keras situs web ini"
   },
   "error_file_access": {
-    "message": "Anda perlu memberikan akses Spotlight Reader ke URL file di [pengaturan](open-extension-settings) ekstensi"
+    "message": "Anda perlu memberikan Spotlight Reader akses ke berkas lokal: buka about:addons, pilih Spotlight Reader, buka tab \"Izin dan data\", lalu aktifkan \"Akses berkas lokal di komputer Anda\""
   },
   "error_add_permissions": {
     "message": "Anda perlu memberikan Spotlight Reader [izin](request-permissions) tambahan untuk situs web ini"

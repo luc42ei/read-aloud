@@ -141,7 +141,7 @@
     "message": "No puedo leer en voz alta este sitio web"
   },
   "error_file_access": {
-    "message": "Debe otorgar acceso de lectura en voz alta a las URL de los archivos en la extensión [configuración](open-extension-settings)"
+    "message": "Debe conceder a Spotlight Reader acceso a los archivos locales: abra about:addons, seleccione Spotlight Reader, vaya a la pestaña «Permisos y datos» y active «Acceder a los archivos locales de su equipo»"
   },
   "error_add_permissions": {
     "message": "Debe conceder [permisos](request-permissions) adicionales para leer en voz alta para este sitio web"

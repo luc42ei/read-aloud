@@ -141,7 +141,7 @@
     "message": "Không thể đọc to trang web này"
   },
   "error_file_access": {
-    "message": "Bạn cần cấp quyền Đọc to cho các URL của tệp trong phần mở rộng [cài đặt](open-extension-settings)"
+    "message": "Bạn cần cấp cho Spotlight Reader quyền truy cập tệp cục bộ: mở about:addons, chọn Spotlight Reader, chuyển đến thẻ \"Quyền và dữ liệu\", rồi bật \"Truy cập tệp cục bộ trên máy tính của bạn\""
   },
   "error_add_permissions": {
     "message": "Bạn cần cấp thêm [quyền](request-permissions) Đọc to cho trang web này"

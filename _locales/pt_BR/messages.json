@@ -141,7 +141,7 @@
     "message": "Não é possível ler este site em voz alta"
   },
   "error_file_access": {
-    "message": "Você precisa conceder ao Spotlight Reader acesso a URLs de arquivos nas [configurações](open-extension-settings) da extensão"
+    "message": "Você precisa conceder ao Spotlight Reader acesso aos arquivos locais: abra about:addons, selecione Spotlight Reader, vá para a aba \"Permissões e dados\" e ative \"Acessar arquivos locais no seu computador\""
   },
   "error_add_permissions": {
     "message": "Você precisa conceder ao Spotlight Reader [permissões](request-permissions) adicionais para este site"

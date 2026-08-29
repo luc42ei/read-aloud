@@ -141,7 +141,7 @@
     "message": "Non posso leggere ad alta voce questo sito"
   },
   "error_file_access": {
-    "message": "Devi concedere l&#39;accesso Leggi ad alta voce agli URL dei file nell&#39;estensione [settings](open-extension-settings)"
+    "message": "Devi concedere a Spotlight Reader l'accesso ai file locali: apri about:addons, seleziona Spotlight Reader, vai alla scheda \"Autorizzazioni e dati\", quindi attiva \"Accedere ai file locali sul tuo computer\""
   },
   "error_add_permissions": {
     "message": "Devi concedere Leggi ad alta voce [autorizzazioni](request-permissions) aggiuntive per questo sito web"

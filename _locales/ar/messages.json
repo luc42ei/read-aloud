@@ -141,7 +141,7 @@
     "message": "لا يمكن قراءة هذا الموقع بصوت عالٍ"
   },
   "error_file_access": {
-    "message": "تحتاج إلى منح Spotlight Reader إذن الوصول إلى عناوين URL للملفات في [الإعدادات](open-extension-settings)"
+    "message": "يجب منح Spotlight Reader إذن الوصول إلى الملفات المحلية: افتح about:addons، ثم اختر Spotlight Reader، وانتقل إلى تبويب \"الأذونات والبيانات\"، ثم فعّل \"الوصول إلى الملفات المحلية على جهازك\""
   },
   "error_add_permissions": {
     "message": "تحتاج إلى منح Spotlight Reader [أذونات](request-permissions) إضافية لهذا الموقع"

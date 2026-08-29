@@ -141,7 +141,7 @@
     "message": "Nelze číst nahlas tuto webovou stránku"
   },
   "error_file_access": {
-    "message": "Musíte udělit Spotlight Reader přístup k URL souborů v [nastavení](open-extension-settings) rozšíření"
+    "message": "Musíte udělit Spotlight Reader přístup k místním souborům: otevřete about:addons, vyberte Spotlight Reader, přejděte na kartu „Oprávnění a data“ a zapněte „Přístup k místním souborům v počítači“"
   },
   "error_add_permissions": {
     "message": "Musíte udělit Spotlight Reader dodatečná [oprávnění](request-permissions) pro tuto webovou stránku"

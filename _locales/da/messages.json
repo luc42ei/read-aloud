@@ -141,7 +141,7 @@
     "message": "Kan ikke læse denne webside højt"
   },
   "error_file_access": {
-    "message": "Du skal give Spotlight Reader adgang til fil-URL'er i udvidelsens [indstillinger](open-extension-settings)"
+    "message": "Du skal give Spotlight Reader adgang til lokale filer: åbn about:addons, vælg Spotlight Reader, gå til fanen \"Tilladelser og data\", og aktivér \"Adgang til lokale filer på din computer\""
   },
   "error_add_permissions": {
     "message": "Du skal give Spotlight Reader yderligere [tilladelser](request-permissions) til denne webside"

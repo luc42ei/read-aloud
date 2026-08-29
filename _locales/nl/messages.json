@@ -141,7 +141,7 @@
     "message": "Kan deze website niet hardop voorlezen"
   },
   "error_file_access": {
-    "message": "U moet Spotlight Reader toegang geven tot bestands-URL's in de extensie [instellingen](open-extension-settings)"
+    "message": "U moet Spotlight Reader toegang geven tot lokale bestanden: open about:addons, selecteer Spotlight Reader, ga naar het tabblad \"Machtigingen en gegevens\" en schakel \"Toegang tot lokale bestanden op uw computer\" in"
   },
   "error_add_permissions": {
     "message": "U moet Spotlight Reader extra [machtigingen](request-permissions) geven voor deze website"

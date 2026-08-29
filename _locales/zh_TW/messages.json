@@ -141,7 +141,7 @@
     "message": "無法朗讀這個網站"
   },
   "error_file_access": {
-    "message": "您需要在擴展 [設置](open-extension-settings) 中授予對文件 URL 的大聲朗讀訪問權限"
+    "message": "您需要授予 Spotlight Reader 存取本機檔案的權限：開啟 about:addons，選擇 Spotlight Reader，前往「權限與資料」分頁，然後啟用「存取您電腦上的本機檔案」"
   },
   "error_add_permissions": {
     "message": "您需要授予大聲朗讀此網站的額外[權限](request-permissions)"

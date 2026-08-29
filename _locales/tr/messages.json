@@ -141,7 +141,7 @@
     "message": "Bu web sitesi sesli okunamıyor"
   },
   "error_file_access": {
-    "message": "[ayarlar](open-extension-settings) uzantısındaki dosya URL'lerine Sesli Okuma erişimi vermeniz gerekir"
+    "message": "Spotlight Reader'a yerel dosyalara erişim izni vermeniz gerekir: about:addons adresini açın, Spotlight Reader'ı seçin, \"İzinler ve veriler\" sekmesine gidin ve \"Bilgisayarınızdaki yerel dosyalara erişim\" seçeneğini etkinleştirin"
   },
   "error_add_permissions": {
     "message": "Bu web sitesi için Sesli Okuma ek [izinleri](request-permissions) vermeniz gerekiyor"

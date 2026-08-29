@@ -141,7 +141,7 @@
     "message": "이 웹사이트를 소리 내어 읽을 수 없습니다"
   },
   "error_file_access": {
-    "message": "확장 프로그램 [설정](open-extension-settings)에서 Spotlight Reader에 파일 URL 액세스 권한을 부여해야 합니다"
+    "message": "Spotlight Reader에 로컬 파일 접근 권한을 부여해야 합니다: about:addons를 열고 Spotlight Reader를 선택한 후 \"권한 및 데이터\" 탭에서 \"내 컴퓨터의 로컬 파일 접근\"을 활성화하세요"
   },
   "error_add_permissions": {
     "message": "이 웹사이트에 대해 Spotlight Reader에 추가 [권한](request-permissions)을 부여해야 합니다"

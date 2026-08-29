@@ -141,7 +141,7 @@
     "message": "ไม่สามารถอ่านออกเสียงเว็บไซต์นี้"
   },
   "error_file_access": {
-    "message": "คุณต้องให้สิทธิ์ Spotlight Reader เข้าถึง URL ไฟล์ใน[การตั้งค่า](open-extension-settings)ส่วนขยาย"
+    "message": "คุณต้องให้สิทธิ์ Spotlight Reader เข้าถึงไฟล์ในเครื่อง: เปิด about:addons เลือก Spotlight Reader ไปที่แท็บ \"สิทธิ์อนุญาตและข้อมูล\" แล้วเปิดใช้ \"เข้าถึงไฟล์ในเครื่องคอมพิวเตอร์ของคุณ\""
   },
   "error_add_permissions": {
     "message": "คุณต้องให้[สิทธิ์](request-permissions)เพิ่มเติมแก่ Spotlight Reader สำหรับเว็บไซต์นี้"

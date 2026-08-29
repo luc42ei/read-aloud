@@ -141,7 +141,7 @@
     "message": "Nie można przeczytać na głos tej strony internetowej"
   },
   "error_file_access": {
-    "message": "Musisz przyznać Spotlight Reader dostęp do adresów URL plików w [ustawieniach](open-extension-settings) rozszerzenia"
+    "message": "Musisz przyznać Spotlight Reader dostęp do plików lokalnych: otwórz about:addons, wybierz Spotlight Reader, przejdź do karty „Uprawnienia i dane”, a następnie włącz „Dostęp do plików lokalnych na komputerze”"
   },
   "error_add_permissions": {
     "message": "Musisz przyznać Spotlight Reader dodatkowe [uprawnienia](request-permissions) dla tej strony internetowej"

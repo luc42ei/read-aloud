@@ -141,7 +141,7 @@
     "message": "इस वेबसाइट को जोर से नहीं पढ़ सकते"
   },
   "error_file_access": {
-    "message": "आपको एक्सटेंशन [सेटिंग्स](open-extension-settings) में फ़ाइल URL तक Spotlight Reader की पहुंच प्रदान करनी होगी"
+    "message": "आपको Spotlight Reader को स्थानीय फ़ाइलों तक पहुँच देनी होगी: about:addons खोलें, Spotlight Reader चुनें, \"अनुमतियाँ और डेटा\" टैब पर जाएँ, फिर \"अपने कंप्यूटर की स्थानीय फ़ाइलों तक पहुँच\" सक्षम करें"
   },
   "error_add_permissions": {
     "message": "आपको इस वेबसाइट के लिए Spotlight Reader को अतिरिक्त [अनुमतियां](request-permissions) प्रदान करनी होंगी"

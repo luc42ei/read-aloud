@@ -141,7 +141,7 @@
     "message": "Tätä verkkosivustoa ei voi lukea ääneen"
   },
   "error_file_access": {
-    "message": "Sinun on myönnettävä Spotlight Reader -sovellukselle pääsy tiedostojen URL-osoitteisiin laajennuksen [asetuksissa](open-extension-settings)"
+    "message": "Sinun on myönnettävä Spotlight Readerille pääsy paikallisiin tiedostoihin: avaa about:addons, valitse Spotlight Reader, siirry \"Käyttöoikeudet ja tiedot\" -välilehdelle ja ota käyttöön \"Pääsy tietokoneesi paikallisiin tiedostoihin\""
   },
   "error_add_permissions": {
     "message": "Sinun on myönnettävä Spotlight Reader -sovellukselle lisä[oikeudet](request-permissions) tälle verkkosivustolle"

@@ -141,7 +141,7 @@
     "message": "不能大声朗读这个网站"
   },
   "error_file_access": {
-    "message": "您需要在扩展 [设置](open-extension-settings) 中授予对文件 URL 的大声朗读访问权限"
+    "message": "您需要授予 Spotlight Reader 访问本地文件的权限：打开 about:addons，选择 Spotlight Reader，转到“权限和数据”标签页，然后启用“访问您计算机上的本地文件”"
   },
   "error_add_permissions": {
     "message": "您需要授予大声朗读此网站的额外[权限](request-permissions)"

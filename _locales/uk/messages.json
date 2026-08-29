@@ -141,7 +141,7 @@
     "message": "Неможливо прочитати вголос цей веб-сайт"
   },
   "error_file_access": {
-    "message": "Вам потрібно надати Spotlight Reader доступ до URL-адрес файлів у [налаштуваннях](open-extension-settings) розширення"
+    "message": "Вам потрібно надати Spotlight Reader доступ до локальних файлів: відкрийте about:addons, виберіть Spotlight Reader, перейдіть на вкладку «Дозволи та дані» й увімкніть «Доступ до локальних файлів на вашому комп'ютері»"
   },
   "error_add_permissions": {
     "message": "Вам потрібно надати Spotlight Reader додаткові [дозволи](request-permissions) для цього веб-сайту"

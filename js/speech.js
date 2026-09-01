@@ -13,6 +13,19 @@ function Speech(texts, options) {
   brapi.storage.local.onChanged.addListener(onRateChange)
 
   for (var i=0; i<texts.length; i++) if (/[\w)]$/.test(texts[i])) texts[i] += '.';
+
+  // Some cloud engines (e.g. Google's) read a thousands-grouped number like
+  // "1,200" as two separate numbers ("one, two hundred") instead of "one
+  // thousand two hundred" — the comma throws off their number normalizer,
+  // inconsistently depending on the digit groups involved. Stripping the
+  // separator ("1200") sidesteps the bug; every engine reads a bare digit
+  // run correctly. Scoped to English, where "," is unambiguously a
+  // thousands separator (unlike e.g. German, where it's the decimal mark).
+  // Applied only to the text actually sent to the engine — not to `texts`
+  // itself — so chunk offsets used for in-page highlighting stay untouched.
+  function spokenText(text) {
+    return /^en\b/.test(options.lang) ? text.replace(/(?<=\d),(?=\d{3}(?:\D|$))/g, '') : text;
+  }
   // Chunk each text separately so chunk boundaries align with original text boundaries.
   // Joining all texts first (texts.join("\n\n")) caused short texts to merge into a single
   // chunk, making origTextToFirstChunk undefined for embedded texts and breaking seek/highlight.
@@ -228,7 +241,7 @@ function Speech(texts, options) {
             const i = playlist.getIndex()
             for (let k = 1; k <= 2; k++) {
               const nextText = texts[i + k]
-              if (nextText) engine.prefetch(nextText, options)
+              if (nextText) engine.prefetch(spokenText(nextText), options)
             }
           }
           break
@@ -318,6 +331,7 @@ function Speech(texts, options) {
 
 
   function makePlayback(text) {
+    text = spokenText(text)
     if (engine.stop != null) return makePlaybackLegacy(text)
     else return engine.speak(text, options, playbackState$)
   }

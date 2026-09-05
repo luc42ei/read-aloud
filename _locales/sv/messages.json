@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Om rösttjänster"
   },
+  "options_bt_silence_gap": {
+    "message": "Åtgärda saknade första ord i varje stycke vid Bluetooth-headset"
+  },
+  "options_emphasize_italics": {
+    "message": "Betona kursiv text (endast Google Cloud-röster)"
+  },
+  "options_highlighting_inpage": {
+    "message": "På sidan"
+  },
+  "cv_include_studio": {
+    "message": "Inkludera Google Studio-röster (VARNING: 10 gånger dyrare)"
+  },
+  "cv_subtext_aws": {
+    "message": "Ange AWS-uppgifter för att aktivera Amazon Polly-röster"
+  },
+  "cv_subtext_gcp": {
+    "message": "Ange GCP-API-nyckel för att aktivera Google Wavenet-röster"
+  },
+  "cv_subtext_ibm": {
+    "message": "Ange IBM-API-nyckel för att aktivera IBM Watson-röster"
+  },
+  "cv_subtext_azure": {
+    "message": "Ange Azure-uppgifter för att aktivera Microsoft Azure-röster"
+  },
+  "cv_subtext_openai": {
+    "message": "Använd OpenAI eller en OpenAI-kompatibel Speech-slutpunkt"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "Åtkomstnyckel-ID"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Hemlig åtkomstnyckel"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API-nyckel"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Spara"
+  },
+  "cv_add": {
+    "message": "Lägg till"
+  },
+  "cv_edit": {
+    "message": "Redigera"
+  },
+  "cv_delete": {
+    "message": "Ta bort"
+  },
+  "cv_cancel": {
+    "message": "Avbryt"
+  },
+  "cv_api_url": {
+    "message": "API-URL"
+  },
+  "cv_api_key": {
+    "message": "API-nyckel"
+  },
+  "cv_api_key_optional": {
+    "message": "API-nyckel (om det behövs)"
+  },
+  "cv_voice_list": {
+    "message": "Röstlista"
+  },
   "options_voice_label": {
     "message": "Röst"
   },

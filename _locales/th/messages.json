@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "เกี่ยวกับผู้ให้บริการเสียง"
   },
+  "options_bt_silence_gap": {
+    "message": "แก้ไขคำแรกๆ ของแต่ละย่อหน้าที่หายไปเมื่อใช้หูฟังบลูทูธ"
+  },
+  "options_emphasize_italics": {
+    "message": "เน้นเสียงข้อความตัวเอียง (เฉพาะเสียง Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "ในหน้าเว็บ"
+  },
+  "cv_include_studio": {
+    "message": "รวมเสียง Google Studio (คำเตือน: ค่าใช้จ่ายสูงกว่า 10 เท่า)"
+  },
+  "cv_subtext_aws": {
+    "message": "ป้อนข้อมูลรับรอง AWS เพื่อเปิดใช้งานเสียง Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "ป้อนคีย์ API ของ GCP เพื่อเปิดใช้งานเสียง Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "ป้อนคีย์ API ของ IBM เพื่อเปิดใช้งานเสียง IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "ป้อนข้อมูลรับรอง Azure เพื่อเปิดใช้งานเสียง Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "ใช้ OpenAI หรือปลายทาง Speech ที่เข้ากันได้กับ OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "รหัสคีย์การเข้าถึง"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "คีย์การเข้าถึงลับ"
+  },
+  "cv_placeholder_api_key": {
+    "message": "คีย์ API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "บันทึก"
+  },
+  "cv_add": {
+    "message": "เพิ่ม"
+  },
+  "cv_edit": {
+    "message": "แก้ไข"
+  },
+  "cv_delete": {
+    "message": "ลบ"
+  },
+  "cv_cancel": {
+    "message": "ยกเลิก"
+  },
+  "cv_api_url": {
+    "message": "URL ของ API"
+  },
+  "cv_api_key": {
+    "message": "คีย์ API"
+  },
+  "cv_api_key_optional": {
+    "message": "คีย์ API (ถ้าจำเป็น)"
+  },
+  "cv_voice_list": {
+    "message": "รายการเสียง"
+  },
   "options_voice_label": {
     "message": "เสียง"
   },

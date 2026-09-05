@@ -93,7 +93,7 @@
       <div class="btn-group btn-group-sm" id="show-highlighting">
         <button type="button" class="btn btn-light" data-value="1" data-i18n="options_highlighting_popup"></button>
         <button type="button" class="btn btn-light" data-value="2" data-i18n="options_highlighting_window"></button>
-        <button type="button" class="btn btn-light" data-value="3">In Page</button>
+        <button type="button" class="btn btn-light" data-value="3" data-i18n="options_highlighting_inpage"></button>
         <button type="button" class="btn btn-light" data-value="0" data-i18n="options_highlighting_off"></button>
       </div>
 
@@ -109,9 +109,9 @@
     <h3 id="extra-options-heading" data-i18n="options_advanced_heading"></h3>
     <div id="extra-options">
       <input type="checkbox" id="fix-bt-silence-gap"
-      ><label for="fix-bt-silence-gap">Fix missing first few words of each paragraph when using Bluetooth headset</label>
+      ><label for="fix-bt-silence-gap" data-i18n="options_bt_silence_gap"></label>
       <input type="checkbox" id="emphasize-italics"
-      ><label for="emphasize-italics">Emphasize italic text (Google cloud voices only)</label>
+      ><label for="emphasize-italics" data-i18n="options_emphasize_italics"></label>
     </div>
 
     <div class="form-group buttons">
@@ -134,11 +134,11 @@
 
       <details class="cv-provider">
         <summary>Amazon Polly</summary>
-        <p class="cv-subtext">Enter AWS credentials to enable Amazon Polly voices</p>
+        <p class="cv-subtext" data-i18n="cv_subtext_aws"></p>
         <div class="cv-form">
-          <input type="text" class="form-control" id="aws-access-key-id" placeholder="Access key ID">
-          <input type="text" class="form-control" id="aws-secret-access-key" placeholder="Secret access key">
-          <button type="button" class="btn btn-sm" id="aws-save-button">Save</button>
+          <input type="text" class="form-control" id="aws-access-key-id" data-i18n-placeholder="cv_placeholder_access_key_id">
+          <input type="text" class="form-control" id="aws-secret-access-key" data-i18n-placeholder="cv_placeholder_secret_access_key">
+          <button type="button" class="btn btn-sm" id="aws-save-button" data-i18n="cv_save"></button>
           <div class="spinner status progress" id="aws-progress"></div>
           <div class="status cv-success" id="aws-success"></div>
           <div class="status cv-error" id="aws-error"></div>
@@ -147,11 +147,11 @@
 
       <details class="cv-provider">
         <summary>Google Wavenet</summary>
-        <p class="cv-subtext">Enter GCP API key to enable Google Wavenet voices</p>
+        <p class="cv-subtext" data-i18n="cv_subtext_gcp"></p>
         <div class="cv-form">
-          <input type="text" class="form-control" id="gcp-api-key" placeholder="API key">
-          <label class="cv-check"><input type="checkbox" id="gcp-enable-studio"> Include Google Studio voices (WARNING: 10x cost)</label>
-          <button type="button" class="btn btn-sm" id="gcp-save-button">Save</button>
+          <input type="text" class="form-control" id="gcp-api-key" data-i18n-placeholder="cv_placeholder_api_key">
+          <label class="cv-check"><input type="checkbox" id="gcp-enable-studio"> <span data-i18n="cv_include_studio"></span></label>
+          <button type="button" class="btn btn-sm" id="gcp-save-button" data-i18n="cv_save"></button>
           <div class="spinner status progress" id="gcp-progress"></div>
           <div class="status cv-success" id="gcp-success"></div>
           <div class="status cv-error" id="gcp-error"></div>
@@ -160,11 +160,11 @@
 
       <details class="cv-provider">
         <summary>IBM Watson</summary>
-        <p class="cv-subtext">Enter IBM API key to enable IBM Watson voices</p>
+        <p class="cv-subtext" data-i18n="cv_subtext_ibm"></p>
         <div class="cv-form">
-          <input type="text" class="form-control" id="ibm-api-key" placeholder="API key">
-          <input type="text" class="form-control" id="ibm-url" placeholder="URL">
-          <button type="button" class="btn btn-sm" id="ibm-save-button">Save</button>
+          <input type="text" class="form-control" id="ibm-api-key" data-i18n-placeholder="cv_placeholder_api_key">
+          <input type="text" class="form-control" id="ibm-url" data-i18n-placeholder="cv_placeholder_url">
+          <button type="button" class="btn btn-sm" id="ibm-save-button" data-i18n="cv_save"></button>
           <div class="spinner status progress" id="ibm-progress"></div>
           <div class="status cv-success" id="ibm-success"></div>
           <div class="status cv-error" id="ibm-error"></div>
@@ -173,11 +173,11 @@
 
       <details class="cv-provider">
         <summary>Microsoft Azure</summary>
-        <p class="cv-subtext">Enter Azure credentials to enable Microsoft Azure voices</p>
+        <p class="cv-subtext" data-i18n="cv_subtext_azure"></p>
         <div class="cv-form">
           <input type="text" class="form-control" id="azure-region" placeholder="SPEECH_REGION">
           <input type="text" class="form-control" id="azure-key" placeholder="SPEECH_KEY">
-          <button type="button" class="btn btn-sm" id="azure-save-button">Save</button>
+          <button type="button" class="btn btn-sm" id="azure-save-button" data-i18n="cv_save"></button>
           <div class="spinner status progress" id="azure-progress"></div>
           <div class="status cv-success" id="azure-success"></div>
           <div class="status cv-error" id="azure-error"></div>
@@ -186,26 +186,26 @@
 
       <details class="cv-provider">
         <summary>OpenAI</summary>
-        <p class="cv-subtext">Use OpenAI or an OpenAI-compatible Speech endpoint</p>
+        <p class="cv-subtext" data-i18n="cv_subtext_openai"></p>
         <div class="openai">
           <div class="view-new cv-form">
-            <button type="button" class="btn btn-sm btn-add">Add</button>
+            <button type="button" class="btn btn-sm btn-add" data-i18n="cv_add"></button>
           </div>
           <div class="view-exist cv-form">
-            <div><span class="text-muted">API URL</span> <span class="endpoint-url"></span></div>
-            <div><span class="text-muted">API Key</span> <span class="api-key"></span></div>
-            <div><span class="text-muted">Voice List</span> <span class="voice-list"></span></div>
-            <button type="button" class="btn btn-sm btn-edit">Edit</button>
-            <button type="button" class="btn btn-sm btn-light btn-delete">Delete</button>
+            <div><span class="text-muted" data-i18n="cv_api_url"></span> <span class="endpoint-url"></span></div>
+            <div><span class="text-muted" data-i18n="cv_api_key"></span> <span class="api-key"></span></div>
+            <div><span class="text-muted" data-i18n="cv_voice_list"></span> <span class="voice-list"></span></div>
+            <button type="button" class="btn btn-sm btn-edit" data-i18n="cv_edit"></button>
+            <button type="button" class="btn btn-sm btn-light btn-delete" data-i18n="cv_delete"></button>
           </div>
           <div class="view-edit cv-form">
-            <label>API URL<input type="text" class="form-control txt-endpoint-url"></label>
-            <label>API Key (if required)<input type="password" class="form-control txt-api-key"></label>
-            <label>Voice List<textarea class="form-control txt-voice-list" rows="4"></textarea></label>
+            <label><span data-i18n="cv_api_url"></span><input type="text" class="form-control txt-endpoint-url"></label>
+            <label><span data-i18n="cv_api_key_optional"></span><input type="password" class="form-control txt-api-key"></label>
+            <label><span data-i18n="cv_voice_list"></span><textarea class="form-control txt-voice-list" rows="4"></textarea></label>
             <div class="spinner status progress"></div>
             <div class="status cv-error error"></div>
-            <button type="button" class="btn btn-sm btn-save">Save</button>
-            <button type="button" class="btn btn-sm btn-light btn-cancel">Cancel</button>
+            <button type="button" class="btn btn-sm btn-save" data-i18n="cv_save"></button>
+            <button type="button" class="btn btn-sm btn-light btn-cancel" data-i18n="cv_cancel"></button>
           </div>
         </div>
       </details>

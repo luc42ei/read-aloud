@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Giới thiệu về nhà cung cấp giọng nói"
   },
+  "options_bt_silence_gap": {
+    "message": "Sửa lỗi mất vài từ đầu của mỗi đoạn khi dùng tai nghe Bluetooth"
+  },
+  "options_emphasize_italics": {
+    "message": "Nhấn mạnh chữ in nghiêng (chỉ giọng Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Trong trang"
+  },
+  "cv_include_studio": {
+    "message": "Bao gồm giọng Google Studio (CẢNH BÁO: chi phí gấp 10 lần)"
+  },
+  "cv_subtext_aws": {
+    "message": "Nhập thông tin xác thực AWS để bật giọng Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Nhập khóa API GCP để bật giọng Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Nhập khóa API IBM để bật giọng IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Nhập thông tin xác thực Azure để bật giọng Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Dùng OpenAI hoặc một điểm cuối Speech tương thích OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "ID khóa truy cập"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Khóa truy cập bí mật"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Khóa API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Lưu"
+  },
+  "cv_add": {
+    "message": "Thêm"
+  },
+  "cv_edit": {
+    "message": "Sửa"
+  },
+  "cv_delete": {
+    "message": "Xóa"
+  },
+  "cv_cancel": {
+    "message": "Hủy"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Khóa API"
+  },
+  "cv_api_key_optional": {
+    "message": "Khóa API (nếu cần)"
+  },
+  "cv_voice_list": {
+    "message": "Danh sách giọng"
+  },
   "options_voice_label": {
     "message": "Giọng đọc"
   },

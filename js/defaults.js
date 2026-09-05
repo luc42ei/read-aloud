@@ -595,6 +595,11 @@ function setI18nText() {
     if ($(this).is("input")) $(this).val(text);
     else $(this).text(text);
   })
+  // Placeholders need their own attribute: the branch above writes .val() for
+  // inputs, which would fill the field instead of labelling it.
+  $("[data-i18n-placeholder]").each(function() {
+    $(this).attr("placeholder", brapi.i18n.getMessage($(this).data("i18n-placeholder")));
+  })
 }
 
 function escapeHtml(text) {

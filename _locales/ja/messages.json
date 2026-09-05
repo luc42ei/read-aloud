@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "音声プロバイダーについて"
   },
+  "options_bt_silence_gap": {
+    "message": "Bluetoothヘッドセット使用時に段落の最初の数語が欠ける問題を修正する"
+  },
+  "options_emphasize_italics": {
+    "message": "斜体のテキストを強調する（Google Cloud の音声のみ）"
+  },
+  "options_highlighting_inpage": {
+    "message": "ページ内"
+  },
+  "cv_include_studio": {
+    "message": "Google Studio の音声を含める（警告: 費用が10倍）"
+  },
+  "cv_subtext_aws": {
+    "message": "AWS の認証情報を入力すると Amazon Polly の音声が有効になります"
+  },
+  "cv_subtext_gcp": {
+    "message": "GCP の API キーを入力すると Google Wavenet の音声が有効になります"
+  },
+  "cv_subtext_ibm": {
+    "message": "IBM の API キーを入力すると IBM Watson の音声が有効になります"
+  },
+  "cv_subtext_azure": {
+    "message": "Azure の認証情報を入力すると Microsoft Azure の音声が有効になります"
+  },
+  "cv_subtext_openai": {
+    "message": "OpenAI または OpenAI 互換の Speech エンドポイントを使用します"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "アクセスキー ID"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "シークレットアクセスキー"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API キー"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "保存"
+  },
+  "cv_add": {
+    "message": "追加"
+  },
+  "cv_edit": {
+    "message": "編集"
+  },
+  "cv_delete": {
+    "message": "削除"
+  },
+  "cv_cancel": {
+    "message": "キャンセル"
+  },
+  "cv_api_url": {
+    "message": "API URL"
+  },
+  "cv_api_key": {
+    "message": "API キー"
+  },
+  "cv_api_key_optional": {
+    "message": "API キー（必要な場合）"
+  },
+  "cv_voice_list": {
+    "message": "音声リスト"
+  },
   "options_voice_label": {
     "message": "音声"
   },

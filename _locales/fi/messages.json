@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Tietoja äänipalveluista"
   },
+  "options_bt_silence_gap": {
+    "message": "Korjaa kunkin kappaleen puuttuvat ensimmäiset sanat Bluetooth-kuulokkeilla"
+  },
+  "options_emphasize_italics": {
+    "message": "Korosta kursivoitu teksti (vain Google Cloud -äänet)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Sivulla"
+  },
+  "cv_include_studio": {
+    "message": "Sisällytä Google Studio -äänet (VAROITUS: 10-kertainen hinta)"
+  },
+  "cv_subtext_aws": {
+    "message": "Syötä AWS-tunnistetiedot ottaaksesi Amazon Polly -äänet käyttöön"
+  },
+  "cv_subtext_gcp": {
+    "message": "Syötä GCP-API-avain ottaaksesi Google Wavenet -äänet käyttöön"
+  },
+  "cv_subtext_ibm": {
+    "message": "Syötä IBM-API-avain ottaaksesi IBM Watson -äänet käyttöön"
+  },
+  "cv_subtext_azure": {
+    "message": "Syötä Azure-tunnistetiedot ottaaksesi Microsoft Azure -äänet käyttöön"
+  },
+  "cv_subtext_openai": {
+    "message": "Käytä OpenAI:ta tai OpenAI-yhteensopivaa Speech-päätepistettä"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "Käyttöavaimen tunnus"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Salainen käyttöavain"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API-avain"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Tallenna"
+  },
+  "cv_add": {
+    "message": "Lisää"
+  },
+  "cv_edit": {
+    "message": "Muokkaa"
+  },
+  "cv_delete": {
+    "message": "Poista"
+  },
+  "cv_cancel": {
+    "message": "Peruuta"
+  },
+  "cv_api_url": {
+    "message": "API-URL"
+  },
+  "cv_api_key": {
+    "message": "API-avain"
+  },
+  "cv_api_key_optional": {
+    "message": "API-avain (jos tarpeen)"
+  },
+  "cv_voice_list": {
+    "message": "Ääniluettelo"
+  },
   "options_voice_label": {
     "message": "Ääni"
   },

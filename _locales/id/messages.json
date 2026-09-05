@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Tentang penyedia suara"
   },
+  "options_bt_silence_gap": {
+    "message": "Perbaiki beberapa kata pertama yang hilang di setiap paragraf saat memakai headset Bluetooth"
+  },
+  "options_emphasize_italics": {
+    "message": "Tekankan teks miring (hanya suara Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Di halaman"
+  },
+  "cv_include_studio": {
+    "message": "Sertakan suara Google Studio (PERINGATAN: biaya 10x lipat)"
+  },
+  "cv_subtext_aws": {
+    "message": "Masukkan kredensial AWS untuk mengaktifkan suara Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Masukkan kunci API GCP untuk mengaktifkan suara Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Masukkan kunci API IBM untuk mengaktifkan suara IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Masukkan kredensial Azure untuk mengaktifkan suara Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Gunakan OpenAI atau endpoint Speech yang kompatibel dengan OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "ID kunci akses"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Kunci akses rahasia"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Kunci API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Simpan"
+  },
+  "cv_add": {
+    "message": "Tambah"
+  },
+  "cv_edit": {
+    "message": "Edit"
+  },
+  "cv_delete": {
+    "message": "Hapus"
+  },
+  "cv_cancel": {
+    "message": "Batal"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Kunci API"
+  },
+  "cv_api_key_optional": {
+    "message": "Kunci API (jika diperlukan)"
+  },
+  "cv_voice_list": {
+    "message": "Daftar Suara"
+  },
   "options_voice_label": {
     "message": "Suara"
   },

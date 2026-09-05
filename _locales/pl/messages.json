@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "O dostawcach głosów"
   },
+  "options_bt_silence_gap": {
+    "message": "Napraw brakujące pierwsze słowa każdego akapitu przy słuchawkach Bluetooth"
+  },
+  "options_emphasize_italics": {
+    "message": "Akcentuj tekst kursywą (tylko głosy Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Na stronie"
+  },
+  "cv_include_studio": {
+    "message": "Uwzględnij głosy Google Studio (UWAGA: 10-krotny koszt)"
+  },
+  "cv_subtext_aws": {
+    "message": "Wprowadź dane logowania AWS, aby włączyć głosy Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Wprowadź klucz API GCP, aby włączyć głosy Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Wprowadź klucz API IBM, aby włączyć głosy IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Wprowadź dane logowania Azure, aby włączyć głosy Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Użyj OpenAI lub punktu końcowego Speech zgodnego z OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "Identyfikator klucza dostępu"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Tajny klucz dostępu"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Klucz API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Zapisz"
+  },
+  "cv_add": {
+    "message": "Dodaj"
+  },
+  "cv_edit": {
+    "message": "Edytuj"
+  },
+  "cv_delete": {
+    "message": "Usuń"
+  },
+  "cv_cancel": {
+    "message": "Anuluj"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Klucz API"
+  },
+  "cv_api_key_optional": {
+    "message": "Klucz API (jeśli wymagany)"
+  },
+  "cv_voice_list": {
+    "message": "Lista głosów"
+  },
   "options_voice_label": {
     "message": "Głos"
   },

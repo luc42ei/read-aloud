@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "음성 제공업체 정보"
   },
+  "options_bt_silence_gap": {
+    "message": "블루투스 헤드셋 사용 시 각 문단의 첫 단어가 누락되는 문제 수정"
+  },
+  "options_emphasize_italics": {
+    "message": "기울임꼴 텍스트 강조 (Google Cloud 음성만)"
+  },
+  "options_highlighting_inpage": {
+    "message": "페이지 내"
+  },
+  "cv_include_studio": {
+    "message": "Google Studio 음성 포함 (경고: 비용 10배)"
+  },
+  "cv_subtext_aws": {
+    "message": "Amazon Polly 음성을 사용하려면 AWS 자격 증명을 입력하세요"
+  },
+  "cv_subtext_gcp": {
+    "message": "Google Wavenet 음성을 사용하려면 GCP API 키를 입력하세요"
+  },
+  "cv_subtext_ibm": {
+    "message": "IBM Watson 음성을 사용하려면 IBM API 키를 입력하세요"
+  },
+  "cv_subtext_azure": {
+    "message": "Microsoft Azure 음성을 사용하려면 Azure 자격 증명을 입력하세요"
+  },
+  "cv_subtext_openai": {
+    "message": "OpenAI 또는 OpenAI 호환 Speech 엔드포인트 사용"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "액세스 키 ID"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "비밀 액세스 키"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API 키"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "저장"
+  },
+  "cv_add": {
+    "message": "추가"
+  },
+  "cv_edit": {
+    "message": "편집"
+  },
+  "cv_delete": {
+    "message": "삭제"
+  },
+  "cv_cancel": {
+    "message": "취소"
+  },
+  "cv_api_url": {
+    "message": "API URL"
+  },
+  "cv_api_key": {
+    "message": "API 키"
+  },
+  "cv_api_key_optional": {
+    "message": "API 키 (필요한 경우)"
+  },
+  "cv_voice_list": {
+    "message": "음성 목록"
+  },
   "options_voice_label": {
     "message": "음성"
   },

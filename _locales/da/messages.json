@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Om stemmeudbydere"
   },
+  "options_bt_silence_gap": {
+    "message": "Ret manglende første ord i hvert afsnit ved brug af Bluetooth-headset"
+  },
+  "options_emphasize_italics": {
+    "message": "Fremhæv kursiv tekst (kun Google Cloud-stemmer)"
+  },
+  "options_highlighting_inpage": {
+    "message": "På siden"
+  },
+  "cv_include_studio": {
+    "message": "Inkludér Google Studio-stemmer (ADVARSEL: 10 gange dyrere)"
+  },
+  "cv_subtext_aws": {
+    "message": "Indtast AWS-legitimationsoplysninger for at aktivere Amazon Polly-stemmer"
+  },
+  "cv_subtext_gcp": {
+    "message": "Indtast GCP-API-nøgle for at aktivere Google Wavenet-stemmer"
+  },
+  "cv_subtext_ibm": {
+    "message": "Indtast IBM-API-nøgle for at aktivere IBM Watson-stemmer"
+  },
+  "cv_subtext_azure": {
+    "message": "Indtast Azure-legitimationsoplysninger for at aktivere Microsoft Azure-stemmer"
+  },
+  "cv_subtext_openai": {
+    "message": "Brug OpenAI eller et OpenAI-kompatibelt Speech-endpoint"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "Adgangsnøgle-id"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Hemmelig adgangsnøgle"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API-nøgle"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Gem"
+  },
+  "cv_add": {
+    "message": "Tilføj"
+  },
+  "cv_edit": {
+    "message": "Rediger"
+  },
+  "cv_delete": {
+    "message": "Slet"
+  },
+  "cv_cancel": {
+    "message": "Annullér"
+  },
+  "cv_api_url": {
+    "message": "API-URL"
+  },
+  "cv_api_key": {
+    "message": "API-nøgle"
+  },
+  "cv_api_key_optional": {
+    "message": "API-nøgle (hvis påkrævet)"
+  },
+  "cv_voice_list": {
+    "message": "Stemmeliste"
+  },
   "options_voice_label": {
     "message": "Stemme"
   },

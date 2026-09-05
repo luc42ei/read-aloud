@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Про постачальників голосів"
   },
+  "options_bt_silence_gap": {
+    "message": "Виправляти пропуск перших слів абзацу під час використання Bluetooth-гарнітури"
+  },
+  "options_emphasize_italics": {
+    "message": "Виділяти курсив голосом (лише голоси Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "На сторінці"
+  },
+  "cv_include_studio": {
+    "message": "Увімкнути голоси Google Studio (УВАГА: у 10 разів дорожче)"
+  },
+  "cv_subtext_aws": {
+    "message": "Введіть облікові дані AWS, щоб увімкнути голоси Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Введіть ключ API GCP, щоб увімкнути голоси Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Введіть ключ API IBM, щоб увімкнути голоси IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Введіть облікові дані Azure, щоб увімкнути голоси Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Використовувати OpenAI або сумісну з OpenAI кінцеву точку Speech"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "Ідентифікатор ключа доступу"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Секретний ключ доступу"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Ключ API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Зберегти"
+  },
+  "cv_add": {
+    "message": "Додати"
+  },
+  "cv_edit": {
+    "message": "Редагувати"
+  },
+  "cv_delete": {
+    "message": "Видалити"
+  },
+  "cv_cancel": {
+    "message": "Скасувати"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Ключ API"
+  },
+  "cv_api_key_optional": {
+    "message": "Ключ API (якщо потрібно)"
+  },
+  "cv_voice_list": {
+    "message": "Список голосів"
+  },
   "options_voice_label": {
     "message": "Голос"
   },

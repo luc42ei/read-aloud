@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "वॉइस प्रदाताओं के बारे में"
   },
+  "options_bt_silence_gap": {
+    "message": "ब्लूटूथ हेडसेट पर हर अनुच्छेद के छूटे हुए पहले शब्द ठीक करें"
+  },
+  "options_emphasize_italics": {
+    "message": "इटैलिक टेक्स्ट पर ज़ोर दें (केवल Google Cloud आवाज़ें)"
+  },
+  "options_highlighting_inpage": {
+    "message": "पेज पर"
+  },
+  "cv_include_studio": {
+    "message": "Google Studio आवाज़ें शामिल करें (चेतावनी: 10 गुना लागत)"
+  },
+  "cv_subtext_aws": {
+    "message": "Amazon Polly आवाज़ें सक्षम करने के लिए AWS क्रेडेंशियल दर्ज करें"
+  },
+  "cv_subtext_gcp": {
+    "message": "Google Wavenet आवाज़ें सक्षम करने के लिए GCP API कुंजी दर्ज करें"
+  },
+  "cv_subtext_ibm": {
+    "message": "IBM Watson आवाज़ें सक्षम करने के लिए IBM API कुंजी दर्ज करें"
+  },
+  "cv_subtext_azure": {
+    "message": "Microsoft Azure आवाज़ें सक्षम करने के लिए Azure क्रेडेंशियल दर्ज करें"
+  },
+  "cv_subtext_openai": {
+    "message": "OpenAI या OpenAI-संगत Speech एंडपॉइंट का उपयोग करें"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "एक्सेस कुंजी ID"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "गुप्त एक्सेस कुंजी"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API कुंजी"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "सहेजें"
+  },
+  "cv_add": {
+    "message": "जोड़ें"
+  },
+  "cv_edit": {
+    "message": "संपादित करें"
+  },
+  "cv_delete": {
+    "message": "हटाएं"
+  },
+  "cv_cancel": {
+    "message": "रद्द करें"
+  },
+  "cv_api_url": {
+    "message": "API URL"
+  },
+  "cv_api_key": {
+    "message": "API कुंजी"
+  },
+  "cv_api_key_optional": {
+    "message": "API कुंजी (यदि आवश्यक हो)"
+  },
+  "cv_voice_list": {
+    "message": "आवाज़ सूची"
+  },
   "options_voice_label": {
     "message": "आवाज़"
   },

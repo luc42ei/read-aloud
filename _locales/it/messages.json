@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "Informazioni sui provider di voci"
   },
+  "options_bt_silence_gap": {
+    "message": "Correggi le prime parole mancanti di ogni paragrafo con auricolari Bluetooth"
+  },
+  "options_emphasize_italics": {
+    "message": "Enfatizza il testo in corsivo (solo voci Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Nella pagina"
+  },
+  "cv_include_studio": {
+    "message": "Includi le voci Google Studio (ATTENZIONE: costo 10 volte superiore)"
+  },
+  "cv_subtext_aws": {
+    "message": "Inserisci le credenziali AWS per attivare le voci Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Inserisci la chiave API GCP per attivare le voci Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Inserisci la chiave API IBM per attivare le voci IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Inserisci le credenziali Azure per attivare le voci Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Usa OpenAI o un endpoint Speech compatibile con OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "ID chiave di accesso"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Chiave di accesso segreta"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Chiave API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Salva"
+  },
+  "cv_add": {
+    "message": "Aggiungi"
+  },
+  "cv_edit": {
+    "message": "Modifica"
+  },
+  "cv_delete": {
+    "message": "Elimina"
+  },
+  "cv_cancel": {
+    "message": "Annulla"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Chiave API"
+  },
+  "cv_api_key_optional": {
+    "message": "Chiave API (se necessaria)"
+  },
+  "cv_voice_list": {
+    "message": "Elenco voci"
+  },
   "options_voice_label": {
     "message": "Voce"
   },

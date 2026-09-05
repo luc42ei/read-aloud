@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "O poskytovatelích hlasů"
   },
+  "options_bt_silence_gap": {
+    "message": "Opravit chybějící první slova každého odstavce při použití sluchátek Bluetooth"
+  },
+  "options_emphasize_italics": {
+    "message": "Zvýraznit kurzívu (pouze hlasy Google Cloud)"
+  },
+  "options_highlighting_inpage": {
+    "message": "Na stránce"
+  },
+  "cv_include_studio": {
+    "message": "Zahrnout hlasy Google Studio (POZOR: 10× vyšší cena)"
+  },
+  "cv_subtext_aws": {
+    "message": "Zadejte přihlašovací údaje AWS pro aktivaci hlasů Amazon Polly"
+  },
+  "cv_subtext_gcp": {
+    "message": "Zadejte klíč API GCP pro aktivaci hlasů Google Wavenet"
+  },
+  "cv_subtext_ibm": {
+    "message": "Zadejte klíč API IBM pro aktivaci hlasů IBM Watson"
+  },
+  "cv_subtext_azure": {
+    "message": "Zadejte přihlašovací údaje Azure pro aktivaci hlasů Microsoft Azure"
+  },
+  "cv_subtext_openai": {
+    "message": "Použít OpenAI nebo koncový bod Speech kompatibilní s OpenAI"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "ID přístupového klíče"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "Tajný přístupový klíč"
+  },
+  "cv_placeholder_api_key": {
+    "message": "Klíč API"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "Uložit"
+  },
+  "cv_add": {
+    "message": "Přidat"
+  },
+  "cv_edit": {
+    "message": "Upravit"
+  },
+  "cv_delete": {
+    "message": "Smazat"
+  },
+  "cv_cancel": {
+    "message": "Zrušit"
+  },
+  "cv_api_url": {
+    "message": "URL API"
+  },
+  "cv_api_key": {
+    "message": "Klíč API"
+  },
+  "cv_api_key_optional": {
+    "message": "Klíč API (je-li vyžadován)"
+  },
+  "cv_voice_list": {
+    "message": "Seznam hlasů"
+  },
   "options_voice_label": {
     "message": "Hlas"
   },

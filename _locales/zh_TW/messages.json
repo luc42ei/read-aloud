@@ -20,6 +20,72 @@
   "options_voice_providers_heading": {
     "message": "關於語音提供者"
   },
+  "options_bt_silence_gap": {
+    "message": "修正使用藍牙耳機時每段開頭幾個字遺失的問題"
+  },
+  "options_emphasize_italics": {
+    "message": "強調斜體文字（僅限 Google Cloud 語音）"
+  },
+  "options_highlighting_inpage": {
+    "message": "頁面內"
+  },
+  "cv_include_studio": {
+    "message": "包含 Google Studio 語音（警告：費用為 10 倍）"
+  },
+  "cv_subtext_aws": {
+    "message": "輸入 AWS 憑證以啟用 Amazon Polly 語音"
+  },
+  "cv_subtext_gcp": {
+    "message": "輸入 GCP API 金鑰以啟用 Google Wavenet 語音"
+  },
+  "cv_subtext_ibm": {
+    "message": "輸入 IBM API 金鑰以啟用 IBM Watson 語音"
+  },
+  "cv_subtext_azure": {
+    "message": "輸入 Azure 憑證以啟用 Microsoft Azure 語音"
+  },
+  "cv_subtext_openai": {
+    "message": "使用 OpenAI 或相容 OpenAI 的 Speech 端點"
+  },
+  "cv_placeholder_access_key_id": {
+    "message": "存取金鑰 ID"
+  },
+  "cv_placeholder_secret_access_key": {
+    "message": "私密存取金鑰"
+  },
+  "cv_placeholder_api_key": {
+    "message": "API 金鑰"
+  },
+  "cv_placeholder_url": {
+    "message": "URL"
+  },
+  "cv_save": {
+    "message": "儲存"
+  },
+  "cv_add": {
+    "message": "新增"
+  },
+  "cv_edit": {
+    "message": "編輯"
+  },
+  "cv_delete": {
+    "message": "刪除"
+  },
+  "cv_cancel": {
+    "message": "取消"
+  },
+  "cv_api_url": {
+    "message": "API URL"
+  },
+  "cv_api_key": {
+    "message": "API 金鑰"
+  },
+  "cv_api_key_optional": {
+    "message": "API 金鑰（如有需要）"
+  },
+  "cv_voice_list": {
+    "message": "語音清單"
+  },
   "options_voice_label": {
     "message": "朗讀語音"
   },

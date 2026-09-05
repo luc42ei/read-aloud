@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader menggunakan Google Terjemahan untuk teks ke ucapan. Harap biarkan tab ini tetap terbuka."
+  },
+  "options_all_languages": {
+    "message": "Semua bahasa"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ bahasa",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Pilih otomatis"
+  },
+  "options_voice_filter": {
+    "message": "Saring suara…"
+  },
+  "options_auto_select_info": {
+    "message": "Jika disetel ke \"Auto\", suara yang cocok dengan bahasa halaman dipilih otomatis. Prioritas: ★ favorit → Piper → Google Translate → suara lainnya. Beri bintang pada suara favorit Anda untuk menentukan mana yang dipilih per bahasa."
+  },
+  "options_voice_note": {
+    "message": "Catatan: Suara ini bisa menjadi tidak tersedia kapan saja."
+  },
+  "options_read_more": {
+    "message": "Baca selengkapnya"
+  },
+  "options_voice_note_tail": {
+    "message": "tentang hal ini di blog kami."
+  },
+  "options_supertonic_downloading": {
+    "message": "Mengunduh model Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Laporkan bug atau ajukan fitur"
+  },
+  "pt_provider": {
+    "message": "Penyedia"
+  },
+  "pt_type": {
+    "message": "Jenis"
+  },
+  "pt_languages": {
+    "message": "Bahasa"
+  },
+  "pt_notes": {
+    "message": "Catatan"
+  },
+  "pt_links": {
+    "message": "Tautan"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Gratis"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Gratis"
+  },
+  "pt_badge_api_paid": {
+    "message": "Kunci API · Berbayar"
+  },
+  "pt_lang_many": {
+    "message": "Banyak"
+  },
+  "pt_lang_several": {
+    "message": "Beberapa"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + lainnya"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 bahasa termasuk Jerman, Inggris, Spanyol, Prancis, Korea, dan Portugis"
+  },
+  "pt_note_supertonic": {
+    "message": "Instal sekali (~250 MB); setelah itu berjalan sepenuhnya di browser lewat ONNX — tanpa internet, tanpa kunci. Terdengar alami, 10 suara (5 wanita + 5 pria)."
+  },
+  "pt_note_piper": {
+    "message": "Unduhan per suara (~50–200 MB). Instal lewat entri \"Install Piper voices…\" di menu suara."
+  },
+  "pt_note_gtranslate": {
+    "message": "Tidak perlu kunci API. Mengirim teks ke server Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Kualitas tinggi. Masukkan kunci API GCP di Suara Khusus. Suara Studio 10× lebih mahal."
+  },
+  "pt_note_polly": {
+    "message": "Masukkan AWS Access Key ID + Secret di Suara Khusus."
+  },
+  "pt_note_ibm": {
+    "message": "Masukkan kunci API IBM + URL endpoint di Suara Khusus."
+  },
+  "pt_note_azure": {
+    "message": "Masukkan region Azure + kunci Speech di Suara Khusus."
+  },
+  "pt_note_openai": {
+    "message": "Bekerja dengan OpenAI atau endpoint TTS apa pun yang kompatibel dengan OpenAI (mis. self-hosted)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo & contoh"
+  },
+  "pt_link_voice_samples": {
+    "message": "Contoh suara"
+  },
+  "pt_link_get_api_key": {
+    "message": "Dapatkan kunci API"
+  },
+  "pt_link_voices": {
+    "message": "Suara"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Dokumentasi Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Dapatkan kunci"
+  },
+  "pt_link_voices_samples": {
+    "message": "Suara & contoh"
+  },
+  "pt_link_get_key": {
+    "message": "Dapatkan kunci"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentasi & contoh"
+  },
+  "pt_link_api_docs": {
+    "message": "Dokumentasi API"
   }
 }

@@ -271,5 +271,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader is using Google Translate for text-to-speech.  Please keep this tab open."
+  },
+  "options_all_languages": {
+    "message": "All languages"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ languages",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Auto select"
+  },
+  "options_voice_filter": {
+    "message": "Filter voices…"
+  },
+  "options_auto_select_info": {
+    "message": "When set to \"Auto\", a voice matching the page language is selected automatically. Priority: ★ favorites → Piper → Google Translate → other voices. Star your preferred voices to control which one is picked per language."
+  },
+  "options_voice_note": {
+    "message": "Note: This voice may become unavailable at any time."
+  },
+  "options_read_more": {
+    "message": "Read more"
+  },
+  "options_voice_note_tail": {
+    "message": "about it on our blog."
+  },
+  "options_supertonic_downloading": {
+    "message": "Downloading Supertonic models…"
+  },
+  "options_report_bug": {
+    "message": "Report a bug or request a feature"
+  },
+  "pt_provider": {
+    "message": "Provider"
+  },
+  "pt_type": {
+    "message": "Type"
+  },
+  "pt_languages": {
+    "message": "Languages"
+  },
+  "pt_notes": {
+    "message": "Notes"
+  },
+  "pt_links": {
+    "message": "Links"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Free"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Free"
+  },
+  "pt_badge_api_paid": {
+    "message": "API key · Paid"
+  },
+  "pt_lang_many": {
+    "message": "Many"
+  },
+  "pt_lang_several": {
+    "message": "Several"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + more"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 languages incl. German, English, Spanish, French, Korean, Portuguese"
+  },
+  "pt_note_supertonic": {
+    "message": "Install once (~250 MB); then runs fully in-browser via ONNX — no internet, no key. Natural-sounding, 10 voices (5 female + 5 male)."
+  },
+  "pt_note_piper": {
+    "message": "Per-voice download (~50–200 MB). Install via the \"Install Piper voices…\" entry in the voice menu."
+  },
+  "pt_note_gtranslate": {
+    "message": "No API key required. Sends text to Google servers."
+  },
+  "pt_note_gcloud": {
+    "message": "High quality. Enter GCP API key under Custom Voices. Studio voices cost 10× more."
+  },
+  "pt_note_polly": {
+    "message": "Enter AWS Access Key ID + Secret under Custom Voices."
+  },
+  "pt_note_ibm": {
+    "message": "Enter IBM API key + endpoint URL under Custom Voices."
+  },
+  "pt_note_azure": {
+    "message": "Enter Azure region + speech key under Custom Voices."
+  },
+  "pt_note_openai": {
+    "message": "Works with OpenAI or any OpenAI-compatible TTS endpoint (e.g. self-hosted)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo & Samples"
+  },
+  "pt_link_voice_samples": {
+    "message": "Voice Samples"
+  },
+  "pt_link_get_api_key": {
+    "message": "Get API key"
+  },
+  "pt_link_voices": {
+    "message": "Voices"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD Docs"
+  },
+  "pt_link_get_keys": {
+    "message": "Get keys"
+  },
+  "pt_link_voices_samples": {
+    "message": "Voices & Samples"
+  },
+  "pt_link_get_key": {
+    "message": "Get key"
+  },
+  "pt_link_docs_samples": {
+    "message": "Docs & Samples"
+  },
+  "pt_link_api_docs": {
+    "message": "API Docs"
   }
 }

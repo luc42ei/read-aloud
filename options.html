@@ -42,7 +42,7 @@
     <div class="layout">
       <div><span data-i18n="options_language_label"></span></div>
       <div id="lang-picker" class="lang-picker">
-        <button type="button" id="lang-picker-btn" class="form-control lang-picker-btn">All languages ▾</button>
+        <button type="button" id="lang-picker-btn" class="form-control lang-picker-btn"></button>
         <div id="lang-picker-panel" class="lang-picker-panel"></div>
       </div>
 
@@ -51,7 +51,7 @@
       </div>
       <div>
         <div id="voice-chips"></div>
-        <input id="voice-filter" type="text" class="form-control" placeholder="Filter voices…">
+        <input id="voice-filter" type="text" class="form-control" data-i18n-placeholder="options_voice_filter">
         <div class="voice-select-row">
           <select id="voices" class="form-control">
           </select>
@@ -59,16 +59,12 @@
             <i class="material-icons">star_border</i>
           </button>
         </div>
-        <small id="supertonic-progress" class="form-text text-muted" style="display:none">Downloading Supertonic models… <span id="supertonic-progress-text"></span></small>
+        <small id="supertonic-progress" class="form-text text-muted" style="display:none"><span data-i18n="options_supertonic_downloading"></span> <span id="supertonic-progress-text"></span></small>
         <small id="auto-voice-label" class="form-text text-muted" style="display:none"></small>
-        <small class="form-text auto-select-info">
-          When set to "Auto", a voice matching the page language is selected automatically.
-          Priority: ★ favorites → Piper → Google Translate → other voices.
-          Star your preferred voices to control which one is picked per language.
-        </small>
+        <small class="form-text auto-select-info" data-i18n="options_auto_select_info"></small>
         <small id="voice-info" class="form-text text-muted">
-          Note: This voice may become unavailable at any time.
-          <a href='http://blog.readaloud.app/2018/10/the-state-of-text-to-speech-technology.html' target='_blank'>Read more</a> about it on our blog.
+          <span data-i18n="options_voice_note"></span>
+          <a href='http://blog.readaloud.app/2018/10/the-state-of-text-to-speech-technology.html' target='_blank' data-i18n="options_read_more"></a> <span data-i18n="options_voice_note_tail"></span>
         </small>
       </div>
 
@@ -215,71 +211,71 @@
       <summary data-i18n="options_voice_providers_heading"></summary>
       <table class="provider-table">
         <thead>
-          <tr><th>Provider</th><th>Type</th><th>Languages</th><th>Notes</th><th>Links</th></tr>
+          <tr><th data-i18n="pt_provider"></th><th data-i18n="pt_type"></th><th data-i18n="pt_languages"></th><th data-i18n="pt_notes"></th><th data-i18n="pt_links"></th></tr>
         </thead>
         <tbody>
           <tr>
             <td>Supertonic</td>
-            <td><span class="badge badge-offline">Offline · Free</span></td>
-            <td>31 languages incl. German, English, Spanish, French, Korean, Portuguese</td>
-            <td>Install once (~250 MB); then runs fully in-browser via ONNX — no internet, no key. Natural-sounding, 10 voices (5 female + 5 male).</td>
-            <td><a href="https://github.com/supertone-inc/supertonic" target="_blank">GitHub</a> · <a href="https://huggingface.co/spaces/Supertone/supertonic-2" target="_blank">Demo &amp; Samples</a></td>
+            <td><span class="badge badge-offline" data-i18n="pt_badge_offline_free"></span></td>
+            <td data-i18n="pt_lang_supertonic"></td>
+            <td data-i18n="pt_note_supertonic"></td>
+            <td><a href="https://github.com/supertone-inc/supertonic" target="_blank">GitHub</a> · <a href="https://huggingface.co/spaces/Supertone/supertonic-2" target="_blank" data-i18n="pt_link_demo_samples"></a></td>
           </tr>
           <tr>
             <td>Piper</td>
-            <td><span class="badge badge-offline">Offline · Free</span></td>
-            <td>Many</td>
-            <td>Per-voice download (~50–200 MB). Install via the "Install Piper voices…" entry in the voice menu.</td>
-            <td><a href="https://github.com/OHF-Voice/piper1-gpl" target="_blank">GitHub</a> · <a href="https://rhasspy.github.io/piper-samples" target="_blank">Voice Samples</a></td>
+            <td><span class="badge badge-offline" data-i18n="pt_badge_offline_free"></span></td>
+            <td data-i18n="pt_lang_many"></td>
+            <td data-i18n="pt_note_piper"></td>
+            <td><a href="https://github.com/OHF-Voice/piper1-gpl" target="_blank">GitHub</a> · <a href="https://rhasspy.github.io/piper-samples" target="_blank" data-i18n="pt_link_voice_samples"></a></td>
           </tr>
           <tr>
             <td>Google Translate</td>
-            <td><span class="badge badge-free">Online · Free</span></td>
-            <td>Many</td>
-            <td>No API key required. Sends text to Google servers.</td>
+            <td><span class="badge badge-free" data-i18n="pt_badge_online_free"></span></td>
+            <td data-i18n="pt_lang_many"></td>
+            <td data-i18n="pt_note_gtranslate"></td>
             <td><a href="https://translate.google.com/" target="_blank">translate.google.com</a></td>
           </tr>
           <tr>
             <td>Google Wavenet / Neural2 / Chirp3-HD</td>
-            <td><span class="badge badge-api">API key · Paid</span></td>
-            <td>Many</td>
-            <td>High quality. Enter GCP API key under Custom Voices. Studio voices cost 10× more.</td>
-            <td><a href="https://console.cloud.google.com/apis/credentials" target="_blank">Get API key</a> · <a href="https://cloud.google.com/text-to-speech/docs/voices" target="_blank">Voices</a> · <a href="https://cloud.google.com/text-to-speech/docs/chirp3-hd" target="_blank">Chirp-HD Docs</a></td>
+            <td><span class="badge badge-api" data-i18n="pt_badge_api_paid"></span></td>
+            <td data-i18n="pt_lang_many"></td>
+            <td data-i18n="pt_note_gcloud"></td>
+            <td><a href="https://console.cloud.google.com/apis/credentials" target="_blank" data-i18n="pt_link_get_api_key"></a> · <a href="https://cloud.google.com/text-to-speech/docs/voices" target="_blank" data-i18n="pt_link_voices"></a> · <a href="https://cloud.google.com/text-to-speech/docs/chirp3-hd" target="_blank" data-i18n="pt_link_chirp_docs"></a></td>
           </tr>
           <tr>
             <td>Amazon Polly</td>
-            <td><span class="badge badge-api">API key · Paid</span></td>
-            <td>Many</td>
-            <td>Enter AWS Access Key ID + Secret under Custom Voices.</td>
-            <td><a href="https://console.aws.amazon.com/iam/home#/security_credentials" target="_blank">Get keys</a> · <a href="https://docs.aws.amazon.com/polly/latest/dg/available-voices.html" target="_blank">Voices &amp; Samples</a></td>
+            <td><span class="badge badge-api" data-i18n="pt_badge_api_paid"></span></td>
+            <td data-i18n="pt_lang_many"></td>
+            <td data-i18n="pt_note_polly"></td>
+            <td><a href="https://console.aws.amazon.com/iam/home#/security_credentials" target="_blank" data-i18n="pt_link_get_keys"></a> · <a href="https://docs.aws.amazon.com/polly/latest/dg/available-voices.html" target="_blank" data-i18n="pt_link_voices_samples"></a></td>
           </tr>
           <tr>
             <td>IBM Watson</td>
-            <td><span class="badge badge-api">API key · Paid</span></td>
-            <td>Several</td>
-            <td>Enter IBM API key + endpoint URL under Custom Voices.</td>
-            <td><a href="https://cloud.ibm.com/catalog/services/text-to-speech" target="_blank">Get API key</a> · <a href="https://www.ibm.com/demos/live/tts-demo/self-service/home" target="_blank">Demo &amp; Samples</a></td>
+            <td><span class="badge badge-api" data-i18n="pt_badge_api_paid"></span></td>
+            <td data-i18n="pt_lang_several"></td>
+            <td data-i18n="pt_note_ibm"></td>
+            <td><a href="https://cloud.ibm.com/catalog/services/text-to-speech" target="_blank" data-i18n="pt_link_get_api_key"></a> · <a href="https://www.ibm.com/demos/live/tts-demo/self-service/home" target="_blank" data-i18n="pt_link_demo_samples"></a></td>
           </tr>
           <tr>
             <td>Microsoft Azure</td>
-            <td><span class="badge badge-api">API key · Paid</span></td>
-            <td>Many</td>
-            <td>Enter Azure region + speech key under Custom Voices.</td>
-            <td><a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesSpeechServices" target="_blank">Get key</a> · <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech" target="_blank">Docs &amp; Samples</a></td>
+            <td><span class="badge badge-api" data-i18n="pt_badge_api_paid"></span></td>
+            <td data-i18n="pt_lang_many"></td>
+            <td data-i18n="pt_note_azure"></td>
+            <td><a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesSpeechServices" target="_blank" data-i18n="pt_link_get_key"></a> · <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech" target="_blank" data-i18n="pt_link_docs_samples"></a></td>
           </tr>
           <tr>
             <td>OpenAI / compatible</td>
-            <td><span class="badge badge-api">API key · Paid</span></td>
-            <td>EN + more</td>
-            <td>Works with OpenAI or any OpenAI-compatible TTS endpoint (e.g. self-hosted).</td>
-            <td><a href="https://platform.openai.com/api-keys" target="_blank">Get API key</a> · <a href="https://platform.openai.com/docs/guides/text-to-speech" target="_blank">API Docs</a></td>
+            <td><span class="badge badge-api" data-i18n="pt_badge_api_paid"></span></td>
+            <td data-i18n="pt_lang_en_more"></td>
+            <td data-i18n="pt_note_openai"></td>
+            <td><a href="https://platform.openai.com/api-keys" target="_blank" data-i18n="pt_link_get_api_key"></a> · <a href="https://platform.openai.com/docs/guides/text-to-speech" target="_blank" data-i18n="pt_link_api_docs"></a></td>
           </tr>
         </tbody>
       </table>
     </details>
 
     <p class="report-link" style="margin-top:16px;text-align:center">
-      <a href="https://github.com/luc42ei/spotlight-reader/issues" target="_blank" rel="noopener">🐞 Report a bug or request a feature</a>
+      🐞 <a href="https://github.com/luc42ei/spotlight-reader/issues" target="_blank" rel="noopener" data-i18n="options_report_bug"></a>
     </p>
   </div>
 </body>

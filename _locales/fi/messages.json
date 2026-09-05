@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader käyttää Google-kääntäjää tekstistä puheeksi -toimintoon. Pidä tämä välilehti auki."
+  },
+  "options_all_languages": {
+    "message": "Kaikki kielet"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ kieltä",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Valitse automaattisesti"
+  },
+  "options_voice_filter": {
+    "message": "Suodata ääniä…"
+  },
+  "options_auto_select_info": {
+    "message": "\"Auto\"-asetuksella valitaan automaattisesti sivun kieltä vastaava ääni. Järjestys: ★ suosikit → Piper → Google Translate → muut äänet. Merkitse suosikkiäänesi tähdellä määrittääksesi, mikä valitaan kullekin kielelle."
+  },
+  "options_voice_note": {
+    "message": "Huomaa: tämä ääni voi lakata toimimasta milloin tahansa."
+  },
+  "options_read_more": {
+    "message": "Lue lisää"
+  },
+  "options_voice_note_tail": {
+    "message": "aiheesta blogissamme."
+  },
+  "options_supertonic_downloading": {
+    "message": "Ladataan Supertonic-malleja…"
+  },
+  "options_report_bug": {
+    "message": "Ilmoita virheestä tai ehdota ominaisuutta"
+  },
+  "pt_provider": {
+    "message": "Palveluntarjoaja"
+  },
+  "pt_type": {
+    "message": "Tyyppi"
+  },
+  "pt_languages": {
+    "message": "Kielet"
+  },
+  "pt_notes": {
+    "message": "Huomautukset"
+  },
+  "pt_links": {
+    "message": "Linkit"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Ilmainen"
+  },
+  "pt_badge_online_free": {
+    "message": "Verkossa · Ilmainen"
+  },
+  "pt_badge_api_paid": {
+    "message": "API-avain · Maksullinen"
+  },
+  "pt_lang_many": {
+    "message": "Useita"
+  },
+  "pt_lang_several": {
+    "message": "Muutamia"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + muita"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 kieltä, mm. saksa, englanti, espanja, ranska, korea ja portugali"
+  },
+  "pt_note_supertonic": {
+    "message": "Asenna kerran (~250 Mt); toimii sen jälkeen kokonaan selaimessa ONNX:n kautta — ilman internetiä ja avainta. Luonnollinen ääni, 10 ääntä (5 naista + 5 miestä)."
+  },
+  "pt_note_piper": {
+    "message": "Lataus äänikohtaisesti (~50–200 Mt). Asenna äänivalikon kohdasta \"Install Piper voices…\"."
+  },
+  "pt_note_gtranslate": {
+    "message": "Ei vaadi API-avainta. Lähettää tekstin Googlen palvelimille."
+  },
+  "pt_note_gcloud": {
+    "message": "Korkea laatu. Syötä GCP-API-avain kohtaan Mukautetut äänet. Studio-äänet maksavat 10× enemmän."
+  },
+  "pt_note_polly": {
+    "message": "Syötä AWS Access Key ID + Secret kohtaan Mukautetut äänet."
+  },
+  "pt_note_ibm": {
+    "message": "Syötä IBM-API-avain + päätepisteen URL kohtaan Mukautetut äänet."
+  },
+  "pt_note_azure": {
+    "message": "Syötä Azure-alue + Speech-avain kohtaan Mukautetut äänet."
+  },
+  "pt_note_openai": {
+    "message": "Toimii OpenAI:n tai minkä tahansa OpenAI-yhteensopivan TTS-päätepisteen kanssa (esim. itse isännöity)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo ja näytteet"
+  },
+  "pt_link_voice_samples": {
+    "message": "Ääninäytteet"
+  },
+  "pt_link_get_api_key": {
+    "message": "Hanki API-avain"
+  },
+  "pt_link_voices": {
+    "message": "Äänet"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD-dokumentaatio"
+  },
+  "pt_link_get_keys": {
+    "message": "Hanki avaimet"
+  },
+  "pt_link_voices_samples": {
+    "message": "Äänet ja näytteet"
+  },
+  "pt_link_get_key": {
+    "message": "Hanki avain"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentaatio ja näytteet"
+  },
+  "pt_link_api_docs": {
+    "message": "API-dokumentaatio"
   }
 }

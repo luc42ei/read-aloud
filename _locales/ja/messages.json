@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Readerは、テキスト読み上げにGoogle翻訳を使用しています。このタブは開いたままにしてください。"
+  },
+  "options_all_languages": {
+    "message": "すべての言語"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ 言語",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "自動選択"
+  },
+  "options_voice_filter": {
+    "message": "音声を絞り込む…"
+  },
+  "options_auto_select_info": {
+    "message": "「自動」に設定すると、ページの言語に合う音声が自動的に選ばれます。優先順位: ★ お気に入り → Piper → Google Translate → その他の音声。言語ごとにどれが選ばれるかを決めるには、好みの音声にスターを付けてください。"
+  },
+  "options_voice_note": {
+    "message": "注意: この音声はいつでも利用できなくなる可能性があります。"
+  },
+  "options_read_more": {
+    "message": "詳細"
+  },
+  "options_voice_note_tail": {
+    "message": "はブログをご覧ください。"
+  },
+  "options_supertonic_downloading": {
+    "message": "Supertonic モデルをダウンロード中…"
+  },
+  "options_report_bug": {
+    "message": "バグを報告する / 機能をリクエストする"
+  },
+  "pt_provider": {
+    "message": "プロバイダー"
+  },
+  "pt_type": {
+    "message": "種類"
+  },
+  "pt_languages": {
+    "message": "言語"
+  },
+  "pt_notes": {
+    "message": "備考"
+  },
+  "pt_links": {
+    "message": "リンク"
+  },
+  "pt_badge_offline_free": {
+    "message": "オフライン · 無料"
+  },
+  "pt_badge_online_free": {
+    "message": "オンライン · 無料"
+  },
+  "pt_badge_api_paid": {
+    "message": "API キー · 有料"
+  },
+  "pt_lang_many": {
+    "message": "多数"
+  },
+  "pt_lang_several": {
+    "message": "いくつか"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + その他"
+  },
+  "pt_lang_supertonic": {
+    "message": "ドイツ語、英語、スペイン語、フランス語、韓国語、ポルトガル語を含む 31 言語"
+  },
+  "pt_note_supertonic": {
+    "message": "一度インストールすれば（約 250 MB）、あとは ONNX でブラウザ内だけで動作します — インターネットもキーも不要。自然な音質、10 音声（女性 5 + 男性 5）。"
+  },
+  "pt_note_piper": {
+    "message": "音声ごとのダウンロード（約 50〜200 MB）。音声メニューの「Install Piper voices…」からインストールします。"
+  },
+  "pt_note_gtranslate": {
+    "message": "API キーは不要です。テキストを Google のサーバーに送信します。"
+  },
+  "pt_note_gcloud": {
+    "message": "高品質。カスタム音声で GCP API キーを入力してください。Studio 音声は 10 倍のコストです。"
+  },
+  "pt_note_polly": {
+    "message": "カスタム音声で AWS Access Key ID と Secret を入力してください。"
+  },
+  "pt_note_ibm": {
+    "message": "カスタム音声で IBM API キーとエンドポイント URL を入力してください。"
+  },
+  "pt_note_azure": {
+    "message": "カスタム音声で Azure リージョンと Speech キーを入力してください。"
+  },
+  "pt_note_openai": {
+    "message": "OpenAI または OpenAI 互換の TTS エンドポイント（セルフホストなど）で動作します。"
+  },
+  "pt_link_demo_samples": {
+    "message": "デモとサンプル"
+  },
+  "pt_link_voice_samples": {
+    "message": "音声サンプル"
+  },
+  "pt_link_get_api_key": {
+    "message": "API キーを取得"
+  },
+  "pt_link_voices": {
+    "message": "音声"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD ドキュメント"
+  },
+  "pt_link_get_keys": {
+    "message": "キーを取得"
+  },
+  "pt_link_voices_samples": {
+    "message": "音声とサンプル"
+  },
+  "pt_link_get_key": {
+    "message": "キーを取得"
+  },
+  "pt_link_docs_samples": {
+    "message": "ドキュメントとサンプル"
+  },
+  "pt_link_api_docs": {
+    "message": "API ドキュメント"
   }
 }

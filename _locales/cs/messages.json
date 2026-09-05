@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader používá Google Překladač pro převod textu na řeč. Prosím ponechte tuto kartu otevřenou."
+  },
+  "options_all_languages": {
+    "message": "Všechny jazyky"
+  },
+  "options_n_languages": {
+    "message": "Jazyky: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Vybrat automaticky"
+  },
+  "options_voice_filter": {
+    "message": "Filtrovat hlasy…"
+  },
+  "options_auto_select_info": {
+    "message": "Při nastavení „Auto“ se automaticky vybere hlas odpovídající jazyku stránky. Pořadí: ★ oblíbené → Piper → Google Translate → ostatní hlasy. Označte oblíbené hlasy hvězdičkou a určete tak, který se pro daný jazyk použije."
+  },
+  "options_voice_note": {
+    "message": "Poznámka: tento hlas může kdykoli přestat být dostupný."
+  },
+  "options_read_more": {
+    "message": "Více informací"
+  },
+  "options_voice_note_tail": {
+    "message": "na našem blogu."
+  },
+  "options_supertonic_downloading": {
+    "message": "Stahování modelů Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Nahlásit chybu nebo navrhnout funkci"
+  },
+  "pt_provider": {
+    "message": "Poskytovatel"
+  },
+  "pt_type": {
+    "message": "Typ"
+  },
+  "pt_languages": {
+    "message": "Jazyky"
+  },
+  "pt_notes": {
+    "message": "Poznámky"
+  },
+  "pt_links": {
+    "message": "Odkazy"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Zdarma"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Zdarma"
+  },
+  "pt_badge_api_paid": {
+    "message": "Klíč API · Placené"
+  },
+  "pt_lang_many": {
+    "message": "Mnoho"
+  },
+  "pt_lang_several": {
+    "message": "Několik"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + další"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 jazyků, mj. němčina, angličtina, španělština, francouzština, korejština a portugalština"
+  },
+  "pt_note_supertonic": {
+    "message": "Jednorázová instalace (~250 MB); poté běží zcela v prohlížeči přes ONNX — bez internetu a bez klíče. Přirozený zvuk, 10 hlasů (5 ženských + 5 mužských)."
+  },
+  "pt_note_piper": {
+    "message": "Stahování po jednotlivých hlasech (~50–200 MB). Instalace přes položku „Install Piper voices…“ v nabídce hlasů."
+  },
+  "pt_note_gtranslate": {
+    "message": "Nevyžaduje klíč API. Odesílá text na servery Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Vysoká kvalita. Zadejte klíč API GCP v sekci Vlastní hlasy. Hlasy Studio stojí 10× více."
+  },
+  "pt_note_polly": {
+    "message": "Zadejte AWS Access Key ID + Secret v sekci Vlastní hlasy."
+  },
+  "pt_note_ibm": {
+    "message": "Zadejte klíč API IBM + URL koncového bodu v sekci Vlastní hlasy."
+  },
+  "pt_note_azure": {
+    "message": "Zadejte oblast Azure + klíč Speech v sekci Vlastní hlasy."
+  },
+  "pt_note_openai": {
+    "message": "Funguje s OpenAI nebo s libovolným koncovým bodem TTS kompatibilním s OpenAI (např. vlastním)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Ukázka a vzorky"
+  },
+  "pt_link_voice_samples": {
+    "message": "Ukázky hlasů"
+  },
+  "pt_link_get_api_key": {
+    "message": "Získat klíč API"
+  },
+  "pt_link_voices": {
+    "message": "Hlasy"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Dokumentace Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Získat klíče"
+  },
+  "pt_link_voices_samples": {
+    "message": "Hlasy a ukázky"
+  },
+  "pt_link_get_key": {
+    "message": "Získat klíč"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentace a ukázky"
+  },
+  "pt_link_api_docs": {
+    "message": "Dokumentace API"
   }
 }

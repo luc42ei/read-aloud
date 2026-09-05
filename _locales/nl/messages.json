@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader gebruikt Google Translate voor tekst naar spraak. Houd dit tabblad open."
+  },
+  "options_all_languages": {
+    "message": "Alle talen"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ talen",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Automatisch kiezen"
+  },
+  "options_voice_filter": {
+    "message": "Stemmen filteren…"
+  },
+  "options_auto_select_info": {
+    "message": "Bij 'Auto' wordt automatisch een stem gekozen die bij de paginataal past. Volgorde: ★ favorieten → Piper → Google Translate → overige stemmen. Markeer voorkeursstemmen met een ster om te bepalen welke per taal wordt gekozen."
+  },
+  "options_voice_note": {
+    "message": "Let op: deze stem kan op elk moment wegvallen."
+  },
+  "options_read_more": {
+    "message": "Lees meer"
+  },
+  "options_voice_note_tail": {
+    "message": "hierover op onze blog."
+  },
+  "options_supertonic_downloading": {
+    "message": "Supertonic-modellen downloaden…"
+  },
+  "options_report_bug": {
+    "message": "Een bug melden of functie aanvragen"
+  },
+  "pt_provider": {
+    "message": "Aanbieder"
+  },
+  "pt_type": {
+    "message": "Type"
+  },
+  "pt_languages": {
+    "message": "Talen"
+  },
+  "pt_notes": {
+    "message": "Opmerkingen"
+  },
+  "pt_links": {
+    "message": "Links"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Gratis"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Gratis"
+  },
+  "pt_badge_api_paid": {
+    "message": "API-sleutel · Betaald"
+  },
+  "pt_lang_many": {
+    "message": "Veel"
+  },
+  "pt_lang_several": {
+    "message": "Enkele"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + meer"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 talen, waaronder Duits, Engels, Spaans, Frans, Koreaans en Portugees"
+  },
+  "pt_note_supertonic": {
+    "message": "Eenmalig installeren (~250 MB); draait daarna volledig in de browser via ONNX — zonder internet of sleutel. Natuurlijk klinkend, 10 stemmen (5 vrouwelijk + 5 mannelijk)."
+  },
+  "pt_note_piper": {
+    "message": "Download per stem (~50–200 MB). Installeer via 'Install Piper voices…' in het stemmenmenu."
+  },
+  "pt_note_gtranslate": {
+    "message": "Geen API-sleutel nodig. Stuurt tekst naar servers van Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Hoge kwaliteit. Voer de GCP-API-sleutel in bij Eigen stemmen. Studio-stemmen kosten 10× zoveel."
+  },
+  "pt_note_polly": {
+    "message": "Voer AWS Access Key ID + Secret in bij Eigen stemmen."
+  },
+  "pt_note_ibm": {
+    "message": "Voer de IBM-API-sleutel + endpoint-URL in bij Eigen stemmen."
+  },
+  "pt_note_azure": {
+    "message": "Voer de Azure-regio + Speech-sleutel in bij Eigen stemmen."
+  },
+  "pt_note_openai": {
+    "message": "Werkt met OpenAI of elk OpenAI-compatibel TTS-endpoint (bijv. zelf gehost)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo & voorbeelden"
+  },
+  "pt_link_voice_samples": {
+    "message": "Stemvoorbeelden"
+  },
+  "pt_link_get_api_key": {
+    "message": "API-sleutel ophalen"
+  },
+  "pt_link_voices": {
+    "message": "Stemmen"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD-documentatie"
+  },
+  "pt_link_get_keys": {
+    "message": "Sleutels ophalen"
+  },
+  "pt_link_voices_samples": {
+    "message": "Stemmen & voorbeelden"
+  },
+  "pt_link_get_key": {
+    "message": "Sleutel ophalen"
+  },
+  "pt_link_docs_samples": {
+    "message": "Documentatie & voorbeelden"
+  },
+  "pt_link_api_docs": {
+    "message": "API-documentatie"
   }
 }

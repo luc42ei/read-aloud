@@ -395,9 +395,9 @@
 
   function updateLangBtn(selected) {
     let label
-    if (!selected.length) label = "All languages"
+    if (!selected.length) label = brapi.i18n.getMessage("options_all_languages")
     else if (selected.length <= 3) label = selected.map(c => langDisplayNames.of(c) || c).join(", ")
-    else label = selected.length + " languages"
+    else label = brapi.i18n.getMessage("options_n_languages", [String(selected.length)])
     $("#lang-picker-btn").text(label + " \u25be")
   }
 
@@ -446,7 +446,9 @@
     const groups = {}
     $("#voices optgroup").not("[data-type='offline']").find("option").each(function() {
       const text = $(this).text().trim()
-      if (!text || text.startsWith("@") || text === "Auto select") return
+      // The auto-select entry is the one with an empty value; matching on its
+      // label would break as soon as the label is localized.
+      if (!text || text.startsWith("@") || !$(this).val()) return
       const firstWord = text.split(" ")[0]
       if (!groups[firstWord]) groups[firstWord] = {label: chipLabelFor(firstWord), count: 0}
       groups[firstWord].count++
@@ -507,7 +509,7 @@
     $("#voices").empty()
     $("<option>")
       .val("")
-      .text("Auto select")
+      .text(brapi.i18n.getMessage("options_auto_select"))
       .appendTo("#voices")
 
     //get voices filtered by selected languages

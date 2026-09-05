@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader använder Google Översätt för text till tal. Vänligen håll denna flik öppen."
+  },
+  "options_all_languages": {
+    "message": "Alla språk"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ språk",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Välj automatiskt"
+  },
+  "options_voice_filter": {
+    "message": "Filtrera röster…"
+  },
+  "options_auto_select_info": {
+    "message": "Med \"Auto\" väljs automatiskt en röst som matchar sidans språk. Prioritet: ★ favoriter → Piper → Google Translate → övriga röster. Stjärnmärk dina favoritröster för att styra vilken som väljs per språk."
+  },
+  "options_voice_note": {
+    "message": "Obs! Den här rösten kan försvinna när som helst."
+  },
+  "options_read_more": {
+    "message": "Läs mer"
+  },
+  "options_voice_note_tail": {
+    "message": "om det på vår blogg."
+  },
+  "options_supertonic_downloading": {
+    "message": "Laddar ner Supertonic-modeller…"
+  },
+  "options_report_bug": {
+    "message": "Rapportera ett fel eller föreslå en funktion"
+  },
+  "pt_provider": {
+    "message": "Leverantör"
+  },
+  "pt_type": {
+    "message": "Typ"
+  },
+  "pt_languages": {
+    "message": "Språk"
+  },
+  "pt_notes": {
+    "message": "Anmärkningar"
+  },
+  "pt_links": {
+    "message": "Länkar"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Gratis"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Gratis"
+  },
+  "pt_badge_api_paid": {
+    "message": "API-nyckel · Betald"
+  },
+  "pt_lang_many": {
+    "message": "Många"
+  },
+  "pt_lang_several": {
+    "message": "Flera"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + fler"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 språk, bl.a. tyska, engelska, spanska, franska, koreanska och portugisiska"
+  },
+  "pt_note_supertonic": {
+    "message": "Installera en gång (~250 MB); körs sedan helt i webbläsaren via ONNX — utan internet och utan nyckel. Naturligt ljud, 10 röster (5 kvinnliga + 5 manliga)."
+  },
+  "pt_note_piper": {
+    "message": "Nedladdning per röst (~50–200 MB). Installera via posten \"Install Piper voices…\" i röstmenyn."
+  },
+  "pt_note_gtranslate": {
+    "message": "Ingen API-nyckel krävs. Skickar text till Googles servrar."
+  },
+  "pt_note_gcloud": {
+    "message": "Hög kvalitet. Ange GCP-API-nyckel under Egna röster. Studio-röster kostar 10× mer."
+  },
+  "pt_note_polly": {
+    "message": "Ange AWS Access Key ID + Secret under Egna röster."
+  },
+  "pt_note_ibm": {
+    "message": "Ange IBM-API-nyckel + endpoint-URL under Egna röster."
+  },
+  "pt_note_azure": {
+    "message": "Ange Azure-region + Speech-nyckel under Egna röster."
+  },
+  "pt_note_openai": {
+    "message": "Fungerar med OpenAI eller vilken OpenAI-kompatibel TTS-endpoint som helst (t.ex. egen server)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo och exempel"
+  },
+  "pt_link_voice_samples": {
+    "message": "Röstexempel"
+  },
+  "pt_link_get_api_key": {
+    "message": "Hämta API-nyckel"
+  },
+  "pt_link_voices": {
+    "message": "Röster"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD-dokumentation"
+  },
+  "pt_link_get_keys": {
+    "message": "Hämta nycklar"
+  },
+  "pt_link_voices_samples": {
+    "message": "Röster och exempel"
+  },
+  "pt_link_get_key": {
+    "message": "Hämta nyckel"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentation och exempel"
+  },
+  "pt_link_api_docs": {
+    "message": "API-dokumentation"
   }
 }

@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "يستخدم Spotlight Reader ترجمة Google لتحويل النص إلى كلام. يرجى إبقاء علامة التبويب هذه مفتوحة."
+  },
+  "options_all_languages": {
+    "message": "كل اللغات"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ لغة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "اختيار تلقائي"
+  },
+  "options_voice_filter": {
+    "message": "تصفية الأصوات…"
+  },
+  "options_auto_select_info": {
+    "message": "عند اختيار «تلقائي» يتم اختيار صوت يطابق لغة الصفحة تلقائيًا. الأولوية: ★ المفضلة ← Piper ← Google Translate ← بقية الأصوات. ضع نجمة على الأصوات المفضلة لديك للتحكم في الصوت المختار لكل لغة."
+  },
+  "options_voice_note": {
+    "message": "ملاحظة: قد يصبح هذا الصوت غير متاح في أي وقت."
+  },
+  "options_read_more": {
+    "message": "اقرأ المزيد"
+  },
+  "options_voice_note_tail": {
+    "message": "عن ذلك في مدونتنا."
+  },
+  "options_supertonic_downloading": {
+    "message": "جارٍ تنزيل نماذج Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "الإبلاغ عن خطأ أو اقتراح ميزة"
+  },
+  "pt_provider": {
+    "message": "المزوّد"
+  },
+  "pt_type": {
+    "message": "النوع"
+  },
+  "pt_languages": {
+    "message": "اللغات"
+  },
+  "pt_notes": {
+    "message": "ملاحظات"
+  },
+  "pt_links": {
+    "message": "روابط"
+  },
+  "pt_badge_offline_free": {
+    "message": "بدون اتصال · مجاني"
+  },
+  "pt_badge_online_free": {
+    "message": "عبر الإنترنت · مجاني"
+  },
+  "pt_badge_api_paid": {
+    "message": "مفتاح API · مدفوع"
+  },
+  "pt_lang_many": {
+    "message": "كثيرة"
+  },
+  "pt_lang_several": {
+    "message": "عدة"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + المزيد"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 لغة منها الألمانية والإنجليزية والإسبانية والفرنسية والكورية والبرتغالية"
+  },
+  "pt_note_supertonic": {
+    "message": "التثبيت مرة واحدة (~250 ميجابايت)؛ ثم يعمل بالكامل داخل المتصفح عبر ONNX — بدون إنترنت وبدون مفتاح. صوت طبيعي، 10 أصوات (5 نسائية + 5 رجالية)."
+  },
+  "pt_note_piper": {
+    "message": "تنزيل لكل صوت (~50–200 ميجابايت). التثبيت عبر العنصر «Install Piper voices…» في قائمة الأصوات."
+  },
+  "pt_note_gtranslate": {
+    "message": "لا يتطلب مفتاح API. يرسل النص إلى خوادم Google."
+  },
+  "pt_note_gcloud": {
+    "message": "جودة عالية. أدخل مفتاح API الخاص بـ GCP ضمن «أصوات مخصصة». تكلفة أصوات Studio أعلى بعشرة أضعاف."
+  },
+  "pt_note_polly": {
+    "message": "أدخل AWS Access Key ID + Secret ضمن «أصوات مخصصة»."
+  },
+  "pt_note_ibm": {
+    "message": "أدخل مفتاح API الخاص بـ IBM + عنوان URL لنقطة النهاية ضمن «أصوات مخصصة»."
+  },
+  "pt_note_azure": {
+    "message": "أدخل منطقة Azure + مفتاح Speech ضمن «أصوات مخصصة»."
+  },
+  "pt_note_openai": {
+    "message": "يعمل مع OpenAI أو أي نقطة نهاية TTS متوافقة مع OpenAI (مثل استضافة ذاتية)."
+  },
+  "pt_link_demo_samples": {
+    "message": "عرض توضيحي وعينات"
+  },
+  "pt_link_voice_samples": {
+    "message": "عينات صوتية"
+  },
+  "pt_link_get_api_key": {
+    "message": "احصل على مفتاح API"
+  },
+  "pt_link_voices": {
+    "message": "الأصوات"
+  },
+  "pt_link_chirp_docs": {
+    "message": "وثائق Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "احصل على المفاتيح"
+  },
+  "pt_link_voices_samples": {
+    "message": "الأصوات والعينات"
+  },
+  "pt_link_get_key": {
+    "message": "احصل على مفتاح"
+  },
+  "pt_link_docs_samples": {
+    "message": "الوثائق والعينات"
+  },
+  "pt_link_api_docs": {
+    "message": "وثائق API"
   }
 }

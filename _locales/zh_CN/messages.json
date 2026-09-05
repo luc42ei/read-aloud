@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader正在使用Google Translate进行语音合成。 请保持此标签打开。"
+  },
+  "options_all_languages": {
+    "message": "所有语言"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ 种语言",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "自动选择"
+  },
+  "options_voice_filter": {
+    "message": "筛选语音…"
+  },
+  "options_auto_select_info": {
+    "message": "设为“自动”时，会自动选择与页面语言匹配的语音。优先级：★ 收藏 → Piper → Google Translate → 其他语音。为常用语音加星标，即可控制每种语言选用哪一个。"
+  },
+  "options_voice_note": {
+    "message": "注意：该语音可能随时不可用。"
+  },
+  "options_read_more": {
+    "message": "了解更多"
+  },
+  "options_voice_note_tail": {
+    "message": "请见我们的博客。"
+  },
+  "options_supertonic_downloading": {
+    "message": "正在下载 Supertonic 模型…"
+  },
+  "options_report_bug": {
+    "message": "报告问题或提出功能建议"
+  },
+  "pt_provider": {
+    "message": "提供方"
+  },
+  "pt_type": {
+    "message": "类型"
+  },
+  "pt_languages": {
+    "message": "语言"
+  },
+  "pt_notes": {
+    "message": "说明"
+  },
+  "pt_links": {
+    "message": "链接"
+  },
+  "pt_badge_offline_free": {
+    "message": "离线 · 免费"
+  },
+  "pt_badge_online_free": {
+    "message": "在线 · 免费"
+  },
+  "pt_badge_api_paid": {
+    "message": "API 密钥 · 付费"
+  },
+  "pt_lang_many": {
+    "message": "多种"
+  },
+  "pt_lang_several": {
+    "message": "若干"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + 更多"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 种语言，包括德语、英语、西班牙语、法语、韩语和葡萄牙语"
+  },
+  "pt_note_supertonic": {
+    "message": "安装一次（约 250 MB），之后通过 ONNX 完全在浏览器中运行——无需联网，无需密钥。音色自然，10 个语音（5 女 + 5 男）。"
+  },
+  "pt_note_piper": {
+    "message": "按语音分别下载（约 50–200 MB）。通过语音菜单中的“Install Piper voices…”项安装。"
+  },
+  "pt_note_gtranslate": {
+    "message": "无需 API 密钥。会将文本发送到 Google 服务器。"
+  },
+  "pt_note_gcloud": {
+    "message": "高质量。在“自定义语音”中输入 GCP API 密钥。Studio 语音费用为 10 倍。"
+  },
+  "pt_note_polly": {
+    "message": "在“自定义语音”中输入 AWS Access Key ID + Secret。"
+  },
+  "pt_note_ibm": {
+    "message": "在“自定义语音”中输入 IBM API 密钥 + 端点 URL。"
+  },
+  "pt_note_azure": {
+    "message": "在“自定义语音”中输入 Azure 区域 + Speech 密钥。"
+  },
+  "pt_note_openai": {
+    "message": "可配合 OpenAI 或任何兼容 OpenAI 的 TTS 端点使用（例如自托管）。"
+  },
+  "pt_link_demo_samples": {
+    "message": "演示与示例"
+  },
+  "pt_link_voice_samples": {
+    "message": "语音示例"
+  },
+  "pt_link_get_api_key": {
+    "message": "获取 API 密钥"
+  },
+  "pt_link_voices": {
+    "message": "语音"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD 文档"
+  },
+  "pt_link_get_keys": {
+    "message": "获取密钥"
+  },
+  "pt_link_voices_samples": {
+    "message": "语音与示例"
+  },
+  "pt_link_get_key": {
+    "message": "获取密钥"
+  },
+  "pt_link_docs_samples": {
+    "message": "文档与示例"
+  },
+  "pt_link_api_docs": {
+    "message": "API 文档"
   }
 }

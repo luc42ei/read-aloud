@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader가 텍스트 음성 변환에 Google 번역을 사용하고 있습니다. 이 탭을 열어 두세요."
+  },
+  "options_all_languages": {
+    "message": "모든 언어"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$개 언어",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "자동 선택"
+  },
+  "options_voice_filter": {
+    "message": "음성 필터…"
+  },
+  "options_auto_select_info": {
+    "message": "\"자동\"으로 설정하면 페이지 언어에 맞는 음성이 자동으로 선택됩니다. 우선순위: ★ 즐겨찾기 → Piper → Google Translate → 기타 음성. 언어별로 어떤 음성이 선택될지 정하려면 원하는 음성에 별표를 지정하세요."
+  },
+  "options_voice_note": {
+    "message": "참고: 이 음성은 언제든지 사용할 수 없게 될 수 있습니다."
+  },
+  "options_read_more": {
+    "message": "자세히 보기"
+  },
+  "options_voice_note_tail": {
+    "message": "는 블로그에서 확인하세요."
+  },
+  "options_supertonic_downloading": {
+    "message": "Supertonic 모델 다운로드 중…"
+  },
+  "options_report_bug": {
+    "message": "버그 신고 또는 기능 요청"
+  },
+  "pt_provider": {
+    "message": "제공업체"
+  },
+  "pt_type": {
+    "message": "유형"
+  },
+  "pt_languages": {
+    "message": "언어"
+  },
+  "pt_notes": {
+    "message": "비고"
+  },
+  "pt_links": {
+    "message": "링크"
+  },
+  "pt_badge_offline_free": {
+    "message": "오프라인 · 무료"
+  },
+  "pt_badge_online_free": {
+    "message": "온라인 · 무료"
+  },
+  "pt_badge_api_paid": {
+    "message": "API 키 · 유료"
+  },
+  "pt_lang_many": {
+    "message": "다수"
+  },
+  "pt_lang_several": {
+    "message": "일부"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + 기타"
+  },
+  "pt_lang_supertonic": {
+    "message": "독일어, 영어, 스페인어, 프랑스어, 한국어, 포르투갈어를 포함한 31개 언어"
+  },
+  "pt_note_supertonic": {
+    "message": "한 번만 설치하면(약 250MB) 이후에는 ONNX를 통해 브라우저에서 완전히 실행됩니다 — 인터넷도 키도 필요 없습니다. 자연스러운 음질, 10개 음성(여성 5 + 남성 5)."
+  },
+  "pt_note_piper": {
+    "message": "음성별 다운로드(약 50~200MB). 음성 메뉴의 \"Install Piper voices…\" 항목으로 설치하세요."
+  },
+  "pt_note_gtranslate": {
+    "message": "API 키가 필요 없습니다. 텍스트를 Google 서버로 전송합니다."
+  },
+  "pt_note_gcloud": {
+    "message": "높은 품질. 사용자 지정 음성에서 GCP API 키를 입력하세요. Studio 음성은 비용이 10배입니다."
+  },
+  "pt_note_polly": {
+    "message": "사용자 지정 음성에서 AWS Access Key ID + Secret을 입력하세요."
+  },
+  "pt_note_ibm": {
+    "message": "사용자 지정 음성에서 IBM API 키 + 엔드포인트 URL을 입력하세요."
+  },
+  "pt_note_azure": {
+    "message": "사용자 지정 음성에서 Azure 지역 + Speech 키를 입력하세요."
+  },
+  "pt_note_openai": {
+    "message": "OpenAI 또는 OpenAI 호환 TTS 엔드포인트(예: 자체 호스팅)와 함께 작동합니다."
+  },
+  "pt_link_demo_samples": {
+    "message": "데모 및 샘플"
+  },
+  "pt_link_voice_samples": {
+    "message": "음성 샘플"
+  },
+  "pt_link_get_api_key": {
+    "message": "API 키 받기"
+  },
+  "pt_link_voices": {
+    "message": "음성"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD 문서"
+  },
+  "pt_link_get_keys": {
+    "message": "키 받기"
+  },
+  "pt_link_voices_samples": {
+    "message": "음성 및 샘플"
+  },
+  "pt_link_get_key": {
+    "message": "키 받기"
+  },
+  "pt_link_docs_samples": {
+    "message": "문서 및 샘플"
+  },
+  "pt_link_api_docs": {
+    "message": "API 문서"
   }
 }

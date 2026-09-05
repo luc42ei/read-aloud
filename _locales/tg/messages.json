@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Барои табдил кардани матн ба нутқ, барномаи «Баланд хонед» аз технологияи «Google Translate» истифода мебарад.  Лутфан, ин варақаро кушода нигоҳ доред."
+  },
+  "options_all_languages": {
+    "message": "Ҳамаи забонҳо"
+  },
+  "options_n_languages": {
+    "message": "Забонҳо: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Худкор интихоб кардан"
+  },
+  "options_voice_filter": {
+    "message": "Филтри овозҳо…"
+  },
+  "options_auto_select_info": {
+    "message": "Ҳангоми «Худкор» овозе интихоб мешавад, ки ба забони саҳифа мувофиқ аст. Афзалият: ★ дӯстдошта → Piper → Google Translate → овозҳои дигар. Овозҳои дӯстдоштаатонро бо ситора қайд кунед, то муайян кунед, ки барои ҳар забон кадоме интихоб шавад."
+  },
+  "options_voice_note": {
+    "message": "Эзоҳ: ин овоз метавонад ҳар лаҳза дастнорас шавад."
+  },
+  "options_read_more": {
+    "message": "Муфассалтар"
+  },
+  "options_voice_note_tail": {
+    "message": "дар бораи ин дар блоги мо."
+  },
+  "options_supertonic_downloading": {
+    "message": "Боргирии моделҳои Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Дар бораи хатогӣ хабар диҳед ё функсия пешниҳод кунед"
+  },
+  "pt_provider": {
+    "message": "Таъминкунанда"
+  },
+  "pt_type": {
+    "message": "Навъ"
+  },
+  "pt_languages": {
+    "message": "Забонҳо"
+  },
+  "pt_notes": {
+    "message": "Эзоҳҳо"
+  },
+  "pt_links": {
+    "message": "Пайвандҳо"
+  },
+  "pt_badge_offline_free": {
+    "message": "Офлайн · Ройгон"
+  },
+  "pt_badge_online_free": {
+    "message": "Онлайн · Ройгон"
+  },
+  "pt_badge_api_paid": {
+    "message": "Калиди API · Пулакӣ"
+  },
+  "pt_lang_many": {
+    "message": "Бисёр"
+  },
+  "pt_lang_several": {
+    "message": "Якчанд"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + дигарҳо"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 забон, аз ҷумла олмонӣ, англисӣ, испанӣ, фаронсавӣ, кореягӣ ва португалӣ"
+  },
+  "pt_note_supertonic": {
+    "message": "Як бор насб кунед (~250 МБ); сипас пурра дар браузер тавассути ONNX кор мекунад — бе интернет ва бе калид. Садои табиӣ, 10 овоз (5 занона + 5 мардона)."
+  },
+  "pt_note_piper": {
+    "message": "Боргирӣ барои ҳар овоз (~50–200 МБ). Насб тавассути «Install Piper voices…» дар менюи овозҳо."
+  },
+  "pt_note_gtranslate": {
+    "message": "Калиди API лозим нест. Матнро ба серверҳои Google мефиристад."
+  },
+  "pt_note_gcloud": {
+    "message": "Сифати баланд. Калиди API-и GCP-ро дар «Овозҳои фармоишӣ» ворид кунед. Овозҳои Studio 10 баробар гаронтаранд."
+  },
+  "pt_note_polly": {
+    "message": "AWS Access Key ID + Secret-ро дар «Овозҳои фармоишӣ» ворид кунед."
+  },
+  "pt_note_ibm": {
+    "message": "Калиди API-и IBM + URL-и нуқтаи ниҳоиро дар «Овозҳои фармоишӣ» ворид кунед."
+  },
+  "pt_note_azure": {
+    "message": "Минтақаи Azure + калиди Speech-ро дар «Овозҳои фармоишӣ» ворид кунед."
+  },
+  "pt_note_openai": {
+    "message": "Бо OpenAI ё ҳар нуқтаи ниҳоии TTS-и мувофиқи OpenAI кор мекунад (масалан, худмизбонӣ)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Намоиш ва намунаҳо"
+  },
+  "pt_link_voice_samples": {
+    "message": "Намунаҳои овоз"
+  },
+  "pt_link_get_api_key": {
+    "message": "Гирифтани калиди API"
+  },
+  "pt_link_voices": {
+    "message": "Овозҳо"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Ҳуҷҷатҳои Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Гирифтани калидҳо"
+  },
+  "pt_link_voices_samples": {
+    "message": "Овозҳо ва намунаҳо"
+  },
+  "pt_link_get_key": {
+    "message": "Гирифтани калид"
+  },
+  "pt_link_docs_samples": {
+    "message": "Ҳуҷҷатҳо ва намунаҳо"
+  },
+  "pt_link_api_docs": {
+    "message": "Ҳуҷҷатҳои API"
   }
 }

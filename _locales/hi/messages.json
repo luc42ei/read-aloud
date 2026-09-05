@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader टेक्स्ट-टू-स्पीच के लिए Google Translate का उपयोग कर रहा है। कृपया इस टैब को खुला रखें।"
+  },
+  "options_all_languages": {
+    "message": "सभी भाषाएँ"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ भाषाएँ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "स्वतः चुनें"
+  },
+  "options_voice_filter": {
+    "message": "आवाज़ें फ़िल्टर करें…"
+  },
+  "options_auto_select_info": {
+    "message": "\"ऑटो\" पर सेट होने पर पेज की भाषा से मेल खाती आवाज़ अपने आप चुनी जाती है। प्राथमिकता: ★ पसंदीदा → Piper → Google Translate → अन्य आवाज़ें। यह तय करने के लिए कि हर भाषा में कौन-सी आवाज़ चुनी जाए, अपनी पसंदीदा आवाज़ों को स्टार करें।"
+  },
+  "options_voice_note": {
+    "message": "ध्यान दें: यह आवाज़ कभी भी अनुपलब्ध हो सकती है।"
+  },
+  "options_read_more": {
+    "message": "और पढ़ें"
+  },
+  "options_voice_note_tail": {
+    "message": "इस बारे में हमारे ब्लॉग पर।"
+  },
+  "options_supertonic_downloading": {
+    "message": "Supertonic मॉडल डाउनलोड हो रहे हैं…"
+  },
+  "options_report_bug": {
+    "message": "बग रिपोर्ट करें या सुविधा का अनुरोध करें"
+  },
+  "pt_provider": {
+    "message": "प्रदाता"
+  },
+  "pt_type": {
+    "message": "प्रकार"
+  },
+  "pt_languages": {
+    "message": "भाषाएँ"
+  },
+  "pt_notes": {
+    "message": "टिप्पणियाँ"
+  },
+  "pt_links": {
+    "message": "लिंक"
+  },
+  "pt_badge_offline_free": {
+    "message": "ऑफ़लाइन · निःशुल्क"
+  },
+  "pt_badge_online_free": {
+    "message": "ऑनलाइन · निःशुल्क"
+  },
+  "pt_badge_api_paid": {
+    "message": "API कुंजी · सशुल्क"
+  },
+  "pt_lang_many": {
+    "message": "अनेक"
+  },
+  "pt_lang_several": {
+    "message": "कुछ"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + अन्य"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 भाषाएँ, जिनमें जर्मन, अंग्रेज़ी, स्पेनिश, फ़्रेंच, कोरियाई और पुर्तगाली शामिल हैं"
+  },
+  "pt_note_supertonic": {
+    "message": "एक बार इंस्टॉल करें (~250 MB); उसके बाद ONNX के ज़रिए पूरी तरह ब्राउज़र में चलता है — न इंटरनेट, न कुंजी। स्वाभाविक ध्वनि, 10 आवाज़ें (5 महिला + 5 पुरुष)।"
+  },
+  "pt_note_piper": {
+    "message": "प्रति आवाज़ डाउनलोड (~50–200 MB)। आवाज़ मेनू में \"Install Piper voices…\" प्रविष्टि से इंस्टॉल करें।"
+  },
+  "pt_note_gtranslate": {
+    "message": "API कुंजी की आवश्यकता नहीं। टेक्स्ट Google सर्वर पर भेजता है।"
+  },
+  "pt_note_gcloud": {
+    "message": "उच्च गुणवत्ता। कस्टम आवाज़ों के अंतर्गत GCP API कुंजी दर्ज करें। Studio आवाज़ों की लागत 10× अधिक है।"
+  },
+  "pt_note_polly": {
+    "message": "कस्टम आवाज़ों के अंतर्गत AWS Access Key ID + Secret दर्ज करें।"
+  },
+  "pt_note_ibm": {
+    "message": "कस्टम आवाज़ों के अंतर्गत IBM API कुंजी + एंडपॉइंट URL दर्ज करें।"
+  },
+  "pt_note_azure": {
+    "message": "कस्टम आवाज़ों के अंतर्गत Azure क्षेत्र + Speech कुंजी दर्ज करें।"
+  },
+  "pt_note_openai": {
+    "message": "OpenAI या किसी भी OpenAI-संगत TTS एंडपॉइंट के साथ काम करता है (जैसे स्वयं-होस्टेड)।"
+  },
+  "pt_link_demo_samples": {
+    "message": "डेमो और नमूने"
+  },
+  "pt_link_voice_samples": {
+    "message": "आवाज़ के नमूने"
+  },
+  "pt_link_get_api_key": {
+    "message": "API कुंजी प्राप्त करें"
+  },
+  "pt_link_voices": {
+    "message": "आवाज़ें"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD दस्तावेज़"
+  },
+  "pt_link_get_keys": {
+    "message": "कुंजियाँ प्राप्त करें"
+  },
+  "pt_link_voices_samples": {
+    "message": "आवाज़ें और नमूने"
+  },
+  "pt_link_get_key": {
+    "message": "कुंजी प्राप्त करें"
+  },
+  "pt_link_docs_samples": {
+    "message": "दस्तावेज़ और नमूने"
+  },
+  "pt_link_api_docs": {
+    "message": "API दस्तावेज़"
   }
 }

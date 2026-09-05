@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader использует Google Translate для преобразования текста в речь.  Пожалуйста, держите эту вкладку открытой."
+  },
+  "options_all_languages": {
+    "message": "Все языки"
+  },
+  "options_n_languages": {
+    "message": "Языков: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Выбрать автоматически"
+  },
+  "options_voice_filter": {
+    "message": "Фильтр голосов…"
+  },
+  "options_auto_select_info": {
+    "message": "При значении «Авто» автоматически выбирается голос, соответствующий языку страницы. Приоритет: ★ избранные → Piper → Google Translate → остальные голоса. Отметьте предпочитаемые голоса звёздочкой, чтобы задать, какой выбирается для каждого языка."
+  },
+  "options_voice_note": {
+    "message": "Примечание: этот голос может стать недоступным в любой момент."
+  },
+  "options_read_more": {
+    "message": "Подробнее"
+  },
+  "options_voice_note_tail": {
+    "message": "об этом в нашем блоге."
+  },
+  "options_supertonic_downloading": {
+    "message": "Загрузка моделей Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Сообщить об ошибке или предложить функцию"
+  },
+  "pt_provider": {
+    "message": "Поставщик"
+  },
+  "pt_type": {
+    "message": "Тип"
+  },
+  "pt_languages": {
+    "message": "Языки"
+  },
+  "pt_notes": {
+    "message": "Примечания"
+  },
+  "pt_links": {
+    "message": "Ссылки"
+  },
+  "pt_badge_offline_free": {
+    "message": "Офлайн · Бесплатно"
+  },
+  "pt_badge_online_free": {
+    "message": "Онлайн · Бесплатно"
+  },
+  "pt_badge_api_paid": {
+    "message": "Ключ API · Платно"
+  },
+  "pt_lang_many": {
+    "message": "Многие"
+  },
+  "pt_lang_several": {
+    "message": "Несколько"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + другие"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 язык, в том числе немецкий, английский, испанский, французский, корейский и португальский"
+  },
+  "pt_note_supertonic": {
+    "message": "Установка один раз (~250 МБ); затем работает полностью в браузере через ONNX — без интернета и без ключа. Естественное звучание, 10 голосов (5 женских + 5 мужских)."
+  },
+  "pt_note_piper": {
+    "message": "Загрузка для каждого голоса (~50–200 МБ). Установка через пункт «Install Piper voices…» в меню голосов."
+  },
+  "pt_note_gtranslate": {
+    "message": "Ключ API не требуется. Отправляет текст на серверы Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Высокое качество. Введите ключ API GCP в разделе «Пользовательские голоса». Голоса Studio стоят в 10 раз дороже."
+  },
+  "pt_note_polly": {
+    "message": "Введите AWS Access Key ID + Secret в разделе «Пользовательские голоса»."
+  },
+  "pt_note_ibm": {
+    "message": "Введите ключ API IBM + URL конечной точки в разделе «Пользовательские голоса»."
+  },
+  "pt_note_azure": {
+    "message": "Введите регион Azure + ключ Speech в разделе «Пользовательские голоса»."
+  },
+  "pt_note_openai": {
+    "message": "Работает с OpenAI или любой совместимой с OpenAI конечной точкой TTS (например, собственной)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Демо и примеры"
+  },
+  "pt_link_voice_samples": {
+    "message": "Примеры голосов"
+  },
+  "pt_link_get_api_key": {
+    "message": "Получить ключ API"
+  },
+  "pt_link_voices": {
+    "message": "Голоса"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Документация Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Получить ключи"
+  },
+  "pt_link_voices_samples": {
+    "message": "Голоса и примеры"
+  },
+  "pt_link_get_key": {
+    "message": "Получить ключ"
+  },
+  "pt_link_docs_samples": {
+    "message": "Документация и примеры"
+  },
+  "pt_link_api_docs": {
+    "message": "Документация API"
   }
 }

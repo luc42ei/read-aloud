@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader bruker Google Oversetter for tekst til tale. Vennligst hold denne fanen åpen."
+  },
+  "options_all_languages": {
+    "message": "Alle språk"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ språk",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Velg automatisk"
+  },
+  "options_voice_filter": {
+    "message": "Filtrer stemmer…"
+  },
+  "options_auto_select_info": {
+    "message": "Med «Auto» velges automatisk en stemme som passer til sidens språk. Prioritet: ★ favoritter → Piper → Google Translate → øvrige stemmer. Stjernemerk foretrukne stemmer for å styre hvilken som velges per språk."
+  },
+  "options_voice_note": {
+    "message": "Merk: Denne stemmen kan bli utilgjengelig når som helst."
+  },
+  "options_read_more": {
+    "message": "Les mer"
+  },
+  "options_voice_note_tail": {
+    "message": "om det på bloggen vår."
+  },
+  "options_supertonic_downloading": {
+    "message": "Laster ned Supertonic-modeller…"
+  },
+  "options_report_bug": {
+    "message": "Rapporter en feil eller foreslå en funksjon"
+  },
+  "pt_provider": {
+    "message": "Leverandør"
+  },
+  "pt_type": {
+    "message": "Type"
+  },
+  "pt_languages": {
+    "message": "Språk"
+  },
+  "pt_notes": {
+    "message": "Merknader"
+  },
+  "pt_links": {
+    "message": "Lenker"
+  },
+  "pt_badge_offline_free": {
+    "message": "Frakoblet · Gratis"
+  },
+  "pt_badge_online_free": {
+    "message": "Tilkoblet · Gratis"
+  },
+  "pt_badge_api_paid": {
+    "message": "API-nøkkel · Betalt"
+  },
+  "pt_lang_many": {
+    "message": "Mange"
+  },
+  "pt_lang_several": {
+    "message": "Flere"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + flere"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 språk, bl.a. tysk, engelsk, spansk, fransk, koreansk og portugisisk"
+  },
+  "pt_note_supertonic": {
+    "message": "Installer én gang (~250 MB); kjører deretter helt i nettleseren via ONNX — uten internett og uten nøkkel. Naturlig lyd, 10 stemmer (5 kvinnelige + 5 mannlige)."
+  },
+  "pt_note_piper": {
+    "message": "Nedlasting per stemme (~50–200 MB). Installer via oppføringen «Install Piper voices…» i stemmemenyen."
+  },
+  "pt_note_gtranslate": {
+    "message": "Krever ingen API-nøkkel. Sender tekst til Googles servere."
+  },
+  "pt_note_gcloud": {
+    "message": "Høy kvalitet. Skriv inn GCP-API-nøkkel under Egne stemmer. Studio-stemmer koster 10× mer."
+  },
+  "pt_note_polly": {
+    "message": "Skriv inn AWS Access Key ID + Secret under Egne stemmer."
+  },
+  "pt_note_ibm": {
+    "message": "Skriv inn IBM-API-nøkkel + endepunkt-URL under Egne stemmer."
+  },
+  "pt_note_azure": {
+    "message": "Skriv inn Azure-region + Speech-nøkkel under Egne stemmer."
+  },
+  "pt_note_openai": {
+    "message": "Fungerer med OpenAI eller et hvilket som helst OpenAI-kompatibelt TTS-endepunkt (f.eks. selvhostet)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo og eksempler"
+  },
+  "pt_link_voice_samples": {
+    "message": "Stemmeeksempler"
+  },
+  "pt_link_get_api_key": {
+    "message": "Hent API-nøkkel"
+  },
+  "pt_link_voices": {
+    "message": "Stemmer"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD-dokumentasjon"
+  },
+  "pt_link_get_keys": {
+    "message": "Hent nøkler"
+  },
+  "pt_link_voices_samples": {
+    "message": "Stemmer og eksempler"
+  },
+  "pt_link_get_key": {
+    "message": "Hent nøkkel"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentasjon og eksempler"
+  },
+  "pt_link_api_docs": {
+    "message": "API-dokumentasjon"
   }
 }

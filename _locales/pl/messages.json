@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader używa Tłumacza Google do zamiany tekstu na mowę. Proszę nie zamykać tej karty."
+  },
+  "options_all_languages": {
+    "message": "Wszystkie języki"
+  },
+  "options_n_languages": {
+    "message": "Języki: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Wybór automatyczny"
+  },
+  "options_voice_filter": {
+    "message": "Filtruj głosy…"
+  },
+  "options_auto_select_info": {
+    "message": "Przy ustawieniu „Auto” automatycznie wybierany jest głos pasujący do języka strony. Kolejność: ★ ulubione → Piper → Google Translate → pozostałe głosy. Oznacz gwiazdką preferowane głosy, aby decydować, który jest wybierany dla danego języka."
+  },
+  "options_voice_note": {
+    "message": "Uwaga: ten głos może w każdej chwili przestać być dostępny."
+  },
+  "options_read_more": {
+    "message": "Więcej informacji"
+  },
+  "options_voice_note_tail": {
+    "message": "na ten temat na naszym blogu."
+  },
+  "options_supertonic_downloading": {
+    "message": "Pobieranie modeli Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Zgłoś błąd lub zaproponuj funkcję"
+  },
+  "pt_provider": {
+    "message": "Dostawca"
+  },
+  "pt_type": {
+    "message": "Typ"
+  },
+  "pt_languages": {
+    "message": "Języki"
+  },
+  "pt_notes": {
+    "message": "Uwagi"
+  },
+  "pt_links": {
+    "message": "Linki"
+  },
+  "pt_badge_offline_free": {
+    "message": "Offline · Bezpłatnie"
+  },
+  "pt_badge_online_free": {
+    "message": "Online · Bezpłatnie"
+  },
+  "pt_badge_api_paid": {
+    "message": "Klucz API · Płatne"
+  },
+  "pt_lang_many": {
+    "message": "Wiele"
+  },
+  "pt_lang_several": {
+    "message": "Kilka"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + inne"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 języków, m.in. niemiecki, angielski, hiszpański, francuski, koreański i portugalski"
+  },
+  "pt_note_supertonic": {
+    "message": "Jednorazowa instalacja (~250 MB); potem działa w całości w przeglądarce przez ONNX — bez internetu i bez klucza. Naturalne brzmienie, 10 głosów (5 żeńskich + 5 męskich)."
+  },
+  "pt_note_piper": {
+    "message": "Pobieranie osobno dla każdego głosu (~50–200 MB). Instalacja przez pozycję „Install Piper voices…” w menu głosów."
+  },
+  "pt_note_gtranslate": {
+    "message": "Nie wymaga klucza API. Wysyła tekst na serwery Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Wysoka jakość. Wprowadź klucz API GCP w sekcji Własne głosy. Głosy Studio kosztują 10× więcej."
+  },
+  "pt_note_polly": {
+    "message": "Wprowadź AWS Access Key ID + Secret w sekcji Własne głosy."
+  },
+  "pt_note_ibm": {
+    "message": "Wprowadź klucz API IBM + adres URL punktu końcowego w sekcji Własne głosy."
+  },
+  "pt_note_azure": {
+    "message": "Wprowadź region Azure + klucz Speech w sekcji Własne głosy."
+  },
+  "pt_note_openai": {
+    "message": "Działa z OpenAI lub dowolnym punktem końcowym TTS zgodnym z OpenAI (np. własnym)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo i przykłady"
+  },
+  "pt_link_voice_samples": {
+    "message": "Przykłady głosów"
+  },
+  "pt_link_get_api_key": {
+    "message": "Uzyskaj klucz API"
+  },
+  "pt_link_voices": {
+    "message": "Głosy"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Dokumentacja Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Uzyskaj klucze"
+  },
+  "pt_link_voices_samples": {
+    "message": "Głosy i przykłady"
+  },
+  "pt_link_get_key": {
+    "message": "Uzyskaj klucz"
+  },
+  "pt_link_docs_samples": {
+    "message": "Dokumentacja i przykłady"
+  },
+  "pt_link_api_docs": {
+    "message": "Dokumentacja API"
   }
 }

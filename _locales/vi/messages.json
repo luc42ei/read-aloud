@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader đang sử dụng Google Dịch để tổng hợp giọng nói. Vui lòng giữ tab này mở."
+  },
+  "options_all_languages": {
+    "message": "Tất cả ngôn ngữ"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ ngôn ngữ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Chọn tự động"
+  },
+  "options_voice_filter": {
+    "message": "Lọc giọng nói…"
+  },
+  "options_auto_select_info": {
+    "message": "Khi đặt ở \"Tự động\", một giọng khớp với ngôn ngữ của trang sẽ được chọn tự động. Thứ tự ưu tiên: ★ yêu thích → Piper → Google Translate → các giọng khác. Gắn sao cho giọng bạn thích để quyết định giọng nào được chọn cho từng ngôn ngữ."
+  },
+  "options_voice_note": {
+    "message": "Lưu ý: Giọng này có thể ngừng khả dụng bất cứ lúc nào."
+  },
+  "options_read_more": {
+    "message": "Tìm hiểu thêm"
+  },
+  "options_voice_note_tail": {
+    "message": "về điều này trên blog của chúng tôi."
+  },
+  "options_supertonic_downloading": {
+    "message": "Đang tải mô hình Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "Báo lỗi hoặc đề xuất tính năng"
+  },
+  "pt_provider": {
+    "message": "Nhà cung cấp"
+  },
+  "pt_type": {
+    "message": "Loại"
+  },
+  "pt_languages": {
+    "message": "Ngôn ngữ"
+  },
+  "pt_notes": {
+    "message": "Ghi chú"
+  },
+  "pt_links": {
+    "message": "Liên kết"
+  },
+  "pt_badge_offline_free": {
+    "message": "Ngoại tuyến · Miễn phí"
+  },
+  "pt_badge_online_free": {
+    "message": "Trực tuyến · Miễn phí"
+  },
+  "pt_badge_api_paid": {
+    "message": "Khóa API · Trả phí"
+  },
+  "pt_lang_many": {
+    "message": "Nhiều"
+  },
+  "pt_lang_several": {
+    "message": "Một số"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + thêm"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 ngôn ngữ, gồm tiếng Đức, Anh, Tây Ban Nha, Pháp, Hàn và Bồ Đào Nha"
+  },
+  "pt_note_supertonic": {
+    "message": "Cài đặt một lần (~250 MB); sau đó chạy hoàn toàn trong trình duyệt qua ONNX — không cần internet, không cần khóa. Nghe tự nhiên, 10 giọng (5 nữ + 5 nam)."
+  },
+  "pt_note_piper": {
+    "message": "Tải riêng cho từng giọng (~50–200 MB). Cài qua mục \"Install Piper voices…\" trong menu giọng nói."
+  },
+  "pt_note_gtranslate": {
+    "message": "Không cần khóa API. Gửi văn bản đến máy chủ của Google."
+  },
+  "pt_note_gcloud": {
+    "message": "Chất lượng cao. Nhập khóa API GCP trong mục Giọng nói tùy chỉnh. Giọng Studio đắt gấp 10 lần."
+  },
+  "pt_note_polly": {
+    "message": "Nhập AWS Access Key ID + Secret trong mục Giọng nói tùy chỉnh."
+  },
+  "pt_note_ibm": {
+    "message": "Nhập khóa API IBM + URL điểm cuối trong mục Giọng nói tùy chỉnh."
+  },
+  "pt_note_azure": {
+    "message": "Nhập vùng Azure + khóa Speech trong mục Giọng nói tùy chỉnh."
+  },
+  "pt_note_openai": {
+    "message": "Hoạt động với OpenAI hoặc bất kỳ điểm cuối TTS tương thích OpenAI nào (ví dụ: tự lưu trữ)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Bản demo & mẫu"
+  },
+  "pt_link_voice_samples": {
+    "message": "Mẫu giọng nói"
+  },
+  "pt_link_get_api_key": {
+    "message": "Lấy khóa API"
+  },
+  "pt_link_voices": {
+    "message": "Giọng nói"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Tài liệu Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "Lấy khóa"
+  },
+  "pt_link_voices_samples": {
+    "message": "Giọng nói & mẫu"
+  },
+  "pt_link_get_key": {
+    "message": "Lấy khóa"
+  },
+  "pt_link_docs_samples": {
+    "message": "Tài liệu & mẫu"
+  },
+  "pt_link_api_docs": {
+    "message": "Tài liệu API"
   }
 }

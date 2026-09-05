@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader กำลังใช้ Google แปลภาษาสำหรับการแปลงข้อความเป็นเสียง กรุณาเปิดแท็บนี้ไว้"
+  },
+  "options_all_languages": {
+    "message": "ทุกภาษา"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ ภาษา",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "เลือกอัตโนมัติ"
+  },
+  "options_voice_filter": {
+    "message": "กรองเสียง…"
+  },
+  "options_auto_select_info": {
+    "message": "เมื่อตั้งค่าเป็น \"อัตโนมัติ\" ระบบจะเลือกเสียงที่ตรงกับภาษาของหน้าโดยอัตโนมัติ ลำดับความสำคัญ: ★ รายการโปรด → Piper → Google Translate → เสียงอื่นๆ ติดดาวเสียงที่คุณต้องการเพื่อกำหนดว่าจะใช้เสียงใดในแต่ละภาษา"
+  },
+  "options_voice_note": {
+    "message": "หมายเหตุ: เสียงนี้อาจใช้ไม่ได้เมื่อใดก็ตาม"
+  },
+  "options_read_more": {
+    "message": "อ่านเพิ่มเติม"
+  },
+  "options_voice_note_tail": {
+    "message": "เกี่ยวกับเรื่องนี้ในบล็อกของเรา"
+  },
+  "options_supertonic_downloading": {
+    "message": "กำลังดาวน์โหลดโมเดล Supertonic…"
+  },
+  "options_report_bug": {
+    "message": "รายงานข้อบกพร่องหรือเสนอฟีเจอร์"
+  },
+  "pt_provider": {
+    "message": "ผู้ให้บริการ"
+  },
+  "pt_type": {
+    "message": "ประเภท"
+  },
+  "pt_languages": {
+    "message": "ภาษา"
+  },
+  "pt_notes": {
+    "message": "หมายเหตุ"
+  },
+  "pt_links": {
+    "message": "ลิงก์"
+  },
+  "pt_badge_offline_free": {
+    "message": "ออฟไลน์ · ฟรี"
+  },
+  "pt_badge_online_free": {
+    "message": "ออนไลน์ · ฟรี"
+  },
+  "pt_badge_api_paid": {
+    "message": "คีย์ API · เสียเงิน"
+  },
+  "pt_lang_many": {
+    "message": "หลายภาษา"
+  },
+  "pt_lang_several": {
+    "message": "บางภาษา"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + อื่นๆ"
+  },
+  "pt_lang_supertonic": {
+    "message": "31 ภาษา รวมถึงเยอรมัน อังกฤษ สเปน ฝรั่งเศส เกาหลี และโปรตุเกส"
+  },
+  "pt_note_supertonic": {
+    "message": "ติดตั้งครั้งเดียว (~250 MB) จากนั้นทำงานในเบราว์เซอร์ทั้งหมดผ่าน ONNX — ไม่ต้องใช้อินเทอร์เน็ตหรือคีย์ เสียงเป็นธรรมชาติ 10 เสียง (หญิง 5 + ชาย 5)"
+  },
+  "pt_note_piper": {
+    "message": "ดาวน์โหลดแยกตามเสียง (~50–200 MB) ติดตั้งผ่านรายการ \"Install Piper voices…\" ในเมนูเสียง"
+  },
+  "pt_note_gtranslate": {
+    "message": "ไม่ต้องใช้คีย์ API ส่งข้อความไปยังเซิร์ฟเวอร์ของ Google"
+  },
+  "pt_note_gcloud": {
+    "message": "คุณภาพสูง ป้อนคีย์ API ของ GCP ในส่วนเสียงที่กำหนดเอง เสียง Studio มีค่าใช้จ่ายสูงกว่า 10 เท่า"
+  },
+  "pt_note_polly": {
+    "message": "ป้อน AWS Access Key ID + Secret ในส่วนเสียงที่กำหนดเอง"
+  },
+  "pt_note_ibm": {
+    "message": "ป้อนคีย์ API ของ IBM + URL ปลายทางในส่วนเสียงที่กำหนดเอง"
+  },
+  "pt_note_azure": {
+    "message": "ป้อนภูมิภาค Azure + คีย์ Speech ในส่วนเสียงที่กำหนดเอง"
+  },
+  "pt_note_openai": {
+    "message": "ใช้งานได้กับ OpenAI หรือปลายทาง TTS ที่เข้ากันได้กับ OpenAI (เช่น โฮสต์เอง)"
+  },
+  "pt_link_demo_samples": {
+    "message": "เดโมและตัวอย่าง"
+  },
+  "pt_link_voice_samples": {
+    "message": "ตัวอย่างเสียง"
+  },
+  "pt_link_get_api_key": {
+    "message": "รับคีย์ API"
+  },
+  "pt_link_voices": {
+    "message": "เสียง"
+  },
+  "pt_link_chirp_docs": {
+    "message": "เอกสาร Chirp-HD"
+  },
+  "pt_link_get_keys": {
+    "message": "รับคีย์"
+  },
+  "pt_link_voices_samples": {
+    "message": "เสียงและตัวอย่าง"
+  },
+  "pt_link_get_key": {
+    "message": "รับคีย์"
+  },
+  "pt_link_docs_samples": {
+    "message": "เอกสารและตัวอย่าง"
+  },
+  "pt_link_api_docs": {
+    "message": "เอกสาร API"
   }
 }

@@ -259,5 +259,130 @@
   },
   "google_translate_keep_page_open": {
     "message": "Spotlight Reader, metinden seslendirme için Google Çeviri'yi kullanıyor. Lütfen bu sekmeyi açık tutun."
+  },
+  "options_all_languages": {
+    "message": "Tüm diller"
+  },
+  "options_n_languages": {
+    "message": "$COUNT$ dil",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_auto_select": {
+    "message": "Otomatik seç"
+  },
+  "options_voice_filter": {
+    "message": "Sesleri filtrele…"
+  },
+  "options_auto_select_info": {
+    "message": "\"Otomatik\" seçildiğinde sayfanın diline uygun bir ses otomatik olarak seçilir. Öncelik: ★ favoriler → Piper → Google Translate → diğer sesler. Her dil için hangisinin seçileceğini belirlemek üzere tercih ettiğiniz sesleri yıldızlayın."
+  },
+  "options_voice_note": {
+    "message": "Not: Bu ses her an kullanılamaz hale gelebilir."
+  },
+  "options_read_more": {
+    "message": "Daha fazla bilgi"
+  },
+  "options_voice_note_tail": {
+    "message": "için blogumuza bakın."
+  },
+  "options_supertonic_downloading": {
+    "message": "Supertonic modelleri indiriliyor…"
+  },
+  "options_report_bug": {
+    "message": "Hata bildirin veya özellik önerin"
+  },
+  "pt_provider": {
+    "message": "Sağlayıcı"
+  },
+  "pt_type": {
+    "message": "Tür"
+  },
+  "pt_languages": {
+    "message": "Diller"
+  },
+  "pt_notes": {
+    "message": "Notlar"
+  },
+  "pt_links": {
+    "message": "Bağlantılar"
+  },
+  "pt_badge_offline_free": {
+    "message": "Çevrimdışı · Ücretsiz"
+  },
+  "pt_badge_online_free": {
+    "message": "Çevrimiçi · Ücretsiz"
+  },
+  "pt_badge_api_paid": {
+    "message": "API anahtarı · Ücretli"
+  },
+  "pt_lang_many": {
+    "message": "Çok sayıda"
+  },
+  "pt_lang_several": {
+    "message": "Birkaç"
+  },
+  "pt_lang_en_more": {
+    "message": "EN + diğerleri"
+  },
+  "pt_lang_supertonic": {
+    "message": "Almanca, İngilizce, İspanyolca, Fransızca, Korece ve Portekizce dahil 31 dil"
+  },
+  "pt_note_supertonic": {
+    "message": "Bir kez kurun (~250 MB); ardından ONNX ile tamamen tarayıcıda çalışır — internet ve anahtar gerekmez. Doğal ses, 10 ses (5 kadın + 5 erkek)."
+  },
+  "pt_note_piper": {
+    "message": "Ses başına indirme (~50–200 MB). Ses menüsündeki \"Install Piper voices…\" girişinden kurun."
+  },
+  "pt_note_gtranslate": {
+    "message": "API anahtarı gerekmez. Metni Google sunucularına gönderir."
+  },
+  "pt_note_gcloud": {
+    "message": "Yüksek kalite. GCP API anahtarını Özel Sesler altına girin. Studio sesleri 10× daha pahalıdır."
+  },
+  "pt_note_polly": {
+    "message": "AWS Access Key ID + Secret bilgisini Özel Sesler altına girin."
+  },
+  "pt_note_ibm": {
+    "message": "IBM API anahtarını + uç nokta URL'sini Özel Sesler altına girin."
+  },
+  "pt_note_azure": {
+    "message": "Azure bölgesini + Speech anahtarını Özel Sesler altına girin."
+  },
+  "pt_note_openai": {
+    "message": "OpenAI ile veya OpenAI uyumlu herhangi bir TTS uç noktasıyla çalışır (ör. kendi sunucunuz)."
+  },
+  "pt_link_demo_samples": {
+    "message": "Demo ve örnekler"
+  },
+  "pt_link_voice_samples": {
+    "message": "Ses örnekleri"
+  },
+  "pt_link_get_api_key": {
+    "message": "API anahtarı al"
+  },
+  "pt_link_voices": {
+    "message": "Sesler"
+  },
+  "pt_link_chirp_docs": {
+    "message": "Chirp-HD belgeleri"
+  },
+  "pt_link_get_keys": {
+    "message": "Anahtarları al"
+  },
+  "pt_link_voices_samples": {
+    "message": "Sesler ve örnekler"
+  },
+  "pt_link_get_key": {
+    "message": "Anahtar al"
+  },
+  "pt_link_docs_samples": {
+    "message": "Belgeler ve örnekler"
+  },
+  "pt_link_api_docs": {
+    "message": "API belgeleri"
   }
 }

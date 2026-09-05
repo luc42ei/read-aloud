@@ -26,7 +26,6 @@
     </button>
     <h2>
       <span data-i18n="options_heading"></span>
-      <a href="advanced-options.html" id="expand-button" class="material-icons">open_in_new</a>
     </h2>
 
     <div class="form-group" id="account-info">
@@ -105,6 +104,14 @@
         <option value="false" data-i18n="options_audio_playback_standalone"></option>
         <option value="true" data-i18n="options_audio_playback_embedded"></option>
       </select>
+    </div>
+
+    <h3 id="extra-options-heading" data-i18n="options_advanced_heading"></h3>
+    <div id="extra-options">
+      <input type="checkbox" id="fix-bt-silence-gap"
+      ><label for="fix-bt-silence-gap">Fix missing first few words of each paragraph when using Bluetooth headset</label>
+      <input type="checkbox" id="emphasize-italics"
+      ><label for="emphasize-italics">Emphasize italic text (Google cloud voices only)</label>
     </div>
 
     <div class="form-group buttons">

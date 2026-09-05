@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "ตัวเลือก"
   },
+  "options_advanced_heading": {
+    "message": "ตัวเลือกขั้นสูง"
+  },
   "options_voice_label": {
     "message": "เสียง"
   },

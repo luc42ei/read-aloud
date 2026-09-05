@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Имконот"
   },
+  "options_advanced_heading": {
+    "message": "Танзимоти пешрафта"
+  },
   "options_voice_label": {
     "message": "Овоз"
   },

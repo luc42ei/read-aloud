@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Параметры"
   },
+  "options_advanced_heading": {
+    "message": "Дополнительные параметры"
+  },
   "options_voice_label": {
     "message": "Голос"
   },

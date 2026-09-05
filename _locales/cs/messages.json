@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Možnosti"
   },
+  "options_advanced_heading": {
+    "message": "Pokročilá nastavení"
+  },
   "options_voice_label": {
     "message": "Hlas"
   },

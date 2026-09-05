@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Alternativ"
   },
+  "options_advanced_heading": {
+    "message": "Avancerade inställningar"
+  },
   "options_voice_label": {
     "message": "Röst"
   },

@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Seçenekler"
   },
+  "options_advanced_heading": {
+    "message": "Gelişmiş seçenekler"
+  },
   "options_voice_label": {
     "message": "Ses"
   },

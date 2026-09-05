@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Opties"
   },
+  "options_advanced_heading": {
+    "message": "Geavanceerde opties"
+  },
   "options_voice_label": {
     "message": "Stem"
   },

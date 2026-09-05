@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Options"
   },
+  "options_advanced_heading": {
+    "message": "Advanced Options"
+  },
   "options_voice_label": {
     "message": "Voice"
   },

@@ -541,10 +541,32 @@ function GoogleWavenetTtsEngine() {
         updateSettings({wavenetVoices: list});
       })
   }
-  function getAudioUrl(text, {voice}) {
+  // Italic passages become <emphasis level="strong"> — Chirp 3: HD honors the
+  // tag (verified by measurement) even though Google's docs don't list it for
+  // that voice type, and the older types support full SSML. Studio is the one
+  // exception: it explicitly drops <emphasis>.
+  const SSML_EMPHASIS_TYPES = ["Chirp3-HD", "Chirp-HD", "Neural2", "Wavenet", "Standard"];
+
+  function xmlEscape(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+  }
+
+  function buildSsml(text, ranges) {
+    let out = "<speak>", pos = 0;
+    for (const [start, end] of ranges) {
+      if (start < pos) continue;
+      out += xmlEscape(text.slice(pos, start))
+        + '<emphasis level="strong">' + xmlEscape(text.slice(start, end)) + '</emphasis>';
+      pos = end;
+    }
+    return out + xmlEscape(text.slice(pos)) + "</speak>";
+  }
+
+  function getAudioUrl(text, {voice, emphasis}) {
     assert(text && voice);
     return cache.fetchCached(
-      JSON.stringify([text, voice.voiceName, voice.lang]),
+      JSON.stringify([text, voice.voiceName, voice.lang, emphasis || null]),
       () => {
         var matches = voice.voiceName.match(/^Google(\S+) .* \((\w+)\)$/);
         const voiceType = matches[1];
@@ -552,24 +574,34 @@ function GoogleWavenetTtsEngine() {
         var endpoint = matches[1] == "Neural2" ? "us-central1-texttospeech.googleapis.com" : "texttospeech.googleapis.com";
         return getSettings(["gcpCreds", "gcpToken"])
           .then(function(settings) {
-            var postData = {
-              input: {
-                text: text
-              },
-              voice: {
-                languageCode: voice.lang,
-                name: voice.lang + "-" + voiceType + "-" + speakerId
-              },
-              audioConfig: {
-                audioEncoding: "OGG_OPUS",
+            function request(input) {
+              var postData = {
+                input: input,
+                voice: {
+                  languageCode: voice.lang,
+                  name: voice.lang + "-" + voiceType + "-" + speakerId
+                },
+                audioConfig: {
+                  audioEncoding: "OGG_OPUS",
+                }
               }
+              if (settings.gcpCreds) return ajaxPost("https://" + endpoint + "/v1/text:synthesize?key=" + settings.gcpCreds.apiKey, postData, "json");
+              if (!settings.gcpToken) throw new Error(JSON.stringify({code: "error_wavenet_auth_required"}));
+              return ajaxPost("https://cxl-services.appspot.com/proxy?url=https://texttospeech.googleapis.com/v1beta1/text:synthesize&token=" + settings.gcpToken, postData, "json")
+                .catch(function(err) {
+                  console.error(err);
+                  throw new Error(JSON.stringify({code: "error_wavenet_auth_required"}));
+                })
             }
-            if (settings.gcpCreds) return ajaxPost("https://" + endpoint + "/v1/text:synthesize?key=" + settings.gcpCreds.apiKey, postData, "json");
-            if (!settings.gcpToken) throw new Error(JSON.stringify({code: "error_wavenet_auth_required"}));
-            return ajaxPost("https://cxl-services.appspot.com/proxy?url=https://texttospeech.googleapis.com/v1beta1/text:synthesize&token=" + settings.gcpToken, postData, "json")
+            // Google bills SSML tags as characters, so only chunks that carry an
+            // emphasis go out as SSML; everything else stays plain text.
+            if (!(emphasis && emphasis.length && SSML_EMPHASIS_TYPES.includes(voiceType))) return request({text: text});
+            // <emphasis> is undocumented for Chirp 3: HD — if Google ever stops
+            // accepting it, read the chunk plainly instead of failing playback.
+            return request({ssml: buildSsml(text, emphasis)})
               .catch(function(err) {
-                console.error(err);
-                throw new Error(JSON.stringify({code: "error_wavenet_auth_required"}));
+                console.warn("SSML emphasis rejected, falling back to plain text", err);
+                return request({text: text});
               })
           })
           .then(function(responseText) {

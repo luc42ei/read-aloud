@@ -5,6 +5,9 @@
     getDocumentInfo: getInfo,
     getCurrentIndex: getCurrentIndex,
     getTexts: getTexts,
+    getItalics: function(index) {
+      return readAloudDoc.getItalics ? readAloudDoc.getItalics(index) : null;
+    },
     highlightBlock: function(origTextIndex) {
       if (readAloudDoc.highlightBlock) readAloudDoc.highlightBlock(origTextIndex);
     },

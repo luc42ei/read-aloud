@@ -22,6 +22,19 @@ var readAloudDoc = new function() {
     else return null;
   }
 
+  // Italic phrases per extracted text, aligned with the array getTexts()
+  // returned for the same index. Must be called after getTexts(), which is what
+  // runs parse() and fills _highlightEntries.
+  this.getItalics = function(index) {
+    if (index != 0 || !self._highlightEntries) return null;
+    return self._highlightEntries.map(function(entry) {
+      if (!entry.italics || !entry.italics.length) return [];
+      // A sentence-level seek slices entry.text; phrases that fell into the cut
+      // prefix are no longer in what gets spoken.
+      return entry.italics.filter(function(p) { return entry.text.indexOf(p) >= 0 });
+    });
+  }
+
   this.getSelectedText = async function() {
     const math = await getMath()
     try {
@@ -281,6 +294,7 @@ var readAloudDoc = new function() {
       });
     }
     refineEntryElems(elem, pairs);
+    for (var pi = 0; pi < pairs.length; pi++) pairs[pi].italics = collectItalics(pairs[pi]);
     $(elem).find(".read-aloud-numbering").remove();
     toHide.show();
     return pairs;
@@ -335,6 +349,46 @@ var readAloudDoc = new function() {
         break;
       }
     }
+  }
+
+  // Italic phrases within an entry, for engines that can emphasize them (see
+  // GoogleWavenetTtsEngine). Collected as plain substrings, not offsets: they
+  // then survive preprocess(), chunking and the appended sentence dot in
+  // speech.js, and entry.text stays byte-identical — the highlight pipeline
+  // matches on exact text, so mutating it here would break the blue box.
+  // <span> is in the selector because plenty of sites italicize through a CSS
+  // class rather than a tag; the computed-style check below does the filtering.
+  var ITALIC_SELECTOR = "i, em, cite, var, dfn, span, [style*='italic']";
+
+  function collectItalics(pair) {
+    if (!pair.elem || !pair.elem.querySelectorAll || !pair.text) return [];
+    var cand = [];
+    var nodes = pair.elem.querySelectorAll(ITALIC_SELECTOR);
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      // <em> can be reset to upright by CSS, and [style*=italic] also matches
+      // font-family names — trust the computed style, not the markup.
+      if (!/^(italic|oblique)/.test(getComputedStyle(el).fontStyle)) continue;
+      cand.push(el);
+    }
+    var set = new Set(cand);
+    var result = [];
+    for (var i = 0; i < cand.length; i++) {
+      // Nested italics: the outermost wins, one <emphasis> per passage.
+      var nested = false;
+      for (var a = cand[i].parentElement; a && a !== pair.elem; a = a.parentElement)
+        if (set.has(a)) { nested = true; break }
+      if (nested) continue;
+      var phrase = (cand[i].innerText || "").replace(/\s+/g, " ").trim();
+      // A whole italic paragraph (pull quote, caption) carries no emphasis, and
+      // stressing a long passage sounds wrong — only short inline runs qualify.
+      if (phrase.length < 2 || phrase.length > 60) continue;
+      if (phrase.split(/\s+/).length > 8) continue;
+      if (phrase.length >= pair.text.length * 0.7) continue;
+      if (pair.text.indexOf(phrase) < 0) continue;
+      result.push(phrase);
+    }
+    return result;
   }
 
   function addNumbering() {

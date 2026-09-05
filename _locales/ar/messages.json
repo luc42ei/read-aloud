@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "الخيارات"
   },
+  "options_advanced_heading": {
+    "message": "الإعدادات المتقدمة"
+  },
   "options_voice_label": {
     "message": "الصوت"
   },

@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "विकल्प"
   },
+  "options_advanced_heading": {
+    "message": "उन्नत विकल्प"
+  },
   "options_voice_label": {
     "message": "आवाज़"
   },

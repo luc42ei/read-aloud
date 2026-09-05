@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Asetukset"
   },
+  "options_advanced_heading": {
+    "message": "Lisäasetukset"
+  },
   "options_voice_label": {
     "message": "Ääni"
   },

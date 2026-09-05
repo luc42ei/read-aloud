@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Tùy Chọn"
   },
+  "options_advanced_heading": {
+    "message": "Tùy chọn nâng cao"
+  },
   "options_voice_label": {
     "message": "Giọng đọc"
   },

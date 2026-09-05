@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "选项"
   },
+  "options_advanced_heading": {
+    "message": "高级选项"
+  },
   "options_voice_label": {
     "message": "朗读语音"
   },

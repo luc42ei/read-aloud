@@ -26,17 +26,6 @@ body.dark-mode {
   padding: 1rem;
 }
 
-#expand-button {
-  text-decoration: none;
-  font-size: .75em;
-  opacity: .25;
-  cursor: pointer;
-  display: none;
-}
-h2:hover #expand-button {
-  display: inline;
-}
-
 button.close {
   padding: 0;
   background-color: transparent;
@@ -589,9 +578,15 @@ input[type=checkbox] + label {
 .dark-mode .badge-free    { background: #0d2a3f; color: #64b5f6; }
 .dark-mode .badge-api     { background: #3a2000; color: #ffb74d; }
 
-#advanced-options {
+#extra-options-heading {
+  margin-top: 1.75rem;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+#extra-options {
   min-width: 500px;
-  margin-top: 1.5rem;
+  margin-top: .5rem;
   display: grid;
   grid-template-columns: min-content auto;
   align-items: start;

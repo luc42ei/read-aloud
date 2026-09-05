@@ -37,6 +37,7 @@ var defaults = {
   showHighlighting: 1,
   highlightFontSize: 3,
   highlightWindowSize: 2,
+  emphasizeItalics: true,
 };
 
 var getSingletonAudio = lazy(() => {
@@ -109,7 +110,7 @@ const settingsChange$ = rxjs.fromEventPattern(
 
 function getSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.get(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.get(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode", "emphasizeItalics"], fulfill);
   });
 }
 
@@ -121,7 +122,7 @@ function updateSettings(items) {
 
 function clearSettings(names) {
   return new Promise(function(fulfill) {
-    brapi.storage.local.remove(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode"], fulfill);
+    brapi.storage.local.remove(names || ["voiceName", "rate", "showHighlighting", "languages", "highlightFontSize", "highlightWindowSize", "useEmbeddedPlayer", "fixBtSilenceGap", "darkMode", "emphasizeItalics"], fulfill);
   });
 }
 

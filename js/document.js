@@ -68,6 +68,12 @@ function TabSource() {
     return sendToSource({method: "getTexts", args: [index, quietly]})
       .finally(function() {waiting = false})
   }
+  // Italic phrases per text, for engines that can emphasize them. Optional:
+  // only the HTML source supplies them, so callers must tolerate null.
+  this.getItalics = function(index) {
+    return sendToSource({method: "getItalics", args: [index]})
+      .catch(function() {return null})
+  }
   this.close = function() {
     return Promise.resolve();
   }
@@ -176,7 +182,9 @@ function Doc(source, onEnd) {
     if (texts) {
       if (texts.length) {
         foundText = true;
-        return read(texts, rewinded);
+        // Must follow getTexts(): the HTML source fills these during extraction.
+        const italics = source.getItalics ? await source.getItalics(currentIndex).catch(err => null) : null
+        return read(texts, rewinded, italics);
       }
       else {
         currentIndex++;
@@ -189,15 +197,18 @@ function Doc(source, onEnd) {
     }
   }
 
-  async function read(texts, rewinded) {
+  async function read(texts, rewinded, italics) {
     texts = texts.map(preprocess)
+    // Same transform on both sides, so a phrase still matches its text after a
+    // URL got replaced or a run of repeated chars was truncated.
+    if (italics) italics = italics.map(list => (list || []).map(preprocess))
     if (info.detectedLang == null) {
       const lang = await detectLanguage(texts)
       await wait(playbackState, "resumed")
       info.detectedLang = lang || "";
     }
     if (activeSpeech) return;
-    activeSpeech = await getSpeech(texts);
+    activeSpeech = await getSpeech(texts, italics);
     await wait(playbackState, "resumed")
     activeSpeech.onEnd = function(err) {
       if (err) {
@@ -300,7 +311,7 @@ function Doc(source, onEnd) {
     }
   }
 
-  async function getSpeech(texts) {
+  async function getSpeech(texts, italics) {
     const settings = await getSettings()
     settings.rate = await getSetting("rate" + (settings.voiceName || ""))
     var lang = (!info.detectedLang || info.lang && info.lang.startsWith(info.detectedLang)) ? info.lang : info.detectedLang;
@@ -314,6 +325,7 @@ function Doc(source, onEnd) {
     options.voice = voice;
     options.rateSettingKey = "rate" + (settings.voiceName || "")
     if (!settings.voiceName) await updateSettings({lastAutoVoice: voice.voiceName})
+    if (settings.emphasizeItalics !== false) options.italics = italics
     return new Speech(texts, options);
   }
 

@@ -30,6 +30,26 @@
 
 
 
+  //advanced settings
+  Promise.all([getSettings(), domReadyPromise])
+    .then(([settings]) => {
+      $("#fix-bt-silence-gap")
+        .prop("checked", settings.fixBtSilenceGap)
+        .change(function() {
+          updateSettings({fixBtSilenceGap: this.checked})
+            .catch(console.error)
+        })
+
+      $("#emphasize-italics")
+        .prop("checked", settings.emphasizeItalics !== false)
+        .change(function() {
+          updateSettings({emphasizeItalics: this.checked})
+            .catch(console.error)
+        })
+    })
+
+
+
   //account button
   domReadyPromise
     .then(() => {

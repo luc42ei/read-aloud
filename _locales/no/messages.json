@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Innstillinger"
   },
+  "options_advanced_heading": {
+    "message": "Avanserte innstillinger"
+  },
   "options_voice_label": {
     "message": "Stemme"
   },

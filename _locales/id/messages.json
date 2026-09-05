@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Opsi"
   },
+  "options_advanced_heading": {
+    "message": "Opsi lanjutan"
+  },
   "options_voice_label": {
     "message": "Suara"
   },

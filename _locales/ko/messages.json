@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "옵션"
   },
+  "options_advanced_heading": {
+    "message": "고급 옵션"
+  },
   "options_voice_label": {
     "message": "음성"
   },

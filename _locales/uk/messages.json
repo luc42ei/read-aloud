@@ -11,6 +11,9 @@
   "options_heading": {
     "message": "Параметри"
   },
+  "options_advanced_heading": {
+    "message": "Додаткові параметри"
+  },
   "options_voice_label": {
     "message": "Голос"
   },

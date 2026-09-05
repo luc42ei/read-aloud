@@ -31,12 +31,15 @@ function Speech(texts, options) {
   // chunk, making origTextToFirstChunk undefined for embedded texts and breaking seek/highlight.
   var chunkToOrigText = null;
   var chunkCharStart = null;
+  var chunkItalics = null;
   if (texts.length) {
     var allChunks = [];
     chunkToOrigText = [];
     chunkCharStart = [];
+    chunkItalics = [];
     for (var i = 0; i < texts.length; i++) {
       var textChunks = getChunks(texts[i]);
+      var origRanges = italicRanges(texts[i], options.italics && options.italics[i]);
       // Breakers preserve the text (chunks concatenate back to texts[i]), so a
       // running offset gives each chunk's start position within the original
       // text — the in-page overlay uses it to pick the right occurrence of a
@@ -49,12 +52,57 @@ function Speech(texts, options) {
           allChunks.push(textChunks[j]);
           chunkToOrigText.push(i);
           chunkCharStart.push(charOffset);
+          chunkItalics.push(rebaseRanges(origRanges, charOffset, textChunks[j].length));
         }
         charOffset += textChunks[j].length;
       }
     }
     texts = allChunks;
   }
+  // Italic passages arrive as plain substrings (html-doc.js collectItalics), not
+  // offsets — that way they survive preprocess() and the dot appended above.
+  // Resolve them here with a forward-running cursor, the same trick the in-page
+  // overlay uses to pick the right occurrence of a repeated phrase.
+  function italicRanges(text, phrases) {
+    if (!phrases || !phrases.length) return null;
+    var out = [], cursor = 0;
+    for (var k = 0; k < phrases.length; k++) {
+      var at = text.indexOf(phrases[k], cursor);
+      if (at < 0) continue;
+      out.push([at, at + phrases[k].length]);
+      cursor = at + phrases[k].length;
+    }
+    return out.length ? out : null;
+  }
+
+  // Ranges of the original text that fall into one chunk, rebased onto it. A
+  // passage split by a chunk boundary is clipped to the part that's in here.
+  function rebaseRanges(ranges, chunkStart, chunkLen) {
+    if (!ranges) return null;
+    var out = [];
+    for (var k = 0; k < ranges.length; k++) {
+      var a = Math.max(ranges[k][0] - chunkStart, 0);
+      var b = Math.min(ranges[k][1] - chunkStart, chunkLen);
+      if (b - a >= 2) out.push([a, b]);
+    }
+    return out.length ? out : null;
+  }
+
+  // Number-comma stripping shortens the chunk, so shift the ranges by the number
+  // of removed commas that sit before them.
+  function spokenChunk(text, ranges) {
+    var spoken = spokenText(text);
+    if (!ranges || spoken.length == text.length) return {text: spoken, ranges: ranges};
+    var cuts = [], re = /(?<=\d),(?=\d{3}(?:\D|$))/g, m;
+    while ((m = re.exec(text))) cuts.push(m.index);
+    var shift = function(pos) {
+      var n = 0;
+      for (var k = 0; k < cuts.length && cuts[k] < pos; k++) n++;
+      return pos - n;
+    };
+    return {text: spoken, ranges: ranges.map(function(r) {return [shift(r[0]), shift(r[1])]})};
+  }
+
   var origTextToFirstChunk = [];
   if (chunkToOrigText) {
     for (var i = 0; i < texts.length; i++) {
@@ -240,8 +288,11 @@ function Speech(texts, options) {
           if (engine.prefetch != null) {
             const i = playlist.getIndex()
             for (let k = 1; k <= 2; k++) {
-              const nextText = texts[i + k]
-              if (nextText) engine.prefetch(spokenText(nextText), options)
+              const nextIndex = i + k
+              if (texts[nextIndex]) {
+                const spoken = spokenChunk(texts[nextIndex], chunkItalics && chunkItalics[nextIndex])
+                engine.prefetch(spoken.text, speakOptions(spoken.ranges))
+              }
             }
           }
           break
@@ -291,7 +342,7 @@ function Speech(texts, options) {
       first() {
         if (0 < texts.length) {
           index = 0
-          return makePlayback(texts[index])
+          return makePlayback(index)
         }
       },
       canForward() {
@@ -303,26 +354,26 @@ function Speech(texts, options) {
       forward() {
         if (index+1 < texts.length) {
           index++
-          return makePlayback(texts[index])
+          return makePlayback(index)
         }
       },
       rewind() {
         if (index > 0) {
           index--
-          return makePlayback(texts[index])
+          return makePlayback(index)
         }
       },
       seek(toIndex) {
         if (toIndex >= 0 && toIndex < texts.length) {
           index = toIndex
-          return makePlayback(texts[index])
+          return makePlayback(index)
         }
       },
       gotoEnd() {
         const toIndex = texts.length - 1
         if (toIndex >= 0) {
           index = toIndex
-          return makePlayback(texts[index])
+          return makePlayback(index)
         }
       }
     }
@@ -330,10 +381,16 @@ function Speech(texts, options) {
 
 
 
-  function makePlayback(text) {
-    text = spokenText(text)
-    if (engine.stop != null) return makePlaybackLegacy(text)
-    else return engine.speak(text, options, playbackState$)
+  function makePlayback(index) {
+    const spoken = spokenChunk(texts[index], chunkItalics && chunkItalics[index])
+    if (engine.stop != null) return makePlaybackLegacy(spoken.text)
+    else return engine.speak(spoken.text, speakOptions(spoken.ranges), playbackState$)
+  }
+
+  // The emphasis ranges differ per chunk, so the engine can't get the shared
+  // options object as-is. Cloned only when there's something to add.
+  function speakOptions(ranges) {
+    return ranges ? Object.assign({}, options, {emphasis: ranges}) : options
   }
 
   function makePlaybackLegacy(text) {

@@ -394,10 +394,18 @@ var readAloudDoc = new function() {
   function addNumbering() {
     var children = $(this).children();
     var text = children.length ? getInnerText(children.get(0)) : null;
-    if (text && !text.match(/^[(]?(\d|[a-zA-Z][).])/))
-      children.each(function(index) {
-        $("<span>").addClass("read-aloud-numbering").text((index +1) + ". ").prependTo(this);
+    if (text && !text.match(/^[(]?(\d|[a-zA-Z][).])/)) {
+      // Honour the list's own counter (<ol start> / <li value>) — pages that split
+      // one logical list into several <ol start="n"> blocks would otherwise all
+      // be numbered "1.".
+      var counter = Number(this.getAttribute("start")) || 1;
+      children.each(function() {
+        var value = Number(this.getAttribute("value"));
+        if (value) counter = value;
+        $("<span>").addClass("read-aloud-numbering").text(counter + ". ").prependTo(this);
+        counter++;
       })
+    }
   }
 
   function dontRead() {

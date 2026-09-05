@@ -23,6 +23,18 @@ release / `updates.json` step anymore (that was the old unlisted flow — see
    - **Anmerkungen für Kontrolleure** — paste the reviewer-notes block from
      `tools/LISTING.md` §2 (build steps + third-party provenance). Required every
      version because of the bundled minified libs + ONNX WASM.
+
+     Don't paste the block into the chat — copying it back out of the transcript
+     is awkward. Instead **print the command** as a copyable line so the user can
+     run it in their own terminal and select the output there:
+     ```
+     ! cat tools/LISTING.md
+     ```
+     The `!` prefix runs it in this session. Plain `cat tools/LISTING.md` works
+     too; for §2 alone:
+     ```
+     ! awk '/^## 2\./{flag=1} /^## 3\./{flag=0} flag' tools/LISTING.md
+     ```
 8. Submit → wait for human review. On approval AMO signs and publishes; existing
    users auto-update from AMO.
 9. Tag git for history and push: `git tag v<version> && git push origin master --tags`.

@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Avancerede indstillinger"
   },
+  "options_custom_voices_heading": {
+    "message": "Brugerdefinerede stemmer (API-nøgler)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Om stemmeudbydere"
+  },
   "options_voice_label": {
     "message": "Stemme"
+  },
+  "options_language_label": {
+    "message": "Sprog"
   },
   "options_voicegroup_offline": {
     "message": "Offline-stemmer"

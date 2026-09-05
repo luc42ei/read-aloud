@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Geavanceerde opties"
   },
+  "options_custom_voices_heading": {
+    "message": "Aangepaste stemmen (API-sleutels)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Over stemaanbieders"
+  },
   "options_voice_label": {
     "message": "Stem"
+  },
+  "options_language_label": {
+    "message": "Taal"
   },
   "options_voicegroup_offline": {
     "message": "Offline stemmen"

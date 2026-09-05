@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Pokročilá nastavení"
   },
+  "options_custom_voices_heading": {
+    "message": "Vlastní hlasy (klíče API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "O poskytovatelích hlasů"
+  },
   "options_voice_label": {
     "message": "Hlas"
+  },
+  "options_language_label": {
+    "message": "Jazyk"
   },
   "options_voicegroup_offline": {
     "message": "Offline hlasy"

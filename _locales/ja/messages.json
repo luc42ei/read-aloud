@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "詳細オプション"
   },
+  "options_custom_voices_heading": {
+    "message": "カスタム音声（APIキー）"
+  },
+  "options_voice_providers_heading": {
+    "message": "音声プロバイダーについて"
+  },
   "options_voice_label": {
     "message": "音声"
+  },
+  "options_language_label": {
+    "message": "言語"
   },
   "options_voicegroup_offline": {
     "message": "オフラインの声"

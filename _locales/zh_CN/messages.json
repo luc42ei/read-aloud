@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "高级选项"
   },
+  "options_custom_voices_heading": {
+    "message": "自定义语音（API 密钥）"
+  },
+  "options_voice_providers_heading": {
+    "message": "关于语音提供商"
+  },
   "options_voice_label": {
     "message": "朗读语音"
+  },
+  "options_language_label": {
+    "message": "语言"
   },
   "options_voicegroup_offline": {
     "message": "离线语音"

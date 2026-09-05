@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "ตัวเลือกขั้นสูง"
   },
+  "options_custom_voices_heading": {
+    "message": "เสียงที่กำหนดเอง (คีย์ API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "เกี่ยวกับผู้ให้บริการเสียง"
+  },
   "options_voice_label": {
     "message": "เสียง"
+  },
+  "options_language_label": {
+    "message": "ภาษา"
   },
   "options_voicegroup_offline": {
     "message": "เสียงออฟไลน์"

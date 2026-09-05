@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "고급 옵션"
   },
+  "options_custom_voices_heading": {
+    "message": "사용자 지정 음성(API 키)"
+  },
+  "options_voice_providers_heading": {
+    "message": "음성 제공업체 정보"
+  },
   "options_voice_label": {
     "message": "음성"
+  },
+  "options_language_label": {
+    "message": "언어"
   },
   "options_voicegroup_offline": {
     "message": "오프라인 음성"

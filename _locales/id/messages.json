@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Opsi lanjutan"
   },
+  "options_custom_voices_heading": {
+    "message": "Suara khusus (kunci API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Tentang penyedia suara"
+  },
   "options_voice_label": {
     "message": "Suara"
+  },
+  "options_language_label": {
+    "message": "Bahasa"
   },
   "options_voicegroup_offline": {
     "message": "Suara Offline"

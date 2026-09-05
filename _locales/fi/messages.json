@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Lisäasetukset"
   },
+  "options_custom_voices_heading": {
+    "message": "Mukautetut äänet (API-avaimet)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Tietoja äänipalveluista"
+  },
   "options_voice_label": {
     "message": "Ääni"
+  },
+  "options_language_label": {
+    "message": "Kieli"
   },
   "options_voicegroup_offline": {
     "message": "Offline-äänet"

@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Opções avançadas"
   },
+  "options_custom_voices_heading": {
+    "message": "Vozes personalizadas (chaves de API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Sobre os provedores de voz"
+  },
   "options_voice_label": {
     "message": "Voz"
+  },
+  "options_language_label": {
+    "message": "Idioma"
   },
   "options_voicegroup_offline": {
     "message": "Vozes offline"

@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Tùy chọn nâng cao"
   },
+  "options_custom_voices_heading": {
+    "message": "Giọng nói tùy chỉnh (khóa API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Giới thiệu về nhà cung cấp giọng nói"
+  },
   "options_voice_label": {
     "message": "Giọng đọc"
+  },
+  "options_language_label": {
+    "message": "Ngôn ngữ"
   },
   "options_voicegroup_offline": {
     "message": "Giọng đọc ngoại tuyến"

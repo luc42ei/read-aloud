@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "उन्नत विकल्प"
   },
+  "options_custom_voices_heading": {
+    "message": "कस्टम आवाज़ें (API कुंजियाँ)"
+  },
+  "options_voice_providers_heading": {
+    "message": "वॉइस प्रदाताओं के बारे में"
+  },
   "options_voice_label": {
     "message": "आवाज़"
+  },
+  "options_language_label": {
+    "message": "भाषा"
   },
   "options_voicegroup_offline": {
     "message": "ऑफ़लाइन आवाज़ें"

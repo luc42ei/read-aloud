@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Gelişmiş seçenekler"
   },
+  "options_custom_voices_heading": {
+    "message": "Özel sesler (API anahtarları)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Ses sağlayıcıları hakkında"
+  },
   "options_voice_label": {
     "message": "Ses"
+  },
+  "options_language_label": {
+    "message": "Dil"
   },
   "options_voicegroup_offline": {
     "message": "Çevrimdışı Sesler"

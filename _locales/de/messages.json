@@ -14,6 +14,12 @@
   "options_advanced_heading": {
     "message": "Erweiterte Optionen"
   },
+  "options_custom_voices_heading": {
+    "message": "Eigene Stimmen (API-Schlüssel)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Über die Stimmenanbieter"
+  },
   "options_voice_label": {
     "message": "Stimme"
   },

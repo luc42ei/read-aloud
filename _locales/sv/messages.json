@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Avancerade inställningar"
   },
+  "options_custom_voices_heading": {
+    "message": "Egna röster (API-nycklar)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Om rösttjänster"
+  },
   "options_voice_label": {
     "message": "Röst"
+  },
+  "options_language_label": {
+    "message": "Språk"
   },
   "options_voicegroup_offline": {
     "message": "Offlineröster"

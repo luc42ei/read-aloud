@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "進階選項"
   },
+  "options_custom_voices_heading": {
+    "message": "自訂語音（API 金鑰）"
+  },
+  "options_voice_providers_heading": {
+    "message": "關於語音提供者"
+  },
   "options_voice_label": {
     "message": "朗讀語音"
+  },
+  "options_language_label": {
+    "message": "語言"
   },
   "options_voicegroup_offline": {
     "message": "離線語音"

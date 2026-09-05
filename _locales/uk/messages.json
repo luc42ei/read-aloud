@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Додаткові параметри"
   },
+  "options_custom_voices_heading": {
+    "message": "Власні голоси (ключі API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Про постачальників голосів"
+  },
   "options_voice_label": {
     "message": "Голос"
+  },
+  "options_language_label": {
+    "message": "Мова"
   },
   "options_voicegroup_offline": {
     "message": "Офлайн-голоси"

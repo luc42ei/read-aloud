@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Avanserte innstillinger"
   },
+  "options_custom_voices_heading": {
+    "message": "Egendefinerte stemmer (API-nøkler)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Om stemmeleverandører"
+  },
   "options_voice_label": {
     "message": "Stemme"
+  },
+  "options_language_label": {
+    "message": "Språk"
   },
   "options_voicegroup_offline": {
     "message": "Frakoblede stemmer"

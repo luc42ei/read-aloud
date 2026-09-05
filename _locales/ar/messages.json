@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "الإعدادات المتقدمة"
   },
+  "options_custom_voices_heading": {
+    "message": "أصوات مخصصة (مفاتيح API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "حول مزوّدي الأصوات"
+  },
   "options_voice_label": {
     "message": "الصوت"
+  },
+  "options_language_label": {
+    "message": "اللغة"
   },
   "options_voicegroup_offline": {
     "message": "الأصوات غير المتصلة"

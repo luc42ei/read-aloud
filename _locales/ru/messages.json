@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Дополнительные параметры"
   },
+  "options_custom_voices_heading": {
+    "message": "Пользовательские голоса (ключи API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "О поставщиках голосов"
+  },
   "options_voice_label": {
     "message": "Голос"
+  },
+  "options_language_label": {
+    "message": "Язык"
   },
   "options_voicegroup_offline": {
     "message": "Автономные голоса"

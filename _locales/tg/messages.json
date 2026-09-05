@@ -14,8 +14,17 @@
   "options_advanced_heading": {
     "message": "Танзимоти пешрафта"
   },
+  "options_custom_voices_heading": {
+    "message": "Овозҳои фармоишӣ (калидҳои API)"
+  },
+  "options_voice_providers_heading": {
+    "message": "Дар бораи таъминкунандагони овоз"
+  },
   "options_voice_label": {
     "message": "Овоз"
+  },
+  "options_language_label": {
+    "message": "Забон"
   },
   "options_voicegroup_offline": {
     "message": "Овозҳои насбшуда"
